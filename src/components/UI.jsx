@@ -90,7 +90,10 @@ var StudyUI = React.createClass({
         }
     },
     addStudy(study) {
-    	var studyLookup=CIQ.Studies.getStudyList();
+    	var studyLookup = {};
+		for(var libraryEntry in CIQ.Studies.studyLibrary){
+            studyLookup[CIQ.Studies.studyLibrary[libraryEntry].name]=libraryEntry;
+		}
         CIQ.Studies.addStudy(this.state.ciq, studyLookup[study]);
     },
 	removeStudy(params){
