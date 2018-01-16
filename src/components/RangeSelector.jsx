@@ -1,55 +1,21 @@
 
-const rangeConfig = [
-	{
-		"display": "All",
-		"span": "all",
-		"multiplier": 1
-	},
-	{
-		"display": "5y",
-		"span": "year",
-		"multiplier": 5
-	},
-	{
-		"display": "1y",
-		"span": "year",
-		"multiplier": 1
-	},
-	{
-		"display": "YTD",
-		"span": "YTD",
-		"multiplier": 1
-	},
-	{
-		"display": "3m",
-		"span": "month",
-		"multiplier": 3
-	},
-	{
-		"display": "1m",
-		"span": "month",
-		"multiplier": 1
-	},
-	{
-		"display": "5d",
-		"span": "day",
-		"multiplier": 5
-	},
-	{
-		"display": "1d",
-		"span": "day",
-		"multiplier": 1
-	}
-];
-
 const RangeSelector = (props) => {
-	let ranges = rangeConfig.map((range, i) => {
-		return (<div className="quick-link" key={'range' + i} onClick={props.setSpan.bind(this, range.span, range.multiplier)}>{range.display}</div>)
-	})
 
 	return (
 		<div>
-			{ranges}
+
+      <div className="quick-link" key='R0' onClick={props.setSpanWithLoader.bind(this,1,'today')}>1D</div>
+      <div className="quick-link" key='R1' onClick={props.setSpanWithLoader.bind(this,5,'day',30,2,'minute')}>5D</div>
+      <div className="quick-link" key='R2' onClick={props.setSpanWithLoader.bind(this,1,'month',30,8,'minute')}>1M</div>
+
+      <div className="quick-link hide-sm" key='R3' onClick={props.setSpanWithLoader.bind(this,3,'month')}>3M</div>
+      <div className="quick-link hide-sm" key='R4' onClick={props.setSpanWithLoader.bind(this,6,'month')}>6M</div>
+      <div className="quick-link hide-sm" key='R5' onClick={props.setSpanWithLoader.bind(this,1,'YTD')}>YTD</div>
+
+      <div className="quick-link" key='R6' onClick={props.setSpanWithLoader.bind(this,1,'year')}>1Y</div>
+      <div className="quick-link hide-sm" key='R7' onClick={props.setSpanWithLoader.bind(this,5,'year',1,1,'week')}>5Y</div>
+      <div className="quick-link hide-sm" key='R8' onClick={props.setSpanWithLoader.bind(this,1,'all',1,1,'month')}>All</div>
+
 		</div>
 	)
 }
