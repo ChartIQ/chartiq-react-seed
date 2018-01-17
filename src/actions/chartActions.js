@@ -51,7 +51,14 @@ export function toggleTimezoneModal(){
 }
 
 export function setSpan(multiplier, base, interval, period, timeUnit){
-    return { type:'SET_SPAN', span: span, multiplier: multiplier }
+    return {
+      type: 'SET_SPAN',
+      multiplier: multiplier,
+      base: base,
+      interval: interval,
+      period: period,
+      timeUnit: timeUnit
+    }
 }
 
 export function setSpanWithLoader(multiplier, base, interval, period, timeUnit){

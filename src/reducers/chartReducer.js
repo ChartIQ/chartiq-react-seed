@@ -1,5 +1,5 @@
 //action types
-import Types from '../actions/chartActions';
+import Types from '../actions/chartActions'
 
 //create a demo date feed
 import FeedService from '../feeds/template'
@@ -30,7 +30,7 @@ const chart = (state = initialState, action) => {
       let ciq = new CIQ.ChartEngine({
         container: action.container
       })
-      ciq.attachQuoteFeed(state.service, state.refreshInterval)
+      ciq.attachQuoteFeed(state.service, {refreshInterval:state.refreshInterval})
       ciq.newChart(state.symbol)
       return Object.assign({}, state, {
         ciq: ciq
@@ -120,6 +120,8 @@ const chart = (state = initialState, action) => {
         interval: refreshInterval
       })
     case Types.SET_SPAN:
+
+      console.log(action)
 
       var params = {
         multiplier: action.multiplier,
