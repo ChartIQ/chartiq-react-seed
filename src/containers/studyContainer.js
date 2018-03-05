@@ -7,7 +7,9 @@ import { toggleOverlay,
          updateStudy,
          removeStudy, 
          openStudyModal,
-         closeStudyModal} from '../actions/studyActions'
+         closeStudyModal,
+         removeAllStudies,
+         syncStudies } from '../actions/studyActions'
 
 //components
 import StudyUI from '../components/UI/StudyUI'
@@ -17,7 +19,8 @@ const mapStateToProps = (state, props) => {
         studyOverlay: state.study.studyOverlay,
         showStudyModal: state.study.showStudyModal,
         studyHelper: state.study.studyHelper,
-        studyList: state.study.studyList
+        studyList: state.study.studyList,
+        studies: state.study.studies
     }
 }
 
@@ -40,6 +43,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         removeStudy: (params) => {
             dispatch(removeStudy(params))
+        },
+        removeAllStudies: () => {
+            dispatch(removeAllStudies())
+        },
+        syncStudies: (params) => {
+            dispatch(syncStudies(params))
         }
     }
 }

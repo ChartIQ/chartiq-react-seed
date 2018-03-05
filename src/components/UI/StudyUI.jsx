@@ -20,7 +20,8 @@ const StudyUI = (props) => {
 
 	props.ciq.callbacks.studyOverlayEdit = props.toggleOverlay;
 	props.ciq.callbacks.studyPanelEdit = props.openStudyModal;
-
+	props.ciq.append('panelClose', props.syncStudies);
+	
 	return (
 		<span>
 			<OverlayMenu {...props} />
@@ -34,7 +35,12 @@ const StudyUI = (props) => {
 						needsCiq={true} 
 						ciq={props.ciq} 
 						menuId='studySelect' 
-						title='Studies' />
+						title='Studies'
+						hasLegend={Object.keys(props.studies).length !== 0 ? true : false}
+						legendItems={props.studies}
+						legendButtonAction={props.removeAllStudies}
+						removeLegendItem={props.removeStudy}
+						editLegendItem={props.openStudyModal} />
 		</span>
 	);
 }

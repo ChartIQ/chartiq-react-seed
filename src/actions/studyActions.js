@@ -1,4 +1,5 @@
-import createTypes from 'redux-create-action-types'
+import createTypes from 'redux-create-action-types';
+import _ from 'lodash';
 
 /*
  * action types
@@ -10,7 +11,9 @@ const Types = createTypes(
     'TOGGLE_STUDY_OVERLAY',
     'ADD_STUDY',
     'UPDATE_STUDY',
-    'REMOVE_STUDY'
+    'REMOVE_STUDY',
+    'CLEAR_STUDIES',
+    'SYNC_STUDIES'
 )
 
 export default Types
@@ -45,4 +48,28 @@ export function updateStudy(inputs, outputs, parameters){
 
 export function removeStudy(study){
     return { type: 'REMOVE_STUDY', study: study }
+}
+
+export function removeAllStudies(){
+    return (dispatch, getState) => {
+        let state = getState();
+        for (var id in state.chart.ciq.layout.studies){
+            let sd = state.chart.ciq.layout.studies[id];
+            if (!sd.customLegend) { CIQ.Studies.removeStudy(state.chart.ciq, sd); }
+        }
+        state.chart.ciq.draw();
+        return dispatch(clearStudies())
+    }
+}
+
+export function clearStudies(){
+    return { type: 'CLEAR_STUDIES' }
+}
+
+export function syncStudies(){
+    return (dispatch, getState) => {
+        let state = getState();
+        let newStudies = _.cloneDeep(state.chart.ciq.layout.studies);
+        return dispatch({ type: 'SYNC_STUDIES', studies: newStudies});
+    }
 }

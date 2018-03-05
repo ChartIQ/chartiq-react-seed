@@ -1,4 +1,6 @@
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+
+import StudyLegend from '../UI/StudyLegend';
 
 class MenuSelect extends React.Component{
     constructor(props){
@@ -79,7 +81,10 @@ class MenuSelect extends React.Component{
             <menu-select id={this.props.menuId} onMouseLeave={this.toggleMenu.bind(this, false)} onClick={this.toggleMenu.bind(this, !this.state.menuOpen)}>
                 <span className='title'>{this.props.title}</span>
                 <menu-select-options className='ps-container' style={menuDisplay}>
-                    {options}
+                    {this.props.hasLegend ? <StudyLegend {...this.props} legendItems={this.props.legendItems} /> : null}
+                    <div className='cq-scroll'>
+                        {options}
+                    </div>
                 </menu-select-options>
             </menu-select>
         );
@@ -89,7 +94,9 @@ class MenuSelect extends React.Component{
 MenuSelect.defaultProps = {
     hasButtons: false,
     options: [],
+    hasLegend: false,
     noButtons: [],
+    legendItems: {},
     needsCiq: false,
     labelNeedsTransform: false,
     keyName: 'option'
@@ -102,12 +109,14 @@ MenuSelect.PropTypes = {
     deleteItem: PropTypes.func.isRequired,
     editItem: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
+    hasLegend: PropTypes.bool.isRequired,
     hasButtons: PropTypes.bool.isRequired,
     labelNeedsTransform: PropTypes.bool,
     labelTransform: PropTypes.func,
     needsCiq: PropTypes.bool,
     ciq: PropTypes.object,
-    noButtons: PropTypes.array
+    noButtons: PropTypes.array,
+    legendItems: PropTypes.object
 };
 
 export default MenuSelect
