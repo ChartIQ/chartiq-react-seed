@@ -52,7 +52,7 @@ const chart = (state = initialState, action) => {
       let layout = CIQ.localStorage.getItem('myChartLayout');
       ciq.callbacks.studyOverlayEdit = action.callbacks.studyOverlayEdit;
       ciq.callbacks.studyPanelEdit = action.callbacks.studyPanelEdit;
-      if (layout !== null){
+      if (layout !== null && !window.FSBL){
         layout = JSON.parse(layout);
         ciq.importLayout(layout, { managePeriodicity: true, cb: restoreDrawings.bind(this, ciq) });
       } else {
@@ -206,6 +206,14 @@ const chart = (state = initialState, action) => {
           drawings: drawings,
           canClear: drawings.length > 0
         });
+    case Types.IMPORT_LAYOUT:
+        let importedLayout = action.layout;
+        if (importedLayout !== null && !window.FSBL){
+          importedLayout = JSON.parse(layout);
+          ciq.importLayout(importedLayout, { managePeriodicity: true, cb: action.cb  && window.FSBL ? action.cb : restoreDrawings.bind(this, ciq) });
+        } else {
+          ciq.newChart(state.symbol, null, null, restoreDrawings.bind(this, ciq))
+        }
     default:
       return state
     }
@@ -216,7 +224,7 @@ const chart = (state = initialState, action) => {
 */
 function restoreDrawings(stx){
 	var memory=CIQ.localStorage.getItem(stx.chart.symbol);
-	if(memory!==null){
+	if(memory!==null && !window.FSBL){
     var parsed=JSON.parse(memory);
 		if(parsed){
 			stx.importDrawings(parsed);

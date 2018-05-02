@@ -1,5 +1,5 @@
 require.config({
-	baseUrl: 'chartiq/js/'
+	baseUrl: 'chartiq/js'
 });
 
 // Define the AMD module for the library

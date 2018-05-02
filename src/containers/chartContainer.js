@@ -23,6 +23,7 @@ import { setChartContainer,
         redo,
         clear,
         importDrawings,
+        importLayout,
         saveLayout,
         undoStamps } from '../actions/chartActions'
 
@@ -66,6 +67,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     importDrawings: () => {
       dispatch(importDrawings())
+    },
+    importLayout: (layout) => {
+      dispatch(importLayout(layout))
     },
     changeVectorParams: (tool) => {
       dispatch(changeVectorParams(tool))

@@ -16,7 +16,8 @@ class ChartSymbol extends React.Component {
     }
 	onOptionClick() {
 		if (!this.props.ciq || !this.props.symbol) { return; }
-		this.props.setSymbolAndSave(this.state.text)
+		if (window.FSBL) { window.FSBL.Clients.LinkerClient.publish({ dataType: 'symbol', data: this.state.text.toUpperCase() }); }
+		this.props.setSymbolAndSave(this.state.text, true)
 	}
 	onChange(event) {
 		this.setState({

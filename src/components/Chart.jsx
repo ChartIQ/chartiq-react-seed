@@ -18,6 +18,20 @@ class Chart extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (this.props.ciq !== nextProps.ciq) {
 			nextProps.ciq.callbacks.layout = this.props.saveLayout;
+
+			//Finsemble hacks
+			let actions = {};
+			Object.keys(nextProps).map((key) => {
+				let prop = nextProps[key];
+
+				if (typeof prop === 'function' && !actions.hasOwnProperty(key)){
+					actions[key] = prop;
+				}
+			});
+
+			window.actions = actions;
+			window.stxx = nextProps.ciq;
+			if (window.onAfterChartCreated) FSBL.addEventListener('onReady', window.onAfterChartCreated);
 		}
 	}
 	render() {

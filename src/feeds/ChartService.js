@@ -40,7 +40,7 @@ this.quotefeedSimulator.generateGUID=function(){
 };
 
 this.quotefeedSimulator.maxTicks=50000;
-this.quotefeedSimulator.url="http://simulator.chartiq.com/datafeed";
+this.quotefeedSimulator.url="https://simulator.chartiq.com/datafeed";
 this.quotefeedSimulator.url += "?session=" + this.quotefeedSimulator.generateGUID(); // add on unique sessionID required by ChartIQ simulator;
 
 // called by chart to fetch initial data

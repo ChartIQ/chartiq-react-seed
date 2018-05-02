@@ -227,14 +227,14 @@ export function setChartType(type){
 	}
 }
 
-export function setSymbolAndSave(symbol){
+export function setSymbolAndSave(symbol, save){
     return (dispatch, getState) => {
         let state = getState();
-        if(symbol && symbol !== null){
+        if(symbol && symbol !== null && symbol !== undefined){
             return Promise.all([
                 state.chart.ciq.newChart(symbol, null, state.ciq, () => {
                     dispatch(setSymbol(symbol));
-                    dispatch(saveLayout());
+                    if (save) dispatch(saveLayout());
                 })
             ]);
         }
@@ -327,6 +327,10 @@ export function changeDrawings(params){
 
 export function drawingsChanged(){
     return { type: 'DRAWINGS_CHANGED' }
+}
+
+export function importLayout(layout, cb) {
+    return { type: 'IMPORT_LAYOUT', layout: layout, cb: cb }
 }
 
 export function saveLayout(){

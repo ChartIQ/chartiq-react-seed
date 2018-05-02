@@ -50,7 +50,8 @@
     "postinstall": "webpack",
     "server": "webpack-dev-server --inline --progress --port 3000 --content-base . --watch=true",
 		"start": "NODE_ENV=development webpack-dev-server  --config=webpack.build.config.js --open",
-		"start0": "NODE_ENV=development webpack-dev-server  --config=webpack.build.config.js --open --host 0.0.0.0"
+    "start0": "NODE_ENV=development webpack-dev-server  --config=webpack.build.config.js --open --host 0.0.0.0",
+    "startwin": "SET NODE_ENV=development & webpack-dev-server  --config=webpack.build.config.js --open"
   },
   "repository": {
     "type": "git",

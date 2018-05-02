@@ -7,6 +7,7 @@ import { logger } from 'redux-logger'
 import reducer from './reducers'
 import App from './components/App'
 import 'babel-polyfill'
+import './finsemble-functionality'
 
 const middlewares = [thunk];
 if(process.env.NODE_ENV === 'development'){
