@@ -38,6 +38,8 @@ Using symlinks is not required. If preferred the js and css from the charting li
 You will need to install the project's dependencies and build the distribution file by running the following command from the project's root:
 
 ```
+npm install -g webpack
+npm install --save-dev webpack-cli
 npm install
 ```
 
