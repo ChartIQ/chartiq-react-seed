@@ -8,6 +8,9 @@ import DrawingContainer from '../containers/drawingContainer'
 class Chart extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			windowSizeClassName: this.getWindowSizeClassName()
+		}
 	}
 	componentDidMount() {
 		this.props.setChartContainer($$$('#chartContainer'), {
@@ -26,20 +29,25 @@ class Chart extends React.Component {
 	componentWillUnmount() {
 		window.removeEventListener("resize", this.resizeScreenFn);
 	}
+	getWindowSizeClassName(){
+		if(window.innerWidth > 800) {
+			return "break-lg"
+		} else if(window.innerWidth > 584) {
+			return "break-md"
+		}
+		return "break-sm"
+	}
 	resizeScreen(){
-		if(window.innerWidth > 800){
-			this.parentDiv.className="break-lg"
-		}
-		else if(window.innerWidth > 584){
-			this.parentDiv.className="break-md"
-		}
-		else {
-			this.parentDiv.className="break-sm"
+		if(this.state.windowSizeClassName !== this.getWindowSizeClassName()) {
+			console.log("setting state to ", this.getWindowSizeClassName())
+			this.setState({
+				windowSizeClassName: this.getWindowSizeClassName()
+			})
 		}
 	}
 	render() {
 		return (
-			<div ref={el => this.parentDiv = el}>
+			<div className={this.state.windowSizeClassName}>
 				<UI {...this.props} />
 				<div className="ciq-chart-area">
 					<DrawingContainer {...this.props} />
