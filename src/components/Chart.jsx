@@ -39,7 +39,6 @@ class Chart extends React.Component {
 	}
 	resizeScreen(){
 		if(this.state.windowSizeClassName !== this.getWindowSizeClassName()) {
-			console.log("setting state to ", this.getWindowSizeClassName())
 			this.setState({
 				windowSizeClassName: this.getWindowSizeClassName()
 			})
