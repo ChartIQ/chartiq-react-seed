@@ -337,3 +337,7 @@ export function saveLayout(){
         CIQ.localStorageSetItem('myChartPreferences', JSON.stringify(state.chart.ciq.exportPreferences()));
     }
 }
+
+export function loadLayout(layout){
+    return { type: 'IMPORT_LAYOUT', layout: layout }
+}

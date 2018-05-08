@@ -76,12 +76,17 @@ const chart = (state = initialState, action) => {
         showCrosshairs: layout ? layout.crosshair : state.showCrosshairs,
         symbol: layout && layout.symbols ? layout.symbols[0].symbol.toUpperCase() : state.symbol
       })
+    case Types.IMPORT_LAYOUT:
+      if (state.ciq !== null) {
+        state.ciq.importLayout(layout, { managePeriodicity: true, cb: restoreDrawings.bind(this, ciq) });
+      }
+      return state;
     case Types.SET_CHART_TYPE:
       return Object.assign({}, state, {
         chartType: action.chartType.type
       })
 		case Types.ADD_COMPARISON:
-			if(!action.series) return state;
+			if(!action.series) { return state; }
 			var seriesArray = Array.isArray(action.series) ? action.series : [action.series]
       let newComparisons = state.comparisons.concat(seriesArray);
       return Object.assign({}, state, {
