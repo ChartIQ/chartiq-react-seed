@@ -47,25 +47,23 @@ Once you have that, run ```npm start``` and open your browser window to localhos
 
 *Note: We do not recommend using the web components from template-advanced.html within frameworks. Unless you have very advanced skills, you are better off building framework components that interface with the charting library.*
 
-All of the project source is in the `src` folder. The main ChartIQ React component is `app.jsx`. There is also an `index.js` in this folder which loads RequireJs and all of our modules into it. This is basically a wrapper component that houses the charting engine in it's state. This wrapper function passes a reference of the engine to all of the UI components which allow each to manipulate the chart based on their functionality.
-
-The chart engine is created inside of the `componentDidMount` function of the wrapper component. This is done in the location because React uses a virtual DOM and the chart component is not injected into the actual DOM until after the render function.
+All of the project source is in the `src` folder. The main ChartIQ charting component is in src/components/Chart.jsx. This file is connected to a redux store inside of src/containers/chartContainer.js. Whenever the chartReducer pushes a state change, the ChartContainer component will catch the new data and pass the ciq object to the UI elements so they can update according the state of the chart. When the chart container mounts it calls a redux action which creates a new stx object from the charting library, and passes the chartContainer node to it. 
 
 ```
-componentDidMount() {
-    var ciq = new CIQ.ChartEngine({
-        container: $$$("#chartContainer")
-    });
-    this.setState({
+case Types.SET_CONTAINER:
+      let ciq = new CIQ.ChartEngine({
+        container: action.container
+      })
+      ciq.attachQuoteFeed(state.service, { refreshInterval: state.refreshInterval })
+      ciq.setMarketFactory(CIQ.Market.Symbology.factory);
+      // new CIQ.ExtendedHours({stx:stxx, filter:true});
+      ciq.newChart(state.symbol)
+      return Object.assign({}, state, {
         ciq: ciq
-    }, function() {
-        this.attachFeed(this.props.feed ? this.props.feed :
-                new CIQ.QuoteFeed[this.state.feed]());
-        ciq.newChart(this.props.symbol ? this.props.symbol : "AAPL");
-    })
-}
+      })
 ```
 
+If you desire to manage state outside of the redux support provided 'out-of-the-box', the UI elements provided are available to build a UI/wrapper around your own charting node where you can create and manage a ChartEngine instance elsewhere.
 
 ## Building for use in the browser
 
@@ -73,6 +71,7 @@ This project is using Webpack to transform JSX and ES6 to ES5. The configs for t
 Running `npm run build` from the command line will re-create the distribution file `dist/chartIQ.js`.
 This is a transformed and bundled version of everything in the src directory. `src/index.js` will automatically load this file.
 
+*NOTE: Currently this project does not run in IE11*
 
 ## Contributing to this project
 
