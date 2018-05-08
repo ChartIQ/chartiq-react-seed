@@ -159,14 +159,10 @@ nav {
   background-position: -350px -50px; }
 
 .break-sm .ciq-nav menu-select#studySelect::before, .break-md .ciq-nav menu-select#studySelect::before {
-  background-position: -300px -50px;
-  height: 35px;
-  margin-top: -5px; }
+  background-position: -300px -50px; }
 
 .break-sm .ciq-nav menu-select#themeSelect::before, .break-md .ciq-nav menu-select#themeSelect::before {
-  background-position: -480px -50px;
-  height: 35px;
-  margin-top: -5px; }
+  background-position: -480px -50px; }
 
 .symbol-frame {
   position: relative;
@@ -310,7 +306,7 @@ menu-select-options menu-option:hover {
   background: #f3f3f3; }
 
 menu-select-options {
-  margin: 2px 0 0 -5px;
+  margin: 0 0 0 -5px;
   padding-top: 0;
   position: absolute;
   min-width: 200px;
@@ -806,11 +802,11 @@ div.left {
 div.right {
   float: right; }
 
-div.right > span {
+div.right span {
   display: inline-block;
   margin-right: 8px; }
 
-div.right > menu-select {
+div.right menu-select {
   display: inline-block;
   margin-right: 8px; }
 
