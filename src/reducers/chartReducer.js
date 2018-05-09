@@ -1,11 +1,15 @@
-//action types
-import Types from '../actions/chartActions'
+/**
+ * Chart reducer for wrapper of actions that modify the ChartIQ charting library
+ * @module reducers/chartReducer
+ */
 
-//create a demo date feed
+import Types from '../actions/chartActions'
 import ChartService from '../feeds/ChartService'
+
+// create a demo date feed
 let service = new ChartService().makeFeed()
 
-//initial state
+// initial state and schema
 const initialState = {
   ciq: null,
   service: service,
@@ -41,6 +45,13 @@ const initialState = {
   redoStack: []
 }
 
+/**
+ * Chart redux reducer
+ *
+ * @param {any} [state=initialState]
+ * @param {any} action
+ * @returns
+ */
 const chart = (state = initialState, action) => {
   switch (action.type) {
     case Types.SET_CONTAINER:
@@ -216,9 +227,12 @@ const chart = (state = initialState, action) => {
     }
 }
 
-/*
-* private functions
-*/
+/**
+ * Restore drawings from localStorage.  Allows for browser to refresh to last state.
+ *
+ * @param {CIQ.ChartEngine} stx Charting engine
+ * @private
+ */
 function restoreDrawings(stx){
 	var memory=CIQ.localStorage.getItem(stx.chart.symbol);
 	if(memory!==null){
@@ -229,5 +243,6 @@ function restoreDrawings(stx){
 		}
 	}
 }
+
 
 export default chart

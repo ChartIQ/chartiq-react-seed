@@ -1,4 +1,8 @@
-//action types
+/**
+ * Drawings redux reducer for actions related to drawings and drawing toolbar
+ * @module reducers/drawingReducer
+ */
+
 import Types from '../actions/drawActions'
 
 // load all drawings, with exclusions
@@ -7,6 +11,7 @@ let toolsArray = Object.keys(tools).map((key) => {
     return tools[key]
 })
 
+// initial state and schema
 const initialState = {
     showDrawingToolbar: false,
     tools: toolsArray.sort(),
@@ -25,6 +30,13 @@ const initialState = {
     color: null
 }
 
+/**
+ * Drawing redux reducer
+ *
+ * @param {any} [state=initialState]
+ * @param {any} action
+ * @returns
+ */
 const draw = (state = initialState, action) => {
     switch(action.type){
         case Types.TOGGLE_DRAWING:
