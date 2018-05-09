@@ -11,7 +11,6 @@ import { setChartContainer,
         changeVectorParams,
         changeVectorLineParams,
         changeVectorStyle,
-        setPeriodicity,
         setChartType,
         setSymbolAndSave,
         setPeriodicityWithLoader,
@@ -102,9 +101,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(toggleDrawing()),
             dispatch(changeVectorParams())
         ])
-    },
-    setPeriodicity: (period, interval) => {
-        dispatch(setPeriodicity(period, interval))
     },
     setPeriodicityWithLoader: (periodicity) => {
         dispatch(setPeriodicityWithLoader(periodicity))
