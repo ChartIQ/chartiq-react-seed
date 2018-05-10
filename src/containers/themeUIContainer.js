@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
 /**
  * Redux connection object linking the store to the Chart component
  */
-const ThemeUIContainer = connect(
+const ThemeUIContainer = reactRedux.connect(
     mapStateToProps,
     mapDispatchToProps
 )(ThemeUI)

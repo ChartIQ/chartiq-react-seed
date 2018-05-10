@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
 /**
  * Redux connection object linking the store to the Chart component
  */
-const StudyContainer = connect(
+const StudyContainer = reactRedux.connect(
     mapStateToProps,
     mapDispatchToProps
 )(StudyUI)

@@ -57,13 +57,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(chartActions.importDrawings())
     },
     changeVectorParams: (tool) => {
-      dispatch(drawActions.changeVectorParams(tool))
+      dispatch(chartActions.changeVectorParams(tool))
     },
     changeVectorLineParams: (weight, pattern) => {
-      dispatch(drawActions.changeVectorLineParams(weight, pattern))
+      dispatch(chartActions.changeVectorLineParams(weight, pattern))
     },
     changeVectorStyle: (styleType, style) => {
-      dispatch(drawActions.changeVectorStyle(styleType, style))
+      dispatch(chartActions.changeVectorStyle(styleType, style))
     },
     addComparisonAndSave: (symbol, params) => {
       dispatch(chartActions.addComparisonAndSave(symbol, params))
@@ -89,7 +89,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleDrawingToolbar: () => {
         Promise.all([
             dispatch(drawActions.toggleDrawing()),
-            dispatch(drawActions.changeVectorParams())
+            dispatch(chartActions.changeVectorParams())
         ])
     },
     setPeriodicityWithLoader: (periodicity) => {

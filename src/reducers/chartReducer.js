@@ -4,10 +4,12 @@
  */
 
 import Types from '../actions/chartActions'
-import ChartService from '../feeds/ChartService'
+// import * as quotefeedSimulator from '../../ChartIQ/js/quoteFeedSimulator'
+//import * as quoteFeedSimulator from '../../ChartIQ/js/quoteFeedSimulator'
+var quoteFeedSimulator = require('../../ChartIQ/js/quoteFeedSimulator')
 
-// create a demo date feed
-let service = new ChartService().makeFeed()
+// console.log(quotefeedSimulator)
+let service = quoteFeedSimulator.quoteFeedSimulator
 
 // initial state and schema
 const initialState = {
