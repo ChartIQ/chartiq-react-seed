@@ -417,10 +417,10 @@ function setSymbol(symbol){
 /**
  * Initiate a redraw of the chart
  *
+ * @export
  * @returns
- * @private
  */
-function draw(){
+export function draw(){
     return { type: 'DRAW' }
 }
 

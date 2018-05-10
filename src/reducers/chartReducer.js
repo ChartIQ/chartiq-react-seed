@@ -4,17 +4,10 @@
  */
 
 import Types from '../actions/chartActions'
-// import * as quotefeedSimulator from '../../ChartIQ/js/quoteFeedSimulator'
-//import * as quoteFeedSimulator from '../../ChartIQ/js/quoteFeedSimulator'
-var quoteFeedSimulator = require('../../ChartIQ/js/quoteFeedSimulator')
-
-// console.log(quotefeedSimulator)
-let service = quoteFeedSimulator.quoteFeedSimulator
 
 // initial state and schema
 const initialState = {
   ciq: null,
-  service: service,
   chartType: null,
   refreshInterval: 1,
   symbol: 'AAPL',
@@ -56,11 +49,11 @@ const initialState = {
  */
 const chart = (state = initialState, action) => {
   switch (action.type) {
-    case Types.SET_CONTAINER:
+		case Types.SET_CONTAINER:
       let ciq = new CIQ.ChartEngine({
         container: action.container
       })
-      ciq.attachQuoteFeed(state.service, { refreshInterval: state.refreshInterval })
+      ciq.attachQuoteFeed(window.quoteFeedSimulator, { refreshInterval: state.refreshInterval })
       ciq.setMarketFactory(CIQ.Market.Symbology.factory);
       let layout = CIQ.localStorage.getItem('myChartLayout');
       ciq.callbacks.studyOverlayEdit = action.callbacks.studyOverlayEdit;
