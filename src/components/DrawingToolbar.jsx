@@ -1,4 +1,8 @@
-//components
+/**
+ * Drawing toolbar for adding drawings to the chart
+ * @module components/DrawingToolbar
+ */
+
 import React from 'react'
 import ColorSwatch from './Drawing/ColorSwatch'
 import LineStyle from "./Drawing/LineStyle"
@@ -11,6 +15,12 @@ import Undo from './Drawing/Undo'
 import Redo from './Drawing/Redo'
 import Clear from './Drawing/Clear'
 
+/**
+ * Drawing toolbar for adding drawings to the chart
+ *
+ * @class DrawingToolbar
+ * @extends {React.Component}
+ */
 class DrawingToolbar extends React.Component {
 	constructor(props) {
 		super(props);

@@ -1,6 +1,13 @@
+/**
+ * Share chart modal dialog window component
+ * @module components/Modals/ShareChartModal
+ */
+
 import React from 'react'
 
-
+/**
+ *  ShareStatus enumeration
+ */
 const ShareStatus = Object.freeze({
 	HIDDEN: "HIDDEN",
 	SHOW: "SHOW",
@@ -10,6 +17,12 @@ const ShareStatus = Object.freeze({
 	ERROR: "ERROR"
 });
 
+/**
+ * Share chart modal dialog window componetnt
+ *
+ * @class ShareChartModal
+ * @extends {React.Component}
+ */
 class ShareChartModal extends React.Component {
 	constructor(props) {
 		super(props);
@@ -17,7 +30,6 @@ class ShareChartModal extends React.Component {
 	}
 
 	shareChart() {
-
 		if (!this.props.ciq) return;
 
 		var stx = this.props.ciq;

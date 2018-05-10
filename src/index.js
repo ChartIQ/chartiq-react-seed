@@ -7,7 +7,6 @@ import { logger } from 'redux-logger'
 import 'babel-polyfill'
 
 import reducer from './reducers'
-import App from './components/App'
 import ChartContainer from './containers/chartContainer'
 
 

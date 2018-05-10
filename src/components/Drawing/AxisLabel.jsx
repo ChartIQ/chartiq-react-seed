@@ -1,5 +1,16 @@
+/**
+ * Axis label drawing component
+ * @module components/Drawing/AxisLabel
+ */
+
 import React from 'react'
 
+/**
+ * Axis Label Component
+ *
+ * @param {Object} props
+ * @returns
+ */
 const AxisLabel  = (props) => {
     let cName = props.showAxisLabels  ? 'ciq-checkbox ciq-active' : 'ciq-checkbox';
 

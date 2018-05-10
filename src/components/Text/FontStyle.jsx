@@ -1,5 +1,15 @@
+/**
+ * Font Style selection
+ * @module components/Text/FontStyle
+ */
+
 import React from 'react'
 
+/**
+ * Font style selection component
+ *
+ * @param {*} props
+ */
 const FontStyle = (props) => {
     let boldCName = props.fontStyle.bold ? 'boldBtn ciq-active' : 'boldBtn',
     italicCName = props.fontStyle.italic ? 'italicBtn ciq-active' : 'italicBtn';
