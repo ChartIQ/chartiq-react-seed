@@ -94,7 +94,7 @@ class Comparison extends React.Component {
 		return (
 			<span className="symbol-frame">
 				<input onChange={this.onChange} onKeyPress={this.handleKeyPress} id="symbolCompareInput" placeholder={this.getPlaceholderText()} type="text" value={this.state.text} />
-				<div className="comparison-btn" onClick={this.onOptionClick}></div>
+				{/* <div className="comparison-btn" onClick={this.onOptionClick}></div> */}
 			</span>
 		);
 	}

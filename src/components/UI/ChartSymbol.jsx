@@ -56,7 +56,7 @@ class ChartSymbol extends React.Component {
 			<span className="symbol-frame">
         <input id="symbolInput" type="text" placeholder={this.getPlaceholderText()}
           onChange={this.onChange} onKeyPress={this.handleKeyPress} value={this.state.text} />
-				<div className="symbol-btn" onClick={this.onOptionClick}></div>
+				{/* <div className="symbol-btn" onClick={this.onOptionClick}></div> */}
 			</span>
 		);
 	}
