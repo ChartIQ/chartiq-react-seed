@@ -4,6 +4,7 @@
  */
 
 import React from 'react'
+import * as chart from '../Chart'
 
 /**
  * Comparison component to add additional series to the chart
@@ -15,11 +16,21 @@ class Comparison extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: '',
-			placeholder: 'Add Comparison'
+			text: ''
 		}
 		this.bindCorrectContext();
-  }
+	}
+
+	getPlaceholderText() {
+		switch(this.props.responsiveSize){
+			case(chart.ChartResponsiveSize.MEDIUM):
+				return "Compare";
+			case(chart.ChartResponsiveSize.SMALL):
+				return "cf.";
+			default:
+				return "Add Comparison";
+		}
+	}
 
 	bindCorrectContext(){
 		this.onChange = this.onChange.bind(this);
@@ -82,7 +93,7 @@ class Comparison extends React.Component {
 	render() {
 		return (
 			<span className="symbol-frame">
-				<input onChange={this.onChange} onKeyPress={this.handleKeyPress} id="symbolCompareInput" placeholder={this.state.placeholder} type="text" value={this.state.text} />
+				<input onChange={this.onChange} onKeyPress={this.handleKeyPress} id="symbolCompareInput" placeholder={this.getPlaceholderText()} type="text" value={this.state.text} />
 				<div className="comparison-btn" onClick={this.onOptionClick}></div>
 			</span>
 		);

@@ -9,6 +9,21 @@ import RangeSelector from "./RangeSelector";
 import Legend from './Legend';
 import DrawingContainer from '../containers/drawingContainer'
 
+export const ChartResponsiveSize = Object.freeze({
+	SMALL: "break-sm",
+	MEDIUM: "break-md",
+	LARGE: "break-lg"
+});
+
+export var calculateResponsiveSize = function() {
+	if(window.innerWidth > 800) {
+		return ChartResponsiveSize.LARGE
+	} else if(window.innerWidth > 584) {
+		return ChartResponsiveSize.MEDIUM
+	}
+	return ChartResponsiveSize.SMALL
+}
+
 /**
  * Main chart react container component
  *
@@ -18,9 +33,6 @@ import DrawingContainer from '../containers/drawingContainer'
 class Chart extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			windowSizeClassName: this.getWindowSizeClassName()
-		}
 	}
 	componentDidMount() {
 		this.props.setChartContainer($$$('#chartContainer'), {
@@ -39,24 +51,15 @@ class Chart extends React.Component {
 	componentWillUnmount() {
 		window.removeEventListener("resize", this.resizeScreenFn);
 	}
-	getWindowSizeClassName(){
-		if(window.innerWidth > 800) {
-			return "break-lg"
-		} else if(window.innerWidth > 584) {
-			return "break-md"
-		}
-		return "break-sm"
-	}
 	resizeScreen(){
-		if(this.state.windowSizeClassName !== this.getWindowSizeClassName()) {
-			this.setState({
-				windowSizeClassName: this.getWindowSizeClassName()
-			})
+		let responsiveSize = calculateResponsiveSize()
+		if(this.props.responsiveSize !== responsiveSize) {
+			this.props.setResponsiveSize(responsiveSize)
 		}
 	}
 	render() {
 		return (
-			<div className={this.state.windowSizeClassName}>
+			<div className={this.props.responsiveSize}>
 				<UI {...this.props} />
 				<div className="ciq-chart-area">
 					<DrawingContainer {...this.props} />

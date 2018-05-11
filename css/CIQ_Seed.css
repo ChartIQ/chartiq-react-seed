@@ -4,6 +4,9 @@ html, body {
   margin: 0;
   padding: 0; }
 
+#chartHere {
+  min-width: 350px; }
+
 #chartHere > div, #chartHere > span {
   border: 0;
   font-family: 'Roboto', sans-serif;
@@ -164,9 +167,14 @@ nav {
 .break-sm .ciq-nav menu-select#themeSelect::before, .break-md .ciq-nav menu-select#themeSelect::before {
   background-position: -480px -50px; }
 
-.symbol-frame {
-  position: relative;
+.break-lg .symbol-frame {
   width: 130px; }
+
+.break-md .symbol-frame {
+  width: 75px; }
+
+.break-sm .symbol-frame {
+  width: 40px; }
 
 .symbol-btn, .comparison-btn {
   position: absolute;
@@ -802,13 +810,8 @@ div.left {
 div.right {
   float: right; }
 
-div.right span {
-  display: inline-block;
-  margin-right: 8px; }
-
 div.right menu-select {
-  display: inline-block;
-  margin-right: 8px; }
+  display: inline-block; }
 
 div.quick-link {
   float: right;
