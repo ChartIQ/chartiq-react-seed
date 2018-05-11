@@ -1,3 +1,8 @@
+/**
+ * UI wrapper component for interacting with the chart
+ * @module components/UI
+ */
+
 import React from 'react'
 import ChartSymbol from './UI/ChartSymbol'
 import Comparison from './UI/Comparison'
@@ -10,6 +15,11 @@ import ShareChartModal from './Modals/ShareChartModal';
 import ThemeUIContainer from '../containers/themeUIContainer'
 import StudyUIContainer from '../containers/studyContainer'
 
+/**
+ * UI wrapper component for interacting with the chart
+ *
+ * @param {Object} props
+ */
 const UI = (props) => {
 	return (
 		<ciq-UI-Wrapper>
@@ -29,7 +39,7 @@ const UI = (props) => {
 						<Crosshairs {...props} />
 						<TimeZoneButton {...props} />
 						<DrawingToolbarButton {...props} />
-            			<ShareChartModal {...props} />
+            <ShareChartModal {...props} />
 					</div>
 				</nav>
 					:

@@ -1,5 +1,16 @@
+/**
+ * Comparison to add additional series to the chart
+ * @module components/UI/Comparison
+ */
+
 import React from 'react'
 
+/**
+ * Comparison component to add additional series to the chart
+ *
+ * @class Comparison
+ * @extends {React.Component}
+ */
 class Comparison extends React.Component {
 	constructor(props) {
 		super(props);

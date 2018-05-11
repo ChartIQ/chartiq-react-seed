@@ -1,24 +1,20 @@
-//modules
-import { connect } from 'react-redux'
+/**
+ * Drawing container for redux container-component pattern, which connects a store
+ * to a parent component through the react-redux.connect() method
+ * @module containers/drawingContainer
+ */
 
-//actions
-import { toggleDrawing,
-         setFontFamily,
-         setFontStyle,
-         setFontSize,
-         setLineWidth,
-         setLineStyle,
-         setFillStyle,
-         setFillColor,
-         setLineColor,
-         setLineParams,
-         changeTool} from '../actions/drawActions'
-
-import { draw, changeDrawings } from '../actions/chartActions'
-
-//components
+import * as reactRedux from 'react-redux'
+import * as drawActions from '../actions/drawActions'
+import * as chartActions from '../actions/chartActions'
 import DrawingToolbar from '../components/DrawingToolbar'
 
+/**
+ * Maps store state to component properties per react-redux
+ *
+ * @param {Object} state
+ * @param {Object} ownProps
+ */
 const mapStateToProps = (state, props) => {
     return {
         showDrawingToolbar: state.draw.showDrawingToolbar,
@@ -36,45 +32,54 @@ const mapStateToProps = (state, props) => {
     }
 }
 
+/**
+ * Maps dispatches to properties to expose actions to components
+ *
+ * @param {Function} dispatch
+ * @param {*} ownProps
+ */
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         toggleDrawing: () => {
-            dispatch(toggleDrawing())
+            dispatch(drawActions.toggleDrawing())
         },
         setFontFamily: (family) => {
-            dispatch(setFontFamily(family))
+            dispatch(drawActions.setFontFamily(family))
         },
         setFontStyle: (styleType) => {
-            dispatch(setFontStyle(styleType))
+            dispatch(drawActions.setFontStyle(styleType))
         },
         setFontSize: (size) => {
-            dispatch(setFontSize(size))
+            dispatch(drawActions.setFontSize(size))
         },
         setFillColor: (color) => {
-            dispatch(setFillColor(color))
+            dispatch(drawActions.setFillColor(color))
         },
         setLineColor: (color) => {
-            dispatch(setLineColor(color))
+            dispatch(drawActions.setLineColor(color))
         },
         setFillStyle: (style) => {
-            dispatch(setLineStyle(style))
+            dispatch(drawActions.setLineStyle(style))
         },
         setLineParams: (weight, pattern) => {
-            dispatch(setLineParams(weight, pattern))
+            dispatch(drawActions.setLineParams(weight, pattern))
         },
         changeTool: (tool, params) => {
-            dispatch(changeTool(tool, params))
+            dispatch(drawActions.changeTool(tool, params))
         },
         draw: () => {
-            dispatch(draw())
+            dispatch(chartActions.draw())
         },
         changeDrawings: (params) => {
-            dispatch(changeDrawings(params))
+            dispatch(chartActions.changeDrawings(params))
         }
     }
 }
 
-const DrawingContainer = connect(
+/**
+ * Redux connection object linking the store to the Chart component
+ */
+const DrawingContainer = reactRedux.connect(
     mapStateToProps,
     mapDispatchToProps
 )(DrawingToolbar)

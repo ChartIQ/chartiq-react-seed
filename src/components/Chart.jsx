@@ -1,10 +1,20 @@
+/**
+ * Main chart react container
+ * @module components/Chart
+ */
+
 import React from 'react'
 import UI from "./UI";
 import RangeSelector from "./RangeSelector";
-import ShareButton from "./ShareButton";
 import Legend from './Legend';
 import DrawingContainer from '../containers/drawingContainer'
 
+/**
+ * Main chart react container component
+ *
+ * @class Chart
+ * @extends {React.Component}
+ */
 class Chart extends React.Component {
 	constructor(props) {
 		super(props);
@@ -56,7 +66,7 @@ class Chart extends React.Component {
 					</div>
 				</div>
 				<div className="ciq-footer">
-					<ShareButton {...this.props} />
+					<div className="ciq-share-button" onClick={()=>props.setShareStatus("SHOW")}>Share</div>
 					<RangeSelector {...this.props} />
 				</div>
 			</div>

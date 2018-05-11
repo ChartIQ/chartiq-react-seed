@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ChartIQ React Example</title>
-    <link rel="stylesheet" type="text/css" href="css/CIQ_Seed.css">
+		<title>ChartIQ React Seed Project</title>
+		<!-- ChartIQ React Seed Project css generated from sass -->
+		<link rel="stylesheet" type="text/css" href="css/CIQ_Seed.css">
+		<!-- ChartIQ charting library stylesheets -->
     <link rel="stylesheet" type="text/css" href="chartiq/css/stx-chart.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="chartiq/css/chartiq.css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="chartiq/css/normalize.css" media="screen"/>
-  </head>
-
+	</head>
+	<!-- provide css class for built-in themes -->
   <body class="ciq-night" >
-    <div id="chartHere"></div>
-		<!-- <script src="https://unpkg.com/react@16.2.0/umd/react.development.js"></script>
-		<script src="https://unpkg.com/react-dom@16.2.0/umd/react-dom.development.js"></script> -->
-  	<script src='require.js'></script>
-		<script src='./src/extras.js'></script>
+		<!-- main chart container -->
+		<div id="chartHere"></div>
+		<!-- link to customer-provided licensed ChartIQ charting library -->
+		<script src='./ChartIQ/js/chartiq.js'></script>
+		<!-- chart sharing functionality -->
+		<script src='./ChartIQ/js/thirdparty/html2canvas.js'></script>
+		<!-- link to customer-provided licensed ChartIQ charting library quoteFeedSimulator -->
+		<script src='./ChartIQ/js/quoteFeedSimulator.js'></script>
+		<!-- webpack generated React seed project bundle -->
+		<script src='./dist/main.js'></script>
 	</body>
 </html>

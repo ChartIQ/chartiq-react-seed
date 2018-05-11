@@ -1,3 +1,8 @@
+/**
+ * Reducers module combining all redux reducers
+ * @module reducers/reducer
+ */
+
 import { combineReducers } from 'redux'
 import chart from './chartReducer'
 import draw from './drawingReducer'
@@ -10,5 +15,6 @@ const reducer = combineReducers({
     study,
     theme
 });
+
 
 export default reducer
