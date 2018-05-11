@@ -24,7 +24,8 @@ const Types = createTypes(
     'CHANGE_VECTOR_STYLE',
     'CHANGE_VECTOR_LINE_PARAMS',
     'TOGGLE_AXIS_LABELS',
-    'SET_PERIODICITY',
+		'SET_PERIODICITY',
+		'SET_RESPONSIVE_SIZE',
     'TOGGLE_CROSSHAIRS',
     'TOGGLE_TIMEZONE_MODAL',
     'DRAW',
@@ -379,6 +380,19 @@ export function setChartType(type){
 			dispatch({ type: 'SET_CHART_TYPE', chartType: type })
 		])
 	}
+}
+
+
+/**
+ * Sets the chart responsive size
+ *
+ * @export
+ * @param {Chart.ChartResponsiveSize} size size of chart
+ * @see module:configs/ui
+ * @returns
+ */
+export function setResponsiveSize(size){
+	return { type: 'SET_RESPONSIVE_SIZE', size: size }
 }
 
 /**
