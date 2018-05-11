@@ -1,5 +1,16 @@
+/**
+ * Chart symbol selection
+ * @module components/UI/ChartSymbol
+ */
+
 import React from 'react'
 
+/**
+ * Chart symbol selection component
+ *
+ * @class ChartSymbol
+ * @extends {React.Component}
+ */
 class ChartSymbol extends React.Component {
 	constructor(props) {
 		super(props);

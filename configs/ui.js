@@ -1,7 +1,11 @@
-export default
+/**
+ * Theme redux reducer for actions related to theme creation and saving
+ * @module configs/ui
+ */
 
+const configs =
 {
-	"periodicity": {
+	periodicity: {
 		"options": [{
 			"period": 1,
       "interval": 1,
@@ -165,3 +169,4 @@ export default
 		}]
 	}
 }
+export default configs;

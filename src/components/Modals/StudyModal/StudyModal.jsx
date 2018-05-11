@@ -1,9 +1,20 @@
+/**
+ * Study modal dialog window component
+ * @module components/Modals/StudyModal/StudyModal
+ */
+
 import React from 'react'
 import StudyModalInput from './StudyModalInput'
 import StudyModalOutput from './StudyModalOutput'
 import StudyModalParameter from './StudyModalParameter'
 import ColorSwatch from '../../Drawing/ColorSwatch'
 
+/**
+ * Study modal dialog window
+ *
+ * @class StudyModal
+ * @extends {React.Component}
+ */
 class StudyModal extends React.Component {
 	constructor(props) {
 		super(props);

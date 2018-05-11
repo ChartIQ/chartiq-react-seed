@@ -1,7 +1,17 @@
+/**
+ * React popup menu implementation
+ * @module components/shared/MenuSelect
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
-
+/**
+ * React popup menu resuseable component
+ *
+ * @class MenuSelect
+ * @extends {React.Component}
+ */
 class MenuSelect extends React.Component{
     constructor(props){
         super(props);

@@ -1,7 +1,17 @@
-import React from 'react'
+/**
+ * Theme edit modal dialog window component
+ * @module components/Modals/ThemeModal
+ */
 
+import React from 'react'
 import ColorSwatch from '../Drawing/ColorSwatch'
 
+/**
+ * Theme edit modal dialog window component
+ *
+ * @class ThemeModal
+ * @extends {React.Component}
+ */
 class ThemeModal extends React.Component {
 	constructor(props) {
 		super(props);

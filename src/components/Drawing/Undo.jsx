@@ -1,5 +1,16 @@
+/**
+ * Undo drawing button
+ * @module components/Drawing/Undo
+ */
+
 import React from 'react'
 
+/**
+ * Undo drawing button
+ *
+ * @param {Object} props
+ * @returns
+ */
 const Undo = (props) => {
 	let cName = props.canUndo ? 'ciq-btn active' : 'ciq-btn';
 	return (

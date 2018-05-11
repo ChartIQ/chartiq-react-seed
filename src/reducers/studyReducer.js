@@ -1,6 +1,11 @@
-//actiont types
+/**
+ * Studies redux reducer for actions related to studies
+ * @module reducers/studyReducer
+ */
+
 import Types from '../actions/studyActions'
 
+// initial state and schema
 const initialState = {
     showStudyModal: false,
     studyList: CIQ.Studies.studyLibrary,
@@ -12,6 +17,13 @@ const initialState = {
     }
 }
 
+/**
+ * Study redux reducer
+ *
+ * @param {any} [state=initialState]
+ * @param {any} action
+ * @returns
+ */
 const study = (state = initialState, action) => {
     switch(action.type){
         case Types.TOGGLE_STUDY_OVERLAY:

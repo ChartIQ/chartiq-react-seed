@@ -1,14 +1,13 @@
-//action types
+/**
+ * Chart reducer for wrapper of actions that modify the ChartIQ charting library
+ * @module reducers/chartReducer
+ */
+
 import Types from '../actions/chartActions'
 
-//create a demo date feed
-import ChartService from '../feeds/ChartService'
-let service = new ChartService().makeFeed()
-
-//initial state
+// initial state and schema
 const initialState = {
   ciq: null,
-  service: service,
   chartType: null,
   refreshInterval: 1,
   symbol: 'AAPL',
@@ -41,13 +40,20 @@ const initialState = {
   redoStack: []
 }
 
+/**
+ * Chart redux reducer
+ *
+ * @param {any} [state=initialState]
+ * @param {any} action
+ * @returns
+ */
 const chart = (state = initialState, action) => {
   switch (action.type) {
-    case Types.SET_CONTAINER:
+		case Types.SET_CONTAINER:
       let ciq = new CIQ.ChartEngine({
         container: action.container
       })
-      ciq.attachQuoteFeed(state.service, { refreshInterval: state.refreshInterval })
+      ciq.attachQuoteFeed(window.quoteFeedSimulator, { refreshInterval: state.refreshInterval })
       ciq.setMarketFactory(CIQ.Market.Symbology.factory);
       let layout = CIQ.localStorage.getItem('myChartLayout');
       ciq.callbacks.studyOverlayEdit = action.callbacks.studyOverlayEdit;
@@ -216,9 +222,12 @@ const chart = (state = initialState, action) => {
     }
 }
 
-/*
-* private functions
-*/
+/**
+ * Restore drawings from localStorage.  Allows for browser to refresh to last state.
+ *
+ * @param {CIQ.ChartEngine} stx Charting engine
+ * @private
+ */
 function restoreDrawings(stx){
 	var memory=CIQ.localStorage.getItem(stx.chart.symbol);
 	if(memory!==null){
@@ -229,5 +238,6 @@ function restoreDrawings(stx){
 		}
 	}
 }
+
 
 export default chart

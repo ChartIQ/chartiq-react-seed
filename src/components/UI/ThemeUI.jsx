@@ -1,7 +1,18 @@
+/**
+ * ThemeUI for switching and editing themes of the chart
+ * @module components/UI/ThemeUI
+ */
+
 import React from 'react'
 import ThemeModal from '../Modals/ThemeModal';
 import MenuSelect from '../shared/MenuSelect';
 
+/**
+ * ThemeUI for switching and editing themes of the chart
+ *
+ * @class ThemeUI
+ * @extends {React.Component}
+ */
 class ThemeUI extends React.Component{
 	constructor(props){
 		super(props);

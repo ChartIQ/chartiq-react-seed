@@ -1,5 +1,16 @@
+/**
+ * Legend for the chart
+ * @module components/Legend
+ */
+
 import React from 'react'
 
+/**
+ * Legend component for the chart
+ *
+ * @class Legend
+ * @extends {React.Component}
+ */
 class Legend extends React.Component{
 	constructor(props){
 		super(props);
