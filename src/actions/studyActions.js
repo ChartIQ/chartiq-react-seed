@@ -72,7 +72,16 @@ export function closeStudyModal(){
  * @returns
  */
 export function addStudy(ciq, study){
-    return { type: 'ADD_STUDY', ciq: ciq, study: study }
+	return (dispatch, getState) => {
+		let state = getState()
+		let studyLookup = {}
+		console.log("study",state)
+		for(let libraryEntry in state.study.studyList){
+				studyLookup[state.study.studyList[libraryEntry].name] = libraryEntry
+		}
+		CIQ.Studies.addStudy(ciq, studyLookup[study.name])
+		return { type: 'ADD_STUDY', ciq: ciq, study: study }
+	}
 }
 
 /**

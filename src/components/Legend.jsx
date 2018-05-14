@@ -14,28 +14,28 @@ import React from 'react'
 class Legend extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = {
-			style: {}
-		};
-		this.moveLegend = this.moveLegend.bind(this);
+		// this.state = {
+		// 	style: {}
+		// };
+		// this.moveLegend = this.moveLegend.bind(this);
 		this.removeSeries = this.removeSeries.bind(this);
 	}
-	componentWillReceiveProps(nextProps){
-		if (this.props.comparisons.length !== nextProps.comparisons.length){
-			this.setState({
-				style: {
-					marginTop: nextProps.ciq.chart.top + 35 + 'px'
-				}
-			});
-		}
-	}
-	moveLegend(){
-		this.setState({
-			style: {
-				marginTop: this.props.ciq.chart.top + 35 + 'px'
-			}
-		});
-	}
+	// componentWillReceiveProps(nextProps){
+	// 	if (this.props.comparisons.length !== nextProps.comparisons.length){
+	// 		this.setState({
+	// 			style: {
+	// 				marginTop: nextProps.ciq.chart.top + 35 + 'px'
+	// 			}
+	// 		});
+	// 	}
+	// }
+	// moveLegend(){
+	// 	this.setState({
+	// 		style: {
+	// 			marginTop: this.props.ciq.chart.top + 35 + 'px'
+	// 		}
+	// 	});
+	// }
 	removeSeries(id){
 		this.props.ciq.removeSeries(id);
 	}
@@ -51,9 +51,10 @@ class Legend extends React.Component{
 			);
 		});
 
+		console.log(this.props.chartTop, this.props)
 
 		return (
-			<div className='comparisons' style={this.state.style}>
+			<div className='comparisons' style={{marginTop: (this.props.chartTop || 0) + 35}}>
 				{comparisons}
 			</div>
 		);
@@ -61,3 +62,4 @@ class Legend extends React.Component{
 }
 
 export default Legend;
+

@@ -11,7 +11,8 @@ const initialState = {
   ciq: null,
   chartType: null,
   refreshInterval: 1,
-  symbol: 'AAPL',
+	symbol: 'AAPL',
+	chartTop: 0,
   showDrawingToolbar: false,
   showCrosshairs: false,
   showTimezoneModal: false,
@@ -82,13 +83,15 @@ const chart = (state = initialState, action) => {
         },
         chartType: layout ? layout.chartType : state.chartType,
         showCrosshairs: layout ? layout.crosshair : state.showCrosshairs,
-        symbol: layout && layout.symbols ? layout.symbols[0].symbol.toUpperCase() : state.symbol
+				symbol: layout && layout.symbols ? layout.symbols[0].symbol.toUpperCase() : state.symbol
       })
     case Types.IMPORT_LAYOUT:
       if (state.ciq !== null) {
         state.ciq.importLayout(layout, { managePeriodicity: true, cb: restoreDrawings.bind(this, ciq) });
       }
-      return state;
+      return Object.assign(state, {
+
+			});
     case Types.SET_CHART_TYPE:
       return Object.assign({}, state, {
         chartType: action.chartType.type
@@ -98,7 +101,8 @@ const chart = (state = initialState, action) => {
 			var seriesArray = Array.isArray(action.series) ? action.series : [action.series]
       let newComparisons = state.comparisons.concat(seriesArray);
       return Object.assign({}, state, {
-        comparisons: newComparisons
+				comparisons: newComparisons,
+				chartTop: state.ciq.chart.top
       })
     case Types.REMOVE_COMPARISON:
       newComparisons = state.comparisons.filter(comp => comp.id !== action.comparison)
@@ -194,6 +198,10 @@ const chart = (state = initialState, action) => {
         let drawings = state.ciq.drawingObjects.slice();
         return Object.assign({}, state, {
           drawings: drawings
+				});
+		case Types.LAYOUT_CHANGED:
+        return Object.assign({}, state, {
+          chartTop: state.ciq.chart.top
         });
     case Types.UNDO:
         let newRedoStack = state.redoStack.slice();

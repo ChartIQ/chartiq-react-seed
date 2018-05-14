@@ -45,7 +45,7 @@ class Chart extends React.Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		if (this.props.ciq !== nextProps.ciq) {
-			nextProps.ciq.callbacks.layout = this.props.saveLayout;
+			nextProps.ciq.callbacks.layout = this.props.layoutChanged;
 		}
 	}
 	componentWillUnmount() {

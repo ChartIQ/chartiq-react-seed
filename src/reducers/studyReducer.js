@@ -58,11 +58,6 @@ const study = (state = initialState, action) => {
                 studyHelper: null
             })
         case Types.ADD_STUDY:
-            let studyLookup = {}
-            for(let libraryEntry in state.studyList){
-                studyLookup[state.studyList[libraryEntry].name] = libraryEntry
-            }
-            CIQ.Studies.addStudy(action.ciq, studyLookup[action.study.name])
             return state
         case Types.UPDATE_STUDY:
             state.studyHelper.updateStudy({ inputs: action.inputs, outputs: action.outputs, parameters: action.parameters });
