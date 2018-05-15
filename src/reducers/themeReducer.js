@@ -174,7 +174,6 @@ const ThemeUI = (state = initialState, action) => {
 				}
 
 			case Types.UPDATE_THEME:
-					console.log(action)
             newThemeSettings = updateThemeSettings(state.themeHelper, state.currentThemeSettings, {
                 color: action.color,
                 swatch: action.swatch
