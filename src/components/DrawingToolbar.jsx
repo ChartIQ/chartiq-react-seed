@@ -46,12 +46,6 @@ class DrawingToolbar extends React.Component {
 		if(nextProps.showDrawingToolbar && !this.props.showDrawingToolbar) {
 			this.props.draw()
 		}
-
-		if(this.props.ciq === null && nextProps.ciq !== null){
-			if (nextProps.ciq.callbacks.drawing === null){
-				nextProps.ciq.addEventListener('undoStamp', this.props.undoStamps);
-			}
-		}
 	}
 	toTitleCase(str) {
 		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});

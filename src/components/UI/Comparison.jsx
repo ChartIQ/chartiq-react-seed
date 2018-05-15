@@ -38,10 +38,6 @@ class Comparison extends React.Component {
 		this.handleKeyPress = this.handleKeyPress.bind(this);
 	}
 
-	componentDidMount(){
-		this.props.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
-	}
-
   onChange(event) {
 		this.setState({
 			text: event.target.value
@@ -80,13 +76,6 @@ class Comparison extends React.Component {
 		let key = event.key;
 		if (key == 'Enter') {
 			this.onOptionClick();
-		}
-  }
-
-	updateComparisonSeries() {
-		if (arguments[0].action == 'remove-series') {
-      let stx = arguments[0]
-			this.props.removeComparisonAndSave(stx.symbol)
 		}
   }
 
