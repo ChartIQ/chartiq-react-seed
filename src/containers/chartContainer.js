@@ -30,7 +30,8 @@ const mapStateToProps = (state, ownProps) => {
         showTimezoneModal: state.chart.showTimezoneModal,
         showAxisLabels: state.chart.showAxisLabels,
         setTimeZone: state.chart.setTimeZone,
-        chartSeries: state.chart.chartSeries,
+				chartSeries: state.chart.chartSeries,
+				responsiveSize: state.chart.responsiveSize,
         shareStatus: state.chart.shareStatus,
         shareStatusMsg : state.chart.shareStatusMsg,
         drawings: state.chart.drawings,
@@ -97,7 +98,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     setChartType: (type) => {
         dispatch(chartActions.setChartType(type))
-    },
+		},
+		setResponsiveSize: (size) => {
+			dispatch(chartActions.setResponsiveSize(size))
+		},
     setSpanWithLoader: (multiplier, base, interval, period, timeUnit) => {
         dispatch(chartActions.setSpanWithLoader(multiplier, base, interval, period, timeUnit))
     },

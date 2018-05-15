@@ -4,6 +4,7 @@
  */
 
 import Types from '../actions/chartActions'
+import * as chartComponent from '../components/Chart'
 
 // initial state and schema
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
     period: 1,
     interval: 1,
     timeUnit: 'day'
-  },
+	},
+	responsiveSize: chartComponent.calculateResponsiveSize(),
   shareStatus: "HIDDEN",
   shareStatusMsg: null,
   showPeriodicityLoader: false,
@@ -163,7 +165,11 @@ const chart = (state = initialState, action) => {
     case Types.SET_SYMBOL:
       return Object.assign({}, state, {
         symbol: action.symbol
-      })
+			})
+		case Types.SET_RESPONSIVE_SIZE:
+			return Object.assign({}, state, {
+				responsiveSize: action.size
+			})
     case Types.SHARE_CHART:
         return state;
     case Types.SET_SHARE_STATUS:

@@ -9,6 +9,21 @@ import RangeSelector from "./RangeSelector";
 import Legend from './Legend';
 import DrawingContainer from '../containers/drawingContainer'
 
+export const ChartResponsiveSize = Object.freeze({
+	SMALL: "break-sm",
+	MEDIUM: "break-md",
+	LARGE: "break-lg"
+});
+
+export var calculateResponsiveSize = function() {
+	if(window.innerWidth > 800) {
+		return ChartResponsiveSize.LARGE
+	} else if(window.innerWidth > 584) {
+		return ChartResponsiveSize.MEDIUM
+	}
+	return ChartResponsiveSize.SMALL
+}
+
 /**
  * Main chart react container component
  *
@@ -24,15 +39,27 @@ class Chart extends React.Component {
 			studyOverlayEdit: this.props.toggleStudyOverlay,
 			studyPanelEdit: this.props.openStudyModal
 		})
+		this.resizeScreenFn = this.resizeScreen.bind(this)
+		window.addEventListener("resize", this.resizeScreenFn);
+		this.resizeScreenFn();
 	}
 	componentWillReceiveProps(nextProps) {
 		if (this.props.ciq !== nextProps.ciq) {
 			nextProps.ciq.callbacks.layout = this.props.saveLayout;
 		}
 	}
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.resizeScreenFn);
+	}
+	resizeScreen(){
+		let responsiveSize = calculateResponsiveSize()
+		if(this.props.responsiveSize !== responsiveSize) {
+			this.props.setResponsiveSize(responsiveSize)
+		}
+	}
 	render() {
 		return (
-			<div>
+			<div className={this.props.responsiveSize}>
 				<UI {...this.props} />
 				<div className="ciq-chart-area">
 					<DrawingContainer {...this.props} />
