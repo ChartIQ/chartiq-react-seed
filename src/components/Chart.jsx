@@ -45,7 +45,9 @@ class Chart extends React.Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		if (this.props.ciq !== nextProps.ciq) {
-			nextProps.ciq.callbacks.layout = this.props.saveLayout;
+			nextProps.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
+			nextProps.ciq.callbacks.layout = this.props.layoutChanged;
+			nextProps.ciq.addEventListener('undoStamp', nextProps.undoStamps);
 		}
 	}
 	componentWillUnmount() {
@@ -57,6 +59,12 @@ class Chart extends React.Component {
 			this.props.setResponsiveSize(responsiveSize)
 		}
 	}
+	updateComparisonSeries() {
+		if (arguments[0].action == 'remove-series') {
+      let stx = arguments[0]
+			this.props.removeComparisonAndSave(stx.symbol)
+		}
+  }
 	render() {
 		return (
 			<div className={this.props.responsiveSize}>

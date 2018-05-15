@@ -29,7 +29,8 @@ const Types = createTypes(
     'TOGGLE_CROSSHAIRS',
     'TOGGLE_TIMEZONE_MODAL',
     'DRAW',
-    'DRAWINGS_CHANGED',
+		'DRAWINGS_CHANGED',
+		'LAYOUT_CHANGED',
     'CREATE_UNDO_STAMP',
     'UPDATE_UNDO_STAMPS',
     'UNDO',
@@ -576,6 +577,23 @@ export function changeDrawings(params){
  */
 function drawingsChanged(){
     return { type: 'DRAWINGS_CHANGED' }
+}
+
+/**
+ * Handle action of the chart.callbacks.laout callback
+ *
+ * @export
+ * @returns
+ */
+export function layoutChanged(){
+	return (dispatch, getState) => {
+		let state = getState();
+		return Promise.all([
+			dispatch(saveLayout()),
+			dispatch({type: 'LAYOUT_CHANGED'})
+	]);
+
+}
 }
 
 /**

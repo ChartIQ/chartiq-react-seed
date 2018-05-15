@@ -19,7 +19,8 @@ import Chart from '../components/Chart'
 const mapStateToProps = (state, ownProps) => {
     return {
         ciq: state.chart.ciq,
-        chartType: state.chart.chartType,
+				chartType: state.chart.chartType,
+				chartTop: state.chart.chartTop,
         periodicity: state.chart.periodicity,
         isLoadingPeriodicity: state.chart.isLoadingPeriodicity,
         comparisons: state.chart.comparisons,
@@ -120,8 +121,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     toggleAxisLabels: () => {
         dispatch(chartActions.toggleAxisLabels())
     },
-    saveLayout: () => {
-      dispatch(chartActions.saveLayout())
+    layoutChanged: () => {
+      dispatch(chartActions.layoutChanged())
     },
     undoStamps: (params) => {
       dispatch(chartActions.undoStamps(params))

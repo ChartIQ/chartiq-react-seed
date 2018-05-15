@@ -72,7 +72,15 @@ export function closeStudyModal(){
  * @returns
  */
 export function addStudy(ciq, study){
-    return { type: 'ADD_STUDY', ciq: ciq, study: study }
+	return (dispatch, getState) => {
+		let state = getState();
+		let studyLookup = {};
+		for(let libraryEntry in state.study.studyList){
+				studyLookup[state.study.studyList[libraryEntry].name] = libraryEntry
+		}
+		CIQ.Studies.addStudy(ciq, studyLookup[study.name])
+		return dispatch({ type: 'ADD_STUDY', ciq: ciq, study: study })
+	}
 }
 
 /**
@@ -85,7 +93,13 @@ export function addStudy(ciq, study){
  * @returns
  */
 export function updateStudy(inputs, outputs, parameters){
-    return { type: 'UPDATE_STUDY', inputs: inputs, outputs: outputs, parameters: parameters }
+	return (dispatch, getState) => {
+		let state = getState();
+		if(state.study.studyHelper !== null) {
+			state.study.studyHelper.updateStudy({ inputs: inputs, outputs: outputs, parameters: parameters });
+		}
+    return dispatch({ type: 'UPDATE_STUDY', inputs: inputs, outputs: outputs, parameters: parameters })
+	}
 }
 
 /**
@@ -96,5 +110,11 @@ export function updateStudy(inputs, outputs, parameters){
  * @returns
  */
 export function removeStudy(study){
-    return { type: 'REMOVE_STUDY', study: study }
+	return (dispatch, getState) => {
+		let state = getState()
+		if(state.study.studyHelper !== null) {
+			CIQ.Studies.removeStudy(state.study.studyHelper.stx, state.study.studyHelper.sd);
+		}
+    return dispatch({ type: 'REMOVE_STUDY', study: study })
+	}
 }

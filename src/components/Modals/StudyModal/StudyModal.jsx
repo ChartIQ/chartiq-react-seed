@@ -105,6 +105,7 @@ class StudyModal extends React.Component {
 		this.forceUpdate();
 	};
 	render() {
+
 		if (!this.props.showStudyModal || !this.props.studyHelper) return <span></span>
 
 		let inputs = this.state.inputs.map((input, i) => {
