@@ -104,7 +104,9 @@ nav {
 .ciq-nav input {
   color: #c5c7c9;
   background-color: #151f28;
-  outline: none; }
+  outline: none;
+  line-height: 2em;
+  }
 
 #studyDialog input[type="number"], #studyDialog input[type="text"] {
   width: 75px;
