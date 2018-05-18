@@ -59,7 +59,6 @@
     "server": "webpack-dev-server --inline --progress --port 3000 --content-base . --watch=true",
     "start": "webpack-dev-server --mode development --config=webpack.config.js --open",
     "start0": "webpack-dev-server --mode development --config=webpack.config.js --open --host 0.0.0.0"
-    "startwin": "SET NODE_ENV=development & webpack-dev-server  --config=webpack.build.config.js --open"
   },
   "repository": {
     "type": "git",

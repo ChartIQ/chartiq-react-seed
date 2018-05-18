@@ -3,7 +3,6 @@
  * to a parent component through the react-redux.connect() method
  * @module containers/chartContainer
  */
-        importLayout,
 
 import * as reactRedux from 'react-redux'
 import * as chartActions from '../actions/chartActions'

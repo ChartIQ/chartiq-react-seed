@@ -402,6 +402,7 @@ export function setResponsiveSize(size){
  * @param {String} symbol
  * @returns
  */
+function setSymbolAndSave(symbol){
     return (dispatch, getState) => {
         let state = getState();
         if(symbol && symbol !== null && symbol !== undefined){
