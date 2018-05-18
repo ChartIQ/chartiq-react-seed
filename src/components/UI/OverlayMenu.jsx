@@ -1,3 +1,15 @@
+/**
+ * Menu for editing overlaying studies
+ * @module components/UI/OverlayMenu
+ */
+
+import React from 'react'
+
+/**
+ * Menu for editing overlaying studies
+ *
+ * @param {Object} props
+ */
 const OverlayMenu = (props) => {
     if (props.studyOverlay.show){
         return (

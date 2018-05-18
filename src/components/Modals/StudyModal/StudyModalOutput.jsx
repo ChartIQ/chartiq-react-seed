@@ -1,7 +1,17 @@
-import PropTypes from 'prop-types'
+/**
+ * Study modal output form field generator
+ * @module components/Modals/StudyModal/StudyModalOutput
+ */
 
+import React from 'react'
+import PropTypes from 'prop-types'
 import ColorSwatch from '../../Drawing/ColorSwatch'
 
+/**
+ * Study modal output form field generator
+ *
+ * @param {Object} props
+ */
 const StudyModalOutput = (props) => {
     if (!props.output) return (<div></div>)
     return (
@@ -18,7 +28,7 @@ StudyModalOutput.defaultProps = {
     isModal: false
 };
 
-StudyModalOutput.PropTypes = {
+StudyModalOutput.propTypes = {
     output: PropTypes.object.isRequired,
     setColor: PropTypes.func.isRequired,
     isPickingStudyColor: PropTypes.bool.isRequired,

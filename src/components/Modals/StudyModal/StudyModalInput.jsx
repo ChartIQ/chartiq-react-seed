@@ -1,3 +1,15 @@
+/**
+ * Study modal form input field generator component
+ * @module components/Modals/StudyModal/StudyModalInput
+ */
+
+import React from 'react'
+
+/**
+ * Study modal form input field generator component
+ *
+ * @param {Object} props
+ */
 const StudyModalInput = (props) => {
     if(props.input.type === 'select'){
         let inputOptions = []

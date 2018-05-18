@@ -1,27 +1,41 @@
-const Legend = (props) => {
+/**
+ * Legend for the chart
+ * @module components/Legend
+ */
 
-  if (props.comparisons && props.comparisons.length === 0) return (<span></span>)
+import React from 'react'
 
-  var removeComparison = function(comparison){
-    // action is handled via callback in in Comparison.jsx, so just remove the series to initiate
-    props.ciq.removeSeries(comparison.id)
-  }
-
-	let comparisons = props.comparisons.map((comparison, i) => {
+/**
+ * Legend component for the chart
+ *
+ * @class Legend
+ * @extends {React.Component}
+ */
+class Legend extends React.Component{
+	constructor(props){
+		super(props);
+		this.removeSeries = this.removeSeries.bind(this);
+	}
+	removeSeries(id){
+		this.props.ciq.removeSeries(id);
+	}
+	render(){
+		let comparisons = this.props.comparisons.map((comparison, i) => {
+			return (
+				<div className='comparisonWrapper' key={'comparison'+i}>
+					<div className='chartSeriesColor' style={{ 'backgroundColor': comparison.parameters.color }}></div>
+					<div className='chartSeries'>{comparison.display}</div>
+					<div className='deleteSeries' onClick={this.removeSeries.bind(this, comparison.id)}></div>
+				</div>
+			);
+		});
 		return (
-			<div className="comparisonWrapper" key={"comparison" + i}>
-				<div className="chartSeriesColor" style={{ 'backgroundColor': comparison.parameters.color }}></div>
-				<div className="chartSeries">{comparison.display}</div>
-				<div className="deleteSeries" onClick={()=>removeComparison(comparison)}></div>
+			<div className='comparisons' style={{marginTop: (this.props.chartTop || 0) + 35}}>
+				{comparisons}
 			</div>
-		)
-	})
-
-	return (
-		<div className="comparisons">
-			{comparisons}
-		</div>
-	)
+		);
+	}
 }
 
-export default Legend
+export default Legend;
+

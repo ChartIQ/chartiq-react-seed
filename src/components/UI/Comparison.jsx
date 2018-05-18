@@ -1,12 +1,36 @@
+/**
+ * Comparison to add additional series to the chart
+ * @module components/UI/Comparison
+ */
+
+import React from 'react'
+import * as chart from '../Chart'
+
+/**
+ * Comparison component to add additional series to the chart
+ *
+ * @class Comparison
+ * @extends {React.Component}
+ */
 class Comparison extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: '',
-			placeholder: 'Add Comparison'
+			text: ''
 		}
 		this.bindCorrectContext();
-  }
+	}
+
+	getPlaceholderText() {
+		switch(this.props.responsiveSize){
+			case(chart.ChartResponsiveSize.MEDIUM):
+				return "Compare";
+			case(chart.ChartResponsiveSize.SMALL):
+				return "cf.";
+			default:
+				return "Add Comparison";
+		}
+	}
 
 	bindCorrectContext(){
 		this.onChange = this.onChange.bind(this);
@@ -21,8 +45,6 @@ class Comparison extends React.Component {
   }
 
 	onOptionClick() {
-		if (!this.props.ciq) { return; }
-		if (!this.props.ciq.callbacks.symbolChange) { this.props.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this) }
 		function getRandomColor() {
 			var letters = '0123456789ABCDEF';
 			var color = '#';
@@ -42,7 +64,7 @@ class Comparison extends React.Component {
 
     let symbolCompare = this.state.text.replace(/\s/g,'').toUpperCase();
     if(symbolCompare && !this.props.comparisons.find(comp=>comp && comp.id===symbolCompare) && symbolCompare!==this.props.symbol){
-      this.props.addComparison(symbolCompare, seriesParams)
+      this.props.addComparisonAndSave(symbolCompare, seriesParams)
     }
 
 		this.setState({
@@ -57,18 +79,11 @@ class Comparison extends React.Component {
 		}
   }
 
-	updateComparisonSeries() {
-		if (arguments[0].action == 'remove-series') {
-      let stx = arguments[0]
-			this.props.removeComparison(stx.symbol)
-		}
-  }
-
 	render() {
 		return (
 			<span className="symbol-frame">
-				<input onChange={this.onChange} onKeyPress={this.handleKeyPress} id="symbolCompareInput" placeholder={this.state.placeholder} type="text" value={this.state.text} />
-				<div className="comparison-btn" onClick={this.onOptionClick}></div>
+				<input onChange={this.onChange} onKeyPress={this.handleKeyPress} id="symbolCompareInput" placeholder={this.getPlaceholderText()} type="text" value={this.state.text} />
+				{/* <div className="comparison-btn" onClick={this.onOptionClick}></div> */}
 			</span>
 		);
 	}

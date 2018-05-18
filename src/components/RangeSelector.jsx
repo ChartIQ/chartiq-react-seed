@@ -1,10 +1,18 @@
+/**
+ * Range selector component
+ * @module components/RangeSelector
+ */
+import React from 'react'
 
+/**
+ * Range selector component
+ *
+ * @param {Object} props
+ */
 const RangeSelector = (props) => {
-
   function setSpan(multiplier, base, interval, period, timeUnit) {
     props.setSpanWithLoader(multiplier, base, interval, period, timeUnit)
   }
-
 	return (
 		<div>
 

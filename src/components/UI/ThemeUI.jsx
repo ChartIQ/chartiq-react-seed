@@ -1,15 +1,44 @@
-//components
+/**
+ * ThemeUI for switching and editing themes of the chart
+ * @module components/UI/ThemeUI
+ */
+
+import React from 'react'
 import ThemeModal from '../Modals/ThemeModal';
-import MenuSelect from './MenuSelect';
+import MenuSelect from '../shared/MenuSelect';
 
-const ThemeUI = (props) => {
-	return (
-		<span>
-			<ThemeModal {...props} />
+/**
+ * ThemeUI for switching and editing themes of the chart
+ *
+ * @class ThemeUI
+ * @extends {React.Component}
+ */
+class ThemeUI extends React.Component{
+	constructor(props){
+		super(props);
+	}
+	componentDidMount(){
+		this.props.setThemeHelper(this.props.ciq)
+		this.props.restoreThemes()
+	}
+	render(){
+		return (
+			<span>
+				<ThemeModal {...this.props} />
 
-			<MenuSelect options={props.themeList} keyName='theme' name='name' handleOptionSelect={props.changeTheme} menuId='themeSelect' title='Select Theme' /> 
-		</span>
-	);
+				<MenuSelect hasButtons={true}
+							options={this.props.themeList.filter(t=>t.name)}
+							keyName='theme'
+							name='name'
+							handleOptionSelect={this.props.changeTheme}
+							menuId='themeSelect'
+							title='Select Theme'
+							noButtons={['Night', '+ New Theme']}
+							editItem={this.props.toggleThemeEditor}
+							deleteItem={this.props.deleteTheme} />
+			</span>
+		);
+	}
 }
 
 export default ThemeUI
