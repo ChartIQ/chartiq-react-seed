@@ -43,14 +43,28 @@ input[type="text"], input[type="number"] {
   border: #ddd solid 1px;
   padding: 0 5px 0 10px; }
 
-.stx-chart-panel.stx-show {
-  display: inline-block !important; }
+.stx-panel-title {
+  display: none; }
 
-.stx-panel-title.chart-title {
+.chart-title {
+  float: left;
   font-size: 28px;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 700;
-  margin: 10px; }
+  text-transform: uppercase;
+  padding: 20px; }
+
+.chart-title:after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both; }
+
+.clearfloat {
+  display: block;
+  height: 0;
+  clear: both; }
 
 h3 {
   font-family: "Roboto", sans-serif;
@@ -84,7 +98,7 @@ nav {
 .left span {
   margin-right: 10px; }
 
-.stx-chart-panel .stx-ico-focus, .stx-chart-panel .stx-ico-down, .stx-chart-panel .stx-ico-up {
+.stx-chart-panel .stx-ico-focus, .stx-chart-panel .stx-ico-down, .stx-chart-panel .stx-ico-up, .stx-btn-panel {
   display: none; }
 
 /* Standard Button Dimensions, Color */
@@ -105,8 +119,7 @@ nav {
   color: #c5c7c9;
   background-color: #151f28;
   outline: none;
-  line-height: 2em;
-  }
+  line-height: 2em; }
 
 #studyDialog input[type="number"], #studyDialog input[type="text"] {
   width: 75px;
