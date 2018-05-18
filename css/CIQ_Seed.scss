@@ -85,16 +85,32 @@ input[type="text"], input[type="number"] {
 	padding: 0 5px 0 10px;
 }
 
-.stx-chart-panel.stx-show {
-	display: inline-block !important;
+.stx-panel-title {
+	display:none;
 }
 
-.stx-panel-title.chart-title{
+.chart-title{
+	float:left;
 	font-size: 28px;
 	font-family: $heading-font;
 	font-weight: 700;
-	margin:10px;
+	text-transform: uppercase;
+	padding: 20px;
 }
+
+.chart-title:after { 
+	content: "."; 
+	visibility: hidden; 
+	display: block; 
+	height: 0; 
+	clear: both;
+ }
+
+ .clearfloat {
+	display: block; 
+	height: 0; 
+	clear:both;
+ }
 
 h3 {
 	font-family: $base-font;
@@ -132,7 +148,8 @@ nav {
 .left span{
 	margin-right:10px;
 }
-.stx-chart-panel .stx-ico-focus, .stx-chart-panel .stx-ico-down, .stx-chart-panel .stx-ico-up{
+
+.stx-chart-panel .stx-ico-focus, .stx-chart-panel .stx-ico-down, .stx-chart-panel .stx-ico-up, .stx-btn-panel{
 	display: none;
 }
 
