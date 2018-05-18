@@ -1,17 +1,18 @@
-//action types
+/**
+ * Chart reducer for wrapper of actions that modify the ChartIQ charting library
+ * @module reducers/chartReducer
+ */
+
 import Types from '../actions/chartActions'
+import * as chartComponent from '../components/Chart'
 
-//create a demo date feed
-import ChartService from '../feeds/ChartService'
-let service = new ChartService().makeFeed()
-
-//initial state
+// initial state and schema
 const initialState = {
   ciq: null,
-  service: service,
   chartType: null,
   refreshInterval: 1,
-  symbol: 'AAPL',
+	symbol: 'AAPL',
+	chartTop: 0,
   showDrawingToolbar: false,
   showCrosshairs: false,
   showTimezoneModal: false,
@@ -22,7 +23,8 @@ const initialState = {
     period: 1,
     interval: 1,
     timeUnit: 'day'
-  },
+	},
+	responsiveSize: chartComponent.calculateResponsiveSize(),
   shareStatus: "HIDDEN",
   shareStatusMsg: null,
   showPeriodicityLoader: false,
@@ -41,13 +43,20 @@ const initialState = {
   redoStack: []
 }
 
+/**
+ * Chart redux reducer
+ *
+ * @param {any} [state=initialState]
+ * @param {any} action
+ * @returns
+ */
 const chart = (state = initialState, action) => {
   switch (action.type) {
-    case Types.SET_CONTAINER:
+		case Types.SET_CONTAINER:
       let ciq = new CIQ.ChartEngine({
         container: action.container
       })
-      ciq.attachQuoteFeed(state.service, { refreshInterval: state.refreshInterval })
+      ciq.attachQuoteFeed(window.quoteFeedSimulator, { refreshInterval: state.refreshInterval })
       ciq.setMarketFactory(CIQ.Market.Symbology.factory);
       let layout = !window.FSBL ? CIQ.localStorage.getItem('myChartLayout') : null;
       ciq.callbacks.studyOverlayEdit = action.callbacks.studyOverlayEdit;
@@ -76,18 +85,26 @@ const chart = (state = initialState, action) => {
         },
         chartType: layout ? layout.chartType : state.chartType,
         showCrosshairs: layout ? layout.crosshair : state.showCrosshairs,
-        symbol: layout && layout.symbols ? layout.symbols[0].symbol.toUpperCase() : state.symbol
+				symbol: layout && layout.symbols ? layout.symbols[0].symbol.toUpperCase() : state.symbol
       })
+    case Types.IMPORT_LAYOUT:
+      if (state.ciq !== null) {
+        state.ciq.importLayout(layout, { managePeriodicity: true, cb: restoreDrawings.bind(this, ciq) });
+      }
+      return Object.assign(state, {
+
+			});
     case Types.SET_CHART_TYPE:
       return Object.assign({}, state, {
         chartType: action.chartType.type
       })
 		case Types.ADD_COMPARISON:
-			if(!action.series) return state;
+			if(!action.series) { return state; }
 			var seriesArray = Array.isArray(action.series) ? action.series : [action.series]
       let newComparisons = state.comparisons.concat(seriesArray);
       return Object.assign({}, state, {
-        comparisons: newComparisons
+				comparisons: newComparisons,
+				chartTop: state.ciq.chart.top
       })
     case Types.REMOVE_COMPARISON:
       newComparisons = state.comparisons.filter(comp => comp.id !== action.comparison)
@@ -154,7 +171,11 @@ const chart = (state = initialState, action) => {
     case Types.SET_SYMBOL:
       return Object.assign({}, state, {
         symbol: action.symbol
-      })
+			})
+		case Types.SET_RESPONSIVE_SIZE:
+			return Object.assign({}, state, {
+				responsiveSize: action.size
+			})
     case Types.SHARE_CHART:
         return state;
     case Types.SET_SHARE_STATUS:
@@ -179,6 +200,10 @@ const chart = (state = initialState, action) => {
         let drawings = state.ciq.drawingObjects.slice();
         return Object.assign({}, state, {
           drawings: drawings
+				});
+		case Types.LAYOUT_CHANGED:
+        return Object.assign({}, state, {
+          chartTop: state.ciq.chart.top
         });
     case Types.UNDO:
         let newRedoStack = state.redoStack.slice();
@@ -233,9 +258,12 @@ const chart = (state = initialState, action) => {
     }
 }
 
-/*
-* private functions
-*/
+/**
+ * Restore drawings from localStorage.  Allows for browser to refresh to last state.
+ *
+ * @param {CIQ.ChartEngine} stx Charting engine
+ * @private
+ */
 function restoreDrawings(stx){
 	var memory=CIQ.localStorage.getItem(stx.chart.symbol);
 	if(memory!==null && !window.FSBL) restoreDrawingsFromMemory(stx, memory);
@@ -248,5 +276,6 @@ function restoreDrawingsFromMemory(stx, memory){
     stx.draw();
   }
 }
+
 
 export default chart

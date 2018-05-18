@@ -1,8 +1,19 @@
+/**
+ * StudyUI for adding studies to the chart
+ * @module components/UI/StudyUI
+ */
+
 import React from 'react'
 import OverlayMenu from './OverlayMenu';
 import StudyModal from '../Modals/StudyModal/StudyModal';
 import MenuSelect from '../shared/MenuSelect'
 
+/**
+ * StudyUI for adding studies to the chart
+ *
+ * @class StudyUI
+ * @extends {React.Component}
+ */
 class StudyUI extends React.Component{
 	constructor(props){
 		super(props);

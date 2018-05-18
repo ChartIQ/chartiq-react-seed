@@ -1,7 +1,12 @@
-//modules
+/**
+ * ColorSwatch
+ * @module components/Drawing/ColorSwatch
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 
+// swatch colors
 var colorPickerColors = [
 	"ffffff", "ffd0cf", "ffd9bb", "fff56c", "eaeba3", "d3e8ae", "adf3ec", "ccdcfa", "d9c3eb",
 	"efefef", "eb8b87", "ffb679", "ffe252", "e2e485", "c5e093", "9de3df", "b1c9f8", "c5a6e1",
@@ -12,6 +17,12 @@ var colorPickerColors = [
 	"000000", "5c1506", "401a08", "714114", "333610", "222f1d", "00544f", "1f2a3c", "281a33"
 ];
 
+/**
+ * ColorSwatch component for choosing colors
+ *
+ * @class ColorSwatch
+ * @extends {React.Component}
+ */
 class ColorSwatch extends React.Component {
     constructor(props){
         super(props)
@@ -102,6 +113,7 @@ class ColorSwatch extends React.Component {
         }
     }
 }
+
 
 ColorSwatch.defaultProps = {
     name: '',

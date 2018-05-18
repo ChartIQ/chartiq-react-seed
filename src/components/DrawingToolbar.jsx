@@ -1,4 +1,8 @@
-//components
+/**
+ * Drawing toolbar for adding drawings to the chart
+ * @module components/DrawingToolbar
+ */
+
 import React from 'react'
 import ColorSwatch from './Drawing/ColorSwatch'
 import LineStyle from "./Drawing/LineStyle"
@@ -11,6 +15,12 @@ import Undo from './Drawing/Undo'
 import Redo from './Drawing/Redo'
 import Clear from './Drawing/Clear'
 
+/**
+ * Drawing toolbar for adding drawings to the chart
+ *
+ * @class DrawingToolbar
+ * @extends {React.Component}
+ */
 class DrawingToolbar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -36,35 +46,30 @@ class DrawingToolbar extends React.Component {
 		if(nextProps.showDrawingToolbar && !this.props.showDrawingToolbar) {
 			this.props.draw()
 		}
-
-		if(this.props.ciq === null && nextProps.ciq !== null){
-			if (nextProps.ciq.callbacks.drawing === null){
-				nextProps.ciq.addEventListener('undoStamp', this.props.undoStamps);
-			}
-		}
 	}
 	toTitleCase(str) {
 		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 	}
 	setTool(ciq, tool){
-		if (ciq === null) return
-		else {
-			if(tool=='callout' || tool=='annotation') { // no need to do this every time
-				// Sync the defaults for font tool
-				var style=ciq.canvasStyle("stx_annotation");
-				ciq.currentVectorParameters.annotation.font.size=style.fontSize
-				ciq.currentVectorParameters.annotation.font.family=style.fontFamily
-				ciq.currentVectorParameters.annotation.font.style=style.fontStyle
-				ciq.currentVectorParameters.annotation.font.weight=style.fontWeight
-			}
-			let toolParams = CIQ.Drawing.getDrawingParameters(ciq, tool)
-			this.props.changeTool(tool, toolParams)
-			this.props.changeVectorParams(tool)
-			this.setState({
-				currentToolHasLabels: toolParams.hasOwnProperty('axisLabel'),
-				toolTitle: this.toTitleCase(tool)
-			});
+		if (ciq === null) {
+			return
 		}
+		if(tool=='callout' || tool=='annotation') { // no need to do this every time
+			// Sync the defaults for font tool
+			var style=ciq.canvasStyle("stx_annotation");
+			ciq.currentVectorParameters.annotation.font.size=style.fontSize
+			ciq.currentVectorParameters.annotation.font.family=style.fontFamily
+			ciq.currentVectorParameters.annotation.font.style=style.fontStyle
+			ciq.currentVectorParameters.annotation.font.weight=style.fontWeight
+		}
+		let toolParams = CIQ.Drawing.getDrawingParameters(ciq, tool)
+		this.props.changeTool(tool, toolParams)
+		this.props.changeVectorParams(tool)
+		this.setState({
+			currentToolHasLabels: toolParams.hasOwnProperty('axisLabel'),
+			toolTitle: this.toTitleCase(tool)
+		});
+
 	}
 	changeFontStyle(type){
 		this.props.setFontStyle(type)

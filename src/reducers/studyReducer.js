@@ -1,6 +1,11 @@
-//actiont types
+/**
+ * Studies redux reducer for actions related to studies
+ * @module reducers/studyReducer
+ */
+
 import Types from '../actions/studyActions'
 
+// initial state and schema
 const initialState = {
     showStudyModal: false,
     studyList: CIQ.Studies.studyLibrary,
@@ -12,6 +17,13 @@ const initialState = {
     }
 }
 
+/**
+ * Study redux reducer
+ *
+ * @param {any} [state=initialState]
+ * @param {any} action
+ * @returns
+ */
 const study = (state = initialState, action) => {
     switch(action.type){
         case Types.TOGGLE_STUDY_OVERLAY:
@@ -46,14 +58,8 @@ const study = (state = initialState, action) => {
                 studyHelper: null
             })
         case Types.ADD_STUDY:
-            let studyLookup = {}
-            for(let libraryEntry in state.studyList){
-                studyLookup[state.studyList[libraryEntry].name] = libraryEntry
-            }
-            CIQ.Studies.addStudy(action.ciq, studyLookup[action.study.name])
             return state
-        case Types.UPDATE_STUDY:
-            state.studyHelper.updateStudy({ inputs: action.inputs, outputs: action.outputs, parameters: action.parameters });
+				case Types.UPDATE_STUDY:
             return Object.assign({}, state, {
                 showStudyModal: false,
                 studyOverlay: {
@@ -64,7 +70,6 @@ const study = (state = initialState, action) => {
                 studyHelper: null
             })
         case Types.REMOVE_STUDY:
-            if(state.studyHelper !== null) { CIQ.Studies.removeStudy(state.studyHelper.stx, state.studyHelper.sd); }
             return Object.assign({}, state, {
                 studyOverlay: {
                     show: false,

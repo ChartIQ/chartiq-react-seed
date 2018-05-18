@@ -1,3 +1,8 @@
+/**
+ * Clear drawings button component
+ * @module components/Drawing/Clear
+ */
+
 import React from 'react'
 
 const Clear = (props) => {

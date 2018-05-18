@@ -1,14 +1,19 @@
-//action types
+/**
+ * Theme redux reducer for actions related to theme creation and saving
+ * @module reducers/themeReducer
+ */
+
 import Types from '../actions/themeActions'
 import themeActions from '../actions/themeActions';
 
-//create the default theme
+// create the default theme
 let night = {
 	"name": "Night",
-	"className":"ciq-night",
-	"builtIn":true
+	"className": "ciq-night",
+	"builtIn": true
 }
 
+// default settings and options to display in UI
 let defaultSettings = [{
 		section: "Candle Color",
 		class: "color",
@@ -117,6 +122,7 @@ let defaultSettings = [{
 	}
 ]
 
+// initial state and schema
 const initialState = {
     themeList: [night, { "name": "+ New Theme" }],
     currentThemeSettings: defaultSettings,
@@ -127,7 +133,14 @@ const initialState = {
 
 var newState;
 
-let newThemeSettings
+let newThemeSettings=undefined
+
+/**
+ * Theme react reducer
+ *
+ * @param {any} state
+ * @param {any} action
+ */
 const ThemeUI = (state = initialState, action) => {
     switch(action.type){
 			case Types.SET_HELPER:
@@ -161,7 +174,6 @@ const ThemeUI = (state = initialState, action) => {
 				}
 
 			case Types.UPDATE_THEME:
-					console.log(action)
             newThemeSettings = updateThemeSettings(state.themeHelper, state.currentThemeSettings, {
                 color: action.color,
                 swatch: action.swatch
@@ -257,8 +269,13 @@ const ThemeUI = (state = initialState, action) => {
     }
 }
 
-export default ThemeUI
-
+/**
+ * Update theme settings in state from UI components
+ *
+ * @param {any} themeHelper
+ * @param {any} currentSettings
+ * @param {any} newParams
+ */
 function updateThemeSettings(themeHelper, currentSettings, newParams){
     let settings = currentSettings.slice(),
     rgbaColor = (newParams && newParams.color) ? CIQ.hexToRgba('#'+newParams.color) : null
@@ -312,23 +329,31 @@ function updateThemeSettings(themeHelper, currentSettings, newParams){
     return newSettings
 }
 
+/**
+ * Set theme of charting library
+ *
+ * @param {any} themeHelper
+ * @param {any} theme
+ */
 function setTheme(themeHelper, theme) {
 	if (theme.settings) {
 		themeHelper.settings = CIQ.clone(theme.settings);
 		themeHelper.update();
-} else if (theme.builtIn===true) {
+	} else if (theme.builtIn === true) {
 		$$$('body').className = theme.className
 		var stx = themeHelper.params.stx;
 		stx.styles = {};
 		stx.chart.container.style.backgroundColor = "";
 		if (stx.displayInitialized) {
-				stx.headsUpHR();
-				stx.clearPixelCache();
-				stx.updateListeners("theme");
-				stx.draw();
+			stx.headsUpHR();
+			stx.clearPixelCache();
+			stx.updateListeners("theme");
+			stx.draw();
 		}
-} else {
-	console.error("InvalidArgument: No valid theme with properties:", action.theme)
+	} else {
+		console.error("InvalidArgument: No valid theme with properties: ", theme)
+	}
 }
 
-}
+
+export default ThemeUI

@@ -1,23 +1,41 @@
-import React from 'react'
+/**
+ * Comparison to add additional series to the chart
+ * @module components/UI/Comparison
+ */
 
+import React from 'react'
+import * as chart from '../Chart'
+
+/**
+ * Comparison component to add additional series to the chart
+ *
+ * @class Comparison
+ * @extends {React.Component}
+ */
 class Comparison extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: '',
-			placeholder: 'Add Comparison'
+			text: ''
 		}
 		this.bindCorrectContext();
-  }
+	}
+
+	getPlaceholderText() {
+		switch(this.props.responsiveSize){
+			case(chart.ChartResponsiveSize.MEDIUM):
+				return "Compare";
+			case(chart.ChartResponsiveSize.SMALL):
+				return "cf.";
+			default:
+				return "Add Comparison";
+		}
+	}
 
 	bindCorrectContext(){
 		this.onChange = this.onChange.bind(this);
 		this.onOptionClick = this.onOptionClick.bind(this);
 		this.handleKeyPress = this.handleKeyPress.bind(this);
-	}
-
-	componentDidMount(){
-		this.props.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
 	}
 
   onChange(event) {
@@ -61,18 +79,11 @@ class Comparison extends React.Component {
 		}
   }
 
-	updateComparisonSeries() {
-		if (arguments[0].action == 'remove-series') {
-      let stx = arguments[0]
-			this.props.removeComparisonAndSave(stx.symbol)
-		}
-  }
-
 	render() {
 		return (
 			<span className="symbol-frame">
-				<input onChange={this.onChange} onKeyPress={this.handleKeyPress} id="symbolCompareInput" placeholder={this.state.placeholder} type="text" value={this.state.text} />
-				<div className="comparison-btn" onClick={this.onOptionClick}></div>
+				<input onChange={this.onChange} onKeyPress={this.handleKeyPress} id="symbolCompareInput" placeholder={this.getPlaceholderText()} type="text" value={this.state.text} />
+				{/* <div className="comparison-btn" onClick={this.onOptionClick}></div> */}
 			</span>
 		);
 	}

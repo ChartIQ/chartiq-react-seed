@@ -1,5 +1,16 @@
+/**
+ * Timezone selection modal dialog window component
+ * @module components/Modals/TimezoneModal
+ */
+
 import React from 'react'
 
+/**
+ * Timezone selection modal dialog window component
+ *
+ * @class TimeZone
+ * @extends {React.Component}
+ */
 class TimeZone extends React.Component {
 	constructor(props) {
 		super(props);

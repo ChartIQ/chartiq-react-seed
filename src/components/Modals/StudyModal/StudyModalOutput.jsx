@@ -1,7 +1,17 @@
+/**
+ * Study modal output form field generator
+ * @module components/Modals/StudyModal/StudyModalOutput
+ */
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import ColorSwatch from '../../Drawing/ColorSwatch'
 
+/**
+ * Study modal output form field generator
+ *
+ * @param {Object} props
+ */
 const StudyModalOutput = (props) => {
     if (!props.output) return (<div></div>)
     return (
