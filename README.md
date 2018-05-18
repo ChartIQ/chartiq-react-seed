@@ -47,6 +47,7 @@ Once you have that, run ```npm start``` and open your browser window to localhos
 
 *Note: We do not recommend using the web components from template-advanced.html within frameworks. Unless you are familiar with integrating web components into React components, you are better off building framework components that interface with the charting library.*
 
+
 #### React-Redux
 
 All of the project source is in the `src` folder. The main ChartIQ charting component is in `./src/components/Chart.jsx`. This file is connected to a redux store inside of `./src/containers/chartContainer.js`. Whenever the `chartReducer` pushes a state change, the `ChartContainer` component will catch the new data and pass the `ciq` object to the UI elements so they can update according the state of the chart. When the chart container mounts it calls a redux action which creates a new stx object from the charting library, and passes the chartContainer node to it.
@@ -74,6 +75,7 @@ All React components exist within the `./src/components` folder and its subfolde
 #### Quotefeed
 
 This seed project uses the ChartIQ quote simulator to view randomized data with no dependency on a paid datasource, but one can be developed and included by altering the `ciq.attachQuoteFeed(window.quoteFeedSimulator)` call in the `SET_CHART_CONTAINER` action within the `chartReducer`.  See [documentation.chartiq.com](https://documentation.chartiq.com/) for more details.
+
 
 ## Building for use in the browser
 
