@@ -49,20 +49,22 @@ const chart = (state = initialState, action) => {
       })
       ciq.attachQuoteFeed(state.service, { refreshInterval: state.refreshInterval })
       ciq.setMarketFactory(CIQ.Market.Symbology.factory);
-      let layout = CIQ.localStorage.getItem('myChartLayout');
+      let layout = !window.FSBL ? CIQ.localStorage.getItem('myChartLayout') : null;
       ciq.callbacks.studyOverlayEdit = action.callbacks.studyOverlayEdit;
       ciq.callbacks.studyPanelEdit = action.callbacks.studyPanelEdit;
-      if (layout !== null && !window.FSBL){
+      if (layout !== null){
         layout = JSON.parse(layout);
         ciq.importLayout(layout, { managePeriodicity: true, cb: restoreDrawings.bind(this, ciq) });
       } else {
 				ciq.newChart(state.symbol, null, null, restoreDrawings.bind(this, ciq))
       }
-      let preferences = CIQ.localStorage.getItem('myChartPreferences');
-      if (preferences !== null){
-        preferences = JSON.parse(preferences);
-        if (preferences.timeZone) {
-          ciq.setTimeZone(null, preferences.timeZone);
+      if (!window.FSBL) {
+        let preferences = CIQ.localStorage.getItem('myChartPreferences');
+        if (preferences !== null){
+          preferences = JSON.parse(preferences);
+          if (preferences.timeZone) {
+            ciq.setTimeZone(null, preferences.timeZone);
+          }
         }
       }
       return Object.assign({}, state, {
@@ -202,18 +204,30 @@ const chart = (state = initialState, action) => {
         });
     case Types.IMPORT_DRAWINGS:
         drawings = state.ciq.drawingObjects.slice();
+        if (action.drawings && window.FSBL) restoreDrawingsFromMemory(state.ciq, action.drawings);
         return Object.assign({}, state, {
           drawings: drawings,
           canClear: drawings.length > 0
         });
     case Types.IMPORT_LAYOUT:
         let importedLayout = action.layout;
-        if (importedLayout !== null && !window.FSBL){
-          importedLayout = JSON.parse(layout);
-          ciq.importLayout(importedLayout, { managePeriodicity: true, cb: action.cb  && window.FSBL ? action.cb : restoreDrawings.bind(this, ciq) });
+        if (importedLayout !== null){
+          importedLayout = typeof importedLayout === 'string' ? JSON.parse(importedLayout) : importedLayout;
+          state.ciq.importLayout(importedLayout, { managePeriodicity: true, cb: action.cb ? action.cb.bind(this, state.ciq) : restoreDrawings.bind(this, state.ciq) });
         } else {
-          ciq.newChart(state.symbol, null, null, restoreDrawings.bind(this, ciq))
+          state.ciq.newChart(state.symbol, null, null, action.cb)
         }
+        console.log('importedLayout isnt null: ', importedLayout);
+        return Object.assign({}, state, {
+          periodicity: {
+            period: importedLayout ? importedLayout.periodicity : state.periodicity.period,
+            interval: importedLayout ? importedLayout.interval : state.periodicity.interval,
+            timeUnit: importedLayout ? importedLayout.timeUnit : state.periodicity.timeUnit
+          },
+          chartType: importedLayout ? importedLayout.chartType : state.chartType,
+          showCrosshairs: importedLayout ? importedLayout.crosshair : state.showCrosshairs,
+          symbol: importedLayout && importedLayout.symbols ? importedLayout.symbols[0].symbol.toUpperCase() : state.symbol
+        })
     default:
       return state
     }
@@ -224,13 +238,15 @@ const chart = (state = initialState, action) => {
 */
 function restoreDrawings(stx){
 	var memory=CIQ.localStorage.getItem(stx.chart.symbol);
-	if(memory!==null && !window.FSBL){
-    var parsed=JSON.parse(memory);
-		if(parsed){
-			stx.importDrawings(parsed);
-			stx.draw();
-		}
-	}
+	if(memory!==null && !window.FSBL) restoreDrawingsFromMemory(stx, memory);
+}
+
+function restoreDrawingsFromMemory(stx, memory){
+  var parsed = JSON.parse(memory);
+  if (parsed) {
+    stx.importDrawings(parsed);
+    stx.draw();
+  }
 }
 
 export default chart

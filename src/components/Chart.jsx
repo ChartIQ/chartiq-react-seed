@@ -15,23 +15,30 @@ class Chart extends React.Component {
 			studyPanelEdit: this.props.openStudyModal
 		})
 	}
-	componentWillReceiveProps(nextProps) {
-		if (this.props.ciq !== nextProps.ciq) {
-			nextProps.ciq.callbacks.layout = this.props.saveLayout;
-
+	componentDidUpdate(prevProps) {
+		if (prevProps.ciq === null) {
 			//Finsemble hacks
 			let actions = {};
-			Object.keys(nextProps).map((key) => {
-				let prop = nextProps[key];
 
-				if (typeof prop === 'function' && !actions.hasOwnProperty(key)){
-					actions[key] = prop;
-				}
-			});
+			actions.importLayout = (stx, cb) => {
+				this.props.importLayout(stx, cb);
+			};
+
+			actions.setSymbolAndSave = (symbol) => {
+				this.props.setSymbolAndSave(symbol);
+			};
+
+			actions.importDrawings = (memory) => {
+				this.props.importDrawings(memory);
+			};
 
 			window.actions = actions;
-			window.stxx = nextProps.ciq;
-			if (window.onAfterChartCreated) FSBL.addEventListener('onReady', window.onAfterChartCreated);
+			window.stxx = this.props.ciq;
+
+			if (window.onAfterChartCreated) FSBL.addEventListener('onReady', () => {
+				window.onAfterChartCreated();
+				window.restoreLayout(this.props.ciq);
+			});
 		}
 	}
 	render() {

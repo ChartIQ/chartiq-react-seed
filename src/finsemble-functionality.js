@@ -81,16 +81,18 @@ window.onAfterChartCreated = function () {
 						var chartData = response.data['chartiq.chart'].chart;
 						window.actions.importLayout(chartData.layout);
 						FSBL.Clients.WindowClient.setComponentState({ field: chartData.layout.symbols[0].symbol, value: chartData.drawings }, function () {
-							window.actions.importDrawings();
+							restoreDrawings(stxx, chartData.layout.symbol[0].symbol);
 						});
 					}
 				}
 			}
 		]
 	});
-	// stxx.callbacks.layout = saveLayout;
-	// stxx.callbacks.symbolChange = saveLayout;
-	// stxx.callbacks.drawing=saveDrawings;
+	stxx.callbacks.layout = saveLayout;
+	stxx.callbacks.symbolChange = saveLayout;
+	stxx.callbacks.drawing = () => {
+		saveDrawings({ stx: stxx, symbol: stxx.chart.symbol });
+	}
 
 	// setTimeout(Actions.updateChartContainerSize, 100);
 };
@@ -99,8 +101,9 @@ window.onAfterChartCreated = function () {
 window.restoreDrawings = function (stx, symbol) {
 	FSBL.Clients.WindowClient.getComponentState({ field: symbol }, function (err, memory) {
 		if (memory) {
-			stx.importDrawings(memory);
-			window.actions.draw();
+			// stx.importDrawings(memory);
+			// window.actions.draw();
+			window.actions.importDrawings(memory);
 		}
 	});
 };
@@ -115,8 +118,9 @@ window.saveDrawings = function (obj) {
 
 window.restoreLayout = function (stx, cb) {
 	if (typeof cb === 'undefined') { cb = function noop() { }; }
-	function closure() {
-		restoreDrawings(stx, stx.chart.symbol);
+	function closure(ciq) {
+		FSBL.Clients.WindowClient.setWindowTitle(ciq.layout.symbols[0].symbol);
+		restoreDrawings(ciq, ciq.chart.symbol);
 		cb();
 	}
 	var opts = FSBL.Clients.WindowClient.options;
@@ -129,9 +133,9 @@ window.restoreLayout = function (stx, cb) {
 				opts.customData.spawnData.layout = null;
 				//so it doesn't overwrite what's in storage the next time the app is loaded.
 			} else {
-				FSBL.Clients.WindowClient.setWindowTitle(stx.symbol);
-				// stx.layout.symbols = [{ symbol: 'AAPL' }];
+				stx.layout.symbols = [{ symbol: 'AAPL' }];
 				// stx.importLayout(stx.layout, { managePeriodicity: true, cb: closure });
+				FSBL.Clients.WindowClient.setWindowTitle(stx.layout.symbols[0].symbol);
 				window.actions.importLayout(stx.layout, closure);
 				return;
 			}
@@ -141,7 +145,6 @@ window.restoreLayout = function (stx, cb) {
 		window.actions.importLayout(state, closure);
 	});
 };
-
 
 // ChartStore.setChart = function (chart) {
 // 	let stx = window.stxx;
@@ -177,15 +180,14 @@ window.changeSymbol = function (data) {
 	// 	// The user has changed the symbol, populate UITitle with yesterday's closing cq-hu-price
 	// 	// iqPrevClose is just a dummy value, you'll need to get the real value from your data source
 
-	// 	for (var field in stxx.chart.series) { stxx.removeSeries(field); } // reset comparisons - remove this line to transfer from symbol to symbol.
-	// 	if (stxx.tfc) { stxx.tfc.changeSymbol(); }   // Update trade from chart, todo, do this with an observer
+		for (var field in stxx.chart.series) { stxx.removeSeries(field); } // reset comparisons - remove this line to transfer from symbol to symbol.
+		if (stxx.tfc) { stxx.tfc.changeSymbol(); }   // Update trade from chart, todo, do this with an observer
 	// 	Actions.hideLoader();
-		// restoreDrawings(stxx, stxx.chart.symbol);
+		restoreDrawings(stxx, stxx.chart.symbol);
 	// });
-	// FSBL.Clients.WindowClient.setWindowTitle(data.symbol.toUpperCase());
 	fin.desktop.InterApplicationBus.publish('fts.navigate.entityBySymbol', { symbol: data.symbol.toUpperCase() });
 	FSBL.Clients.WindowClient.setWindowTitle(data.symbol.toUpperCase());
-	window.actions.setSymbolAndSave(data.symbol.toUpperCase(), false);
+	window.actions.setSymbolAndSave(data.symbol.toUpperCase());
 };
 
 fin.desktop.InterApplicationBus.subscribe("*", "fts.entity.active", (message) => {

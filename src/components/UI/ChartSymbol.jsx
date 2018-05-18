@@ -16,8 +16,11 @@ class ChartSymbol extends React.Component {
     }
 	onOptionClick() {
 		if (!this.props.ciq || !this.props.symbol) { return; }
-		if (window.FSBL) { window.FSBL.Clients.LinkerClient.publish({ dataType: 'symbol', data: this.state.text.toUpperCase() }); }
-		this.props.setSymbolAndSave(this.state.text, true)
+		if (window.FSBL) { 
+			window.FSBL.Clients.LinkerClient.publish({ dataType: 'symbol', data: this.state.text.toUpperCase() });
+			FSBL.Clients.WindowClient.setWindowTitle(this.state.text.toUpperCase());
+		}
+		this.props.setSymbolAndSave(this.state.text);
 	}
 	onChange(event) {
 		this.setState({
