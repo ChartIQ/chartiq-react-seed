@@ -63,9 +63,9 @@ class Chart extends React.Component {
 			window.actions = actions;
 			window.stxx = this.props.ciq;
 
-			nextProps.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
-			nextProps.ciq.callbacks.layout = this.props.layoutChanged;
-			nextProps.ciq.addEventListener('undoStamp', nextProps.undoStamps);
+			prevProps.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
+			prevProps.ciq.callbacks.layout = this.props.layoutChanged;
+			prevProps.ciq.addEventListener('undoStamp', prevProps.undoStamps);
 		}
 	}
 	componentWillUnmount() {
