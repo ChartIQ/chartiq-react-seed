@@ -402,20 +402,21 @@ export function setResponsiveSize(size){
  * @param {String} symbol
  * @returns
  */
-function setSymbolAndSave(symbol){
-    return (dispatch, getState) => {
-        let state = getState();
-        if(symbol && symbol !== null && symbol !== undefined){
-            return Promise.all([
-                state.chart.ciq.newChart(symbol, null, state.ciq, () => {
-                    dispatch(setSymbol(symbol));
-                    if (save) dispatch(saveLayout());
-                })
-            ]);
-        }
-        return;
-    };
+export function setSymbolAndSave(symbol){
+	return (dispatch, getState) => {
+			let state = getState();
+			if(symbol && symbol !== null){
+					return Promise.all([
+							state.chart.ciq.newChart(symbol, null, state.ciq, () => {
+									dispatch(setSymbol(symbol));
+									dispatch(saveLayout());
+							})
+					]);
+			}
+			return;
+	};
 }
+
 
 /**
  * Sets the symbol of the chart
