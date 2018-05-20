@@ -44,7 +44,7 @@ class Chart extends React.Component {
 		this.resizeScreenFn();
 	}
 	componentDidUpdate(prevProps) {
-		if (prevProps.ciq === null && this.props !== null) {
+		if (prevProps.ciq === null && this.props.ciq !== null) {
 			//Finsemble hacks
 			let actions = {};
 
@@ -63,17 +63,14 @@ class Chart extends React.Component {
 			window.actions = actions;
 			window.stxx = this.props.ciq;
 
-			if (window.onAfterChartCreated) {
-				console.log(window.FSBL)
-				window.FSBL.addEventListener('onReady', () => {
-				window.onAfterChartCreated();
-				window.restoreLayout(this.props.ciq);
-				});
-			}
-
 			this.props.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
 			this.props.ciq.callbacks.layout = this.props.layoutChanged;
-			this.props.ciq.addEventListener('undoStamp', prevProps.undoStamps);
+			this.props.ciq.addEventListener('undoStamp', this.props.undoStamps);
+
+			if (window.onAfterChartCreated) FSBL.addEventListener('onReady', () => {
+				window.onAfterChartCreated();
+				window.restoreLayout(this.props.ciq);
+			});
 		}
 	}
 	componentWillUnmount() {

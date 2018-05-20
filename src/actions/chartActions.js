@@ -62,9 +62,11 @@ export function setChartContainer(container, callbacks){
             dispatch(setContainer(container, callbacks)),
             dispatch(changingChartData(true)),
             setTimeout(() => {
-                let ciq = getState().chart.ciq
-                dispatch(importDrawings())
-                dispatch(addComparison(getCurrentComparisons(ciq)))
+                let ciq = getState().chart.ciq;
+                if (!window.FSBL) {
+                    dispatch(importDrawings())
+                    dispatch(addComparison(getCurrentComparisons(ciq)))
+                }
                 dispatch(changingChartData(false))
             }, 1500)
         ]);

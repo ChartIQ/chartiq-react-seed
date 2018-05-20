@@ -87,13 +87,6 @@ const chart = (state = initialState, action) => {
         showCrosshairs: layout ? layout.crosshair : state.showCrosshairs,
 				symbol: layout && layout.symbols ? layout.symbols[0].symbol.toUpperCase() : state.symbol
       })
-    case Types.IMPORT_LAYOUT:
-      if (state.ciq !== null) {
-        state.ciq.importLayout(layout, { managePeriodicity: true, cb: restoreDrawings.bind(this, ciq) });
-      }
-      return Object.assign(state, {
-
-			});
     case Types.SET_CHART_TYPE:
       return Object.assign({}, state, {
         chartType: action.chartType.type
