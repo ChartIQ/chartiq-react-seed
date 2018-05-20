@@ -1,4 +1,48 @@
+if(!window.fin){
+	console.warn("window.fin is undefined.  mocking window.fin!!!")
+	window.fin = {}
+	var fin = window.fin;
+	fin.desktop = {};
+	fin.desktop.InterApplicationBus = {}
+	fin.desktop.InterApplicationBus.publish = ()=>{};
+	fin.desktop.InterApplicationBus.subscribe = ()=>{};
+}
 
+if(!window.FSBL){
+	console.warn("window.FSBL is undefined.  mocking window.FSBL!!!")
+	window.FSBL = {};
+	var FSBL = window.FSBL;
+
+	FSBL.Clients = {};
+
+	FSBL.Clients.WindowClient = {}
+	FSBL.Clients.WindowClient.setWindowTitle=()=>{};
+	FSBL.addEventListener=(action, cb)=>{setTimeout(() => {
+		cb()
+	}, 0);};
+
+	FSBL.Clients.Logger={};
+	FSBL.Clients.Logger.start=()=>{};
+	FSBL.Clients.Logger.log=()=>{console.log(arguments)};
+
+	FSBL.Clients.DragAndDropClient={};
+	FSBL.Clients.DragAndDropClient.setEmitters=()=>{};
+	FSBL.Clients.DragAndDropClient.addReceivers=()=>{};
+
+	FSBL.Clients.LinkerClient={};
+	FSBL.Clients.LinkerClient.subscribe=()=>{};
+
+	FSBL.Clients.WindowClient.getComponentState = function(obj, cb){
+		var state = localStorage.getItem(obj.field);
+		cb(null, state)
+	}
+
+	FSBL.Clients.WindowClient.setComponentState = function(obj){
+		localStorage.setItem(obj.field, obj.value);
+	}
+
+
+}
 
 // var Test = require('./test');
 // import { ChartStore, Actions } from './stores/ChartStore';

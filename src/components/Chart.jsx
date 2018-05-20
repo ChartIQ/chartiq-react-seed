@@ -44,7 +44,7 @@ class Chart extends React.Component {
 		this.resizeScreenFn();
 	}
 	componentDidUpdate(prevProps) {
-		if (prevProps.ciq === null) {
+		if (prevProps.ciq === null && this.props !== null) {
 			//Finsemble hacks
 			let actions = {};
 
@@ -63,9 +63,17 @@ class Chart extends React.Component {
 			window.actions = actions;
 			window.stxx = this.props.ciq;
 
-			prevProps.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
-			prevProps.ciq.callbacks.layout = this.props.layoutChanged;
-			prevProps.ciq.addEventListener('undoStamp', prevProps.undoStamps);
+			if (window.onAfterChartCreated) {
+				console.log(window.FSBL)
+				window.FSBL.addEventListener('onReady', () => {
+				window.onAfterChartCreated();
+				window.restoreLayout(this.props.ciq);
+				});
+			}
+
+			this.props.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
+			this.props.ciq.callbacks.layout = this.props.layoutChanged;
+			this.props.ciq.addEventListener('undoStamp', prevProps.undoStamps);
 		}
 	}
 	componentWillUnmount() {
@@ -81,10 +89,6 @@ class Chart extends React.Component {
 		if (arguments[0].action == 'remove-series') {
 			let stx = arguments[0]
 			this.props.removeComparisonAndSave(stx.symbol)
-			if (window.onAfterChartCreated) FSBL.addEventListener('onReady', () => {
-				window.onAfterChartCreated();
-				window.restoreLayout(this.props.ciq);
-			});
 		}
   }
 	render() {

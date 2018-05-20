@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(chartActions.importDrawings())
     },
     importLayout: (layout) => {
-      dispatch(importLayout(layout))
+      dispatch(chartActions.importLayout(layout))
     },
     changeVectorParams: (tool) => {
       dispatch(chartActions.changeVectorParams(tool))
