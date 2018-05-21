@@ -52,7 +52,9 @@ input[type="text"], input[type="number"] {
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 20px; }
+  padding: 20px;
+  z-index: 21;
+  position: absolute; }
 
 .chart-title:after {
   content: ".";
@@ -151,8 +153,9 @@ nav {
 
 #symbolCompareInput, #symbolInput {
   border-radius: 1px;
-  display: inline;
-  border: #333 1px solid; }
+  display: inline-block;
+  border: #333 1px solid;
+  width: 100%; }
 
 #symbolInput:hover, #symbolCompareInput:hover,
 #symbolInput:focus, #symbolCompareInput:focus {
@@ -199,13 +202,13 @@ nav {
   background-position: -480px -50px; }
 
 .break-lg .symbol-frame {
-  width: 130px; }
+  width: 160px; }
 
 .break-md .symbol-frame {
-  width: 75px; }
+  width: 100px; }
 
 .break-sm .symbol-frame {
-  width: 40px; }
+  width: 60px; }
 
 .symbol-btn, .comparison-btn {
   position: absolute;
