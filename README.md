@@ -14,7 +14,7 @@ This is a basic build of the ChartIQ library within the React framework. This pr
 
 ## Getting started
 
-To view the example, you will need to copy and paste the ChartIQ `js` and `css` directories inside of the `chartiq` directory. To do this, execute the following commands in a terminal or command line:
+To view the example, you will need to copy and paste the ChartIQ js and css directories from your trial library inside of the chartiq directory.
 
 ### Running Locally
 
