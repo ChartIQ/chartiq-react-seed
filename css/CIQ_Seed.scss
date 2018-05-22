@@ -51,6 +51,74 @@ $DEFAULT-border-subtle:		#ddd !default;
 $DEFAULT-border-medium:		#ccc !default;
 $DEFAULT-border-strong:		#999 !default;
 
+.ciq-day {
+	color: #666;
+
+	#symbolInput:hover, #symbolCompareInput:hover,
+	#symbolInput:focus, #symbolCompareInput:focus{
+		transition: background .60s 0s;
+		background-color: #eee;
+	}
+	.ciq-nav input:placeholder {
+		color: #fafafa;
+	}
+	.ciq-nav input {
+		color: #555;
+		background-color: #fcfcfc;
+	}
+	#symbolCompareInput, #symbolInput{
+		border-radius: 1px;
+		display: inline;
+		border: #999 1px solid;
+	}
+	div.quick-link:hover {
+		color: #aaa;
+	}
+	.comparisonWrapper:hover {
+		background-color: #ddd;
+	}
+	menu-select span.title {
+		color: #555;
+		transition: color .20s 0s;
+	}
+	menu-select span.title:hover {
+		color: #aaa;
+	}
+
+	.symbol-btn, .comparison-btn{
+		background-position: -45px -25px;
+	}
+
+	.comparison-btn{
+		background-position: -443px -25px;
+	}
+
+	& .ciq-nav menu-select#chartTypeSelect::before {
+		background-position: -350px -25px;
+	}
+	& .ciq-nav menu-select#studySelect::before {
+		background-position: -300px -25px;
+	}
+	& .ciq-nav menu-select#themeSelect::before {
+		background-position: -480px -25px;
+	}
+
+	.crosshair-btn, .drawing-toolbar-btn {
+		background-position: -443px -25px;
+	}
+	
+	.drawing-toolbar-btn{
+		background-position: -250px -25px;
+	}
+
+	.timezone-btn {
+		height: 27px;
+		width: 27px;
+		background-image: url(img/ciq-timezone-day.svg);
+	}
+
+}
+
 /*
 * Global theme
 */
@@ -703,7 +771,6 @@ div.loader{
 	transition: height .20s 0s, padding .20s 0s;
 	display: flex;
 	color: white;
-	background: #1c2a35;
 }
 
 .toolbar > span{

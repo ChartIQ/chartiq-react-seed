@@ -7,11 +7,16 @@ import Types from '../actions/themeActions'
 import themeActions from '../actions/themeActions';
 
 // create the default theme
-let night = {
+let builtinThemes = [{
 	"name": "Night",
 	"className": "ciq-night",
 	"builtIn": true
-}
+},
+{
+	"name": "Day",
+	"className": "ciq-day",
+	"builtIn": true
+}]
 
 // default settings and options to display in UI
 let defaultSettings = [{
@@ -124,7 +129,7 @@ let defaultSettings = [{
 
 // initial state and schema
 const initialState = {
-    themeList: [night, { "name": "+ New Theme" }],
+    themeList: builtinThemes.concat([{ "name": "+ New Theme" }]),
     currentThemeSettings: defaultSettings,
     currentThemeName: 'Default',
     showEditModal: false,
@@ -142,7 +147,7 @@ let newThemeSettings=undefined
  * @param {any} action
  */
 const ThemeUI = (state = initialState, action) => {
-    switch(action.type){
+	switch(action.type){
 			case Types.SET_HELPER:
             if(!action.ciq) return state
             let themeHelper = new CIQ.ThemeHelper({
@@ -196,7 +201,7 @@ const ThemeUI = (state = initialState, action) => {
 							}
 						});
 
-				    if(action.name==="Night" || action.name==="+ New Theme") {
+				    if(action.builtIn==true || action.name==="+ New Theme") {
 					    alert('Cannot override a built in theme');
 					    return state;
 				    }
