@@ -117,6 +117,18 @@ $DEFAULT-border-strong:		#999 !default;
 		background-image: url(img/ciq-timezone-day.svg);
 	}
 
+	span.title.ciq-solid-1,
+	span.title.ciq-solid-3,
+	span.title.ciq-solid-5,
+	span.title.ciq-dotted-1,
+	span.title.ciq-dotted-3,
+	span.title.ciq-dotted-5,
+	span.title.ciq-dashed-1,
+	span.title.ciq-dashed-3,
+	span.title.ciq-dashed-5{
+		border-top-color: #000;
+	}
+
 }
 
 /*

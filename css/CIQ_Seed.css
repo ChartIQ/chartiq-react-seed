@@ -44,8 +44,7 @@ resume: React Components
   .ciq-day .comparison-btn {
     background-position: -443px -25px; }
   .ciq-day .ciq-nav menu-select#chartTypeSelect::before {
-    background-position: -350px -25px;
-    }
+    background-position: -350px -25px; }
   .ciq-day .ciq-nav menu-select#studySelect::before {
     background-position: -300px -25px; }
   .ciq-day .ciq-nav menu-select#themeSelect::before {
@@ -58,6 +57,16 @@ resume: React Components
     height: 27px;
     width: 27px;
     background-image: url(img/ciq-timezone-day.svg); }
+  .ciq-day span.title.ciq-solid-1,
+  .ciq-day span.title.ciq-solid-3,
+  .ciq-day span.title.ciq-solid-5,
+  .ciq-day span.title.ciq-dotted-1,
+  .ciq-day span.title.ciq-dotted-3,
+  .ciq-day span.title.ciq-dotted-5,
+  .ciq-day span.title.ciq-dashed-1,
+  .ciq-day span.title.ciq-dashed-3,
+  .ciq-day span.title.ciq-dashed-5 {
+    border-top-color: #000; }
 
 /*
 * Global theme
@@ -220,8 +229,7 @@ nav {
   display: inline; }
 
 .break-sm .ciq-nav menu-select#chartTypeSelect::before, .break-md .ciq-nav menu-select#chartTypeSelect::before {
-  background-position: -350px -50px;
-  }
+  background-position: -350px -50px; }
 
 .break-sm .ciq-nav menu-select#studySelect::before, .break-md .ciq-nav menu-select#studySelect::before {
   background-position: -300px -50px; }

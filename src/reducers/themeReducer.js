@@ -188,28 +188,26 @@ const ThemeUI = (state = initialState, action) => {
                 currentThemeSettings: newThemeSettings
             })
 	    case Types.SAVE_THEME:
-            let item = {
-                name: action.name,
-                settings: action.theme
-            },
-            endIndex = state.themeList.length-1,
-						newThemeList = state.themeList.slice(),
-						existsIndex = -1;
-						newThemeList.map((theme, i) => {
-							if (theme.name === action.name){
-								existsIndex = i;
-							}
-						});
+						let item = {
+							    name: action.name,
+							    settings: action.theme
+						}
+						let newThemeList = state.themeList.slice()
+						let existsIndex = newThemeList.findIndex(t=>t.name.toUpperCase()==action.name.toUpperCase())
 
-				    if(action.builtIn==true || action.name==="+ New Theme") {
+				    if((existsIndex > -1 && newThemeList[existsIndex].builtIn == true) || action.name==="+ New Theme") {
 					    alert('Cannot override a built in theme');
 					    return state;
 				    }
 
-						if (existsIndex > -1) { newThemeList.splice(existsIndex, 1, item); }
-						else { newThemeList.splice(endIndex, 0, item); }
+						if (existsIndex > -1) {
+							newThemeList.splice(existsIndex, 1, item);
+						}
+						else {
+							newThemeList.splice(newThemeList.length-1, 0, item);
+						}
 
-						setTheme(state.themeHelper, {settings: action.theme})
+						setTheme(state.themeHelper, {settings: item.settings})
 
 						CIQ.localStorageSetItem('myChartThemes', JSON.stringify(newThemeList));
 						CIQ.localStorageSetItem('myChartCurrentThemeName', JSON.stringify(action.name));
