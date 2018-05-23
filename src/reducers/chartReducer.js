@@ -1,29 +1,32 @@
-//action types
+/**
+ * Chart reducer for wrapper of actions that modify the ChartIQ charting library
+ * @module reducers/chartReducer
+ */
+
 import Types from '../actions/chartActions'
+import * as chartComponent from '../components/Chart'
 
-//create a demo date feed
-import ChartService from '../feeds/ChartService'
-let service = new ChartService().makeFeed()
-
-//initial state
+// initial state and schema
 const initialState = {
   ciq: null,
-  service: service,
   chartType: null,
   refreshInterval: 1,
-  symbol: 'AAPL',
+	symbol: 'AAPL',
+	chartTop: 0,
   showDrawingToolbar: false,
   showCrosshairs: false,
   showTimezoneModal: false,
+  showAxisLabels: true,
   chartSeries: [],
   comparisons: [],
   periodicity: {
     period: 1,
     interval: 1,
     timeUnit: 'day'
-  },
-    shareStatus: "HIDDEN",
-    shareStatusMsg: null,
+	},
+	responsiveSize: chartComponent.calculateResponsiveSize(),
+  shareStatus: "HIDDEN",
+  shareStatusMsg: null,
   showPeriodicityLoader: false,
   studyOverlay: {
     show: false,
@@ -31,39 +34,70 @@ const initialState = {
     left: 0,
     params: null
   },
-	initialTool:undefined
+  initialTool:undefined,
+  drawings: [],
+  canUndo: false,
+  canRedo: false,
+  canClear: false,
+  undoStack: [],
+  redoStack: []
 }
 
+/**
+ * Chart redux reducer
+ *
+ * @param {any} [state=initialState]
+ * @param {any} action
+ * @returns
+ */
 const chart = (state = initialState, action) => {
   switch (action.type) {
-    case Types.SET_CONTAINER:
+		case Types.SET_CONTAINER:
       let ciq = new CIQ.ChartEngine({
         container: action.container
       })
-      ciq.attachQuoteFeed(state.service, { refreshInterval: state.refreshInterval })
+      ciq.attachQuoteFeed(window.quoteFeedSimulator, { refreshInterval: state.refreshInterval })
       ciq.setMarketFactory(CIQ.Market.Symbology.factory);
-      // new CIQ.ExtendedHours({stx:stxx, filter:true});
-      ciq.newChart(state.symbol)
+      let layout = !window.FSBL ? CIQ.localStorage.getItem('myChartLayout') : null;
+      ciq.callbacks.studyOverlayEdit = action.callbacks.studyOverlayEdit;
+      ciq.callbacks.studyPanelEdit = action.callbacks.studyPanelEdit;
+      if (layout !== null){
+        layout = JSON.parse(layout);
+        ciq.importLayout(layout, { managePeriodicity: true, cb: restoreDrawings.bind(this, ciq) });
+      } else {
+				ciq.newChart(state.symbol, null, null, restoreDrawings.bind(this, ciq))
+      }
+      if (!window.FSBL) {
+        let preferences = CIQ.localStorage.getItem('myChartPreferences');
+        if (preferences !== null){
+          preferences = JSON.parse(preferences);
+          if (preferences.timeZone) {
+            ciq.setTimeZone(null, preferences.timeZone);
+          }
+        }
+      }
       return Object.assign({}, state, {
-        ciq: ciq
+        ciq: ciq,
+        periodicity: {
+          period: layout ? layout.periodicity : state.periodicity.period,
+          interval: layout ? layout.interval : state.periodicity.interval,
+          timeUnit: layout ? layout.timeUnit : state.periodicity.timeUnit
+        },
+        chartType: layout ? layout.chartType : state.chartType,
+        showCrosshairs: layout ? layout.crosshair : state.showCrosshairs,
+				symbol: layout && layout.symbols ? layout.symbols[0].symbol.toUpperCase() : state.symbol
       })
     case Types.SET_CHART_TYPE:
-      if ((action.chartType.aggregationEdit && state.ciq.layout.aggregationType != action.chartType.type) || action.chartType.type === 'heikinashi') {
-        state.ciq.setChartType('candle')
-        state.ciq.setAggregationType(action.chartType.type)
-      } else {
-        state.ciq.setAggregationType(null)
-        state.ciq.setChartType(action.chartType.type)
-      }
-      state.ciq.draw()
       return Object.assign({}, state, {
         chartType: action.chartType.type
       })
-    case Types.ADD_COMPARISON:
-      let newSeries = state.ciq.addSeries(action.symbol, action.params);
-      let newComparisons = state.comparisons.concat([newSeries]);
+		case Types.ADD_COMPARISON:
+			if(!action.series) { return state; }
+			var seriesArray = Array.isArray(action.series) ? action.series : [action.series]
+      let newComparisons = state.comparisons.concat(seriesArray);
       return Object.assign({}, state, {
-        comparisons: newComparisons
+				comparisons: newComparisons,
+				chartTop: state.ciq.chart.top
       })
     case Types.REMOVE_COMPARISON:
       newComparisons = state.comparisons.filter(comp => comp.id !== action.comparison)
@@ -74,15 +108,6 @@ const chart = (state = initialState, action) => {
       return Object.assign({}, state, {
         showTimezoneModal: !state.showTimezoneModal
       })
-    case Types.SET_TIME_ZONE:
-      if (action.zone) {
-        state.ciq.setTimeZone(null, action.zone)
-      } else {
-        state.ciq.displayZone = null;
-        state.ciq.setTimeZone();
-      }
-      if (state.ciq.displayInitialized) state.ciq.draw();
-      return Object.assign({}, state);
     case Types.TOGGLE_CROSSHAIRS:
       state.ciq.layout.crosshair = !state.showCrosshairs
       return Object.assign({}, state, {
@@ -137,31 +162,113 @@ const chart = (state = initialState, action) => {
         }
       })
     case Types.SET_SYMBOL:
-      if (action.symbol && action.symbol !== null){
-        state.ciq.newChart(action.symbol);
-        return Object.assign({}, state, {
-          symbol: action.symbol
-        })
-      }else { return state; }
-    case Types.SET_REFRESH_INTERVAL:
       return Object.assign({}, state, {
-        interval: refreshInterval
-      })
-        case Types.SHARE_CHART:
-
-            return state;
-        case Types.SET_SHARE_STATUS:
-          console.log(action);
-          return Object.assign({}, state, {
-              shareStatus: action.status,
-              shareStatusMsg: action.msg
-            })
+        symbol: action.symbol
+			})
+		case Types.SET_RESPONSIVE_SIZE:
+			return Object.assign({}, state, {
+				responsiveSize: action.size
+			})
+    case Types.SHARE_CHART:
+        return state;
+    case Types.SET_SHARE_STATUS:
+      return Object.assign({}, state, {
+          shareStatus: action.status,
+          shareStatusMsg: action.msg
+        })
     case Types.DRAW:
-      state.ciq.draw()
-      return state
+      state.ciq.draw();
+      return Object.assign({}, state, {
+        canUndo: state.undoStack.length > 0,
+        canRedo: state.redoStack.length > 0,
+        canClear: state.ciq.drawingObjects.length > 0
+      });
+    case Types.TOGGLE_AXIS_LABELS:
+      let flipAxisLabels = !state.showAxisLabels;
+      state.ciq.currentVectorParameters.axisLabel=flipAxisLabels;
+      return Object.assign({}, state, {
+        showAxisLabels: flipAxisLabels
+      })
+    case Types.DRAWINGS_CHANGED:
+        let drawings = state.ciq.drawingObjects.slice();
+        return Object.assign({}, state, {
+          drawings: drawings
+				});
+		case Types.LAYOUT_CHANGED:
+        return Object.assign({}, state, {
+          chartTop: state.ciq.chart.top
+        });
+    case Types.UNDO:
+        let newRedoStack = state.redoStack.slice();
+        newRedoStack.push(action.item);
+        return Object.assign({}, state, {
+          canRedo: true,
+          redoStack: newRedoStack
+        });
+    case Types.REDO:
+        let newUndoStack = state.undoStack.slice();
+        newUndoStack.push(action.item);
+        return Object.assign({}, state, {
+          undoStack: newUndoStack
+        });
+    case Types.UPDATE_UNDO_STAMPS:
+        let newStack = state.undoStack.slice();
+        newStack.push(action.params.before);
+        return Object.assign({}, state, {
+          undoStack: newStack,
+          canUndo: newStack.length > 0,
+          canRedo: state.redoStack.length  > 0,
+          canClear: state.ciq.drawingObjects.length > 0
+        });
+    case Types.IMPORT_DRAWINGS:
+        drawings = state.ciq.drawingObjects.slice();
+        if (action.drawings && window.FSBL) restoreDrawingsFromMemory(state.ciq, action.drawings);
+        return Object.assign({}, state, {
+          drawings: drawings,
+          canClear: drawings.length > 0
+        });
+    case Types.IMPORT_LAYOUT:
+        let importedLayout = action.layout;
+        if (importedLayout !== null){
+          importedLayout = typeof importedLayout === 'string' ? JSON.parse(importedLayout) : importedLayout;
+          state.ciq.importLayout(importedLayout, { managePeriodicity: true, cb: action.cb ? action.cb.bind(this, state.ciq) : restoreDrawings.bind(this, state.ciq) });
+        } else {
+          state.ciq.newChart(state.symbol, null, null, action.cb)
+        }
+        console.log('importedLayout isnt null: ', importedLayout);
+        return Object.assign({}, state, {
+          periodicity: {
+            period: importedLayout ? importedLayout.periodicity : state.periodicity.period,
+            interval: importedLayout ? importedLayout.interval : state.periodicity.interval,
+            timeUnit: importedLayout ? importedLayout.timeUnit : state.periodicity.timeUnit
+          },
+          chartType: importedLayout ? importedLayout.chartType : state.chartType,
+          showCrosshairs: importedLayout ? importedLayout.crosshair : state.showCrosshairs,
+          symbol: importedLayout && importedLayout.symbols ? importedLayout.symbols[0].symbol.toUpperCase() : state.symbol
+        })
     default:
       return state
     }
 }
+
+/**
+ * Restore drawings from localStorage.  Allows for browser to refresh to last state.
+ *
+ * @param {CIQ.ChartEngine} stx Charting engine
+ * @private
+ */
+function restoreDrawings(stx){
+	var memory=CIQ.localStorage.getItem(stx.chart.symbol);
+	if(memory!==null && !window.FSBL) restoreDrawingsFromMemory(stx, memory);
+}
+
+function restoreDrawingsFromMemory(stx, memory){
+  var parsed = JSON.parse(memory);
+  if (parsed) {
+    stx.importDrawings(parsed);
+    stx.draw();
+  }
+}
+
 
 export default chart

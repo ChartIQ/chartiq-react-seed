@@ -12,10 +12,7 @@ dist/
 .node_repl_history
 
 # ChartIQ library files
-chartiq/
-
-# Yarn lock file (https://yarnpkg.com)
-yarn.lock
+# chartiq/
 
 # Editor files
 .idea

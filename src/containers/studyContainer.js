@@ -1,18 +1,21 @@
-//modules
-import { connect } from 'react-redux'
+/**
+ * Chart container for redux container-component pattern, which connects a store
+ * to a parent component through the react-redux.connect() method
+ * @module containers/studyContainer
+ */
 
-//actions
-import { toggleOverlay,
-         addStudy,
-         updateStudy,
-         removeStudy, 
-         openStudyModal,
-         closeStudyModal} from '../actions/studyActions'
-
-//components
+import * as reactRedux from 'react-redux'
+import * as studyActions from '../actions/studyActions'
+import * as chartActions from '../actions/chartActions'
 import StudyUI from '../components/UI/StudyUI'
 
-const mapStateToProps = (state, props) => {
+/**
+ * Maps store state to component properties per react-redux
+ *
+ * @param {Object} state
+ * @param {Object} ownProps
+ */
+const mapStateToProps = (state) => {
     return {
         studyOverlay: state.study.studyOverlay,
         showStudyModal: state.study.showStudyModal,
@@ -21,30 +24,42 @@ const mapStateToProps = (state, props) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+/**
+ * Maps dispatches to properties to expose actions to components
+ *
+ * @param {Function} dispatch
+ * @param {*} ownProps
+ */
+const mapDispatchToProps = (dispatch) => {
     return {
         openStudyModal: (params) => {
-            dispatch(openStudyModal(params))
+            dispatch(studyActions.openStudyModal(params))
         },
         closeStudyModal: () => {
-            dispatch(closeStudyModal())
+            dispatch(studyActions.closeStudyModal())
         },
         toggleOverlay: (params) => {
-            dispatch(toggleOverlay(params))
+            dispatch(studyActions.toggleOverlay(params))
         },
         addStudy: (ciq, study) => {
-            dispatch(addStudy(ciq, study))
+            dispatch(studyActions.addStudy(ciq, study))
         },
         updateStudy: (inputs, outputs, parameters) => {
-            dispatch(updateStudy(inputs, outputs, parameters))
+            dispatch(studyActions.updateStudy(inputs, outputs, parameters))
         },
         removeStudy: (params) => {
-            dispatch(removeStudy(params))
+            dispatch(studyActions.removeStudy(params))
+        },
+        saveLayout: () => {
+            dispatch(chartActions.saveLayout())
         }
     }
 }
 
-const StudyContainer = connect(
+/**
+ * Redux connection object linking the store to the Chart component
+ */
+const StudyContainer = reactRedux.connect(
     mapStateToProps,
     mapDispatchToProps
 )(StudyUI)
