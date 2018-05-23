@@ -51,13 +51,23 @@ $DEFAULT-border-subtle:		#ddd !default;
 $DEFAULT-border-medium:		#ccc !default;
 $DEFAULT-border-strong:		#999 !default;
 
+
+
+
+/*
+* Day theme
+*/
+
+$LIGHT-text:				#666 !default;
+$LIGHT-bg:					$DEFAULT-bg;
+
 .ciq-day {
-	color: #666;
+	color: $DEFAULT-text;
 
 	#symbolInput:hover, #symbolCompareInput:hover,
 	#symbolInput:focus, #symbolCompareInput:focus{
 		transition: background .60s 0s;
-		background-color: #eee;
+		background-color: $LIGHT-bg;
 	}
 	.ciq-nav input:placeholder {
 		color: #fafafa;
@@ -132,7 +142,7 @@ $DEFAULT-border-strong:		#999 !default;
 }
 
 /*
-* Global theme
+* Default theme
 */
 
 html, body {

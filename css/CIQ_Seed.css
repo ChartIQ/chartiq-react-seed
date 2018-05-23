@@ -15,12 +15,15 @@ resume: React Components
 /* General Global Style */
 /*  */
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700,500,100,300,400italic|Roboto+Condensed:400,700,300");
+/*
+* Day theme
+*/
 .ciq-day {
-  color: #666; }
+  color: #000; }
   .ciq-day #symbolInput:hover, .ciq-day #symbolCompareInput:hover,
   .ciq-day #symbolInput:focus, .ciq-day #symbolCompareInput:focus {
     transition: background .60s 0s;
-    background-color: #eee; }
+    background-color: #f8f8f8; }
   .ciq-day .ciq-nav input:placeholder {
     color: #fafafa; }
   .ciq-day .ciq-nav input {
@@ -69,7 +72,7 @@ resume: React Components
     border-top-color: #000; }
 
 /*
-* Global theme
+* Default theme
 */
 html, body {
   margin: 0;
