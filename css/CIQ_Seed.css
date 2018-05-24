@@ -644,7 +644,6 @@ div.loader {
   height: 96%; }
 
 .toolbar {
-  border-bottom: 1px solid #131d24;
   height: 40px;
   padding: 5px 10px 0;
   z-index: 2;
