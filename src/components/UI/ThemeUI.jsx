@@ -25,7 +25,6 @@ class ThemeUI extends React.Component{
 		return (
 			<span>
 				<ThemeModal {...this.props} />
-
 				<MenuSelect hasButtons={true}
 							options={this.props.themeList.filter(t=>t.name)}
 							keyName='theme'
@@ -33,7 +32,7 @@ class ThemeUI extends React.Component{
 							handleOptionSelect={this.props.changeTheme}
 							menuId='themeSelect'
 							title='Select Theme'
-							noButtons={['Night', '+ New Theme']}
+							noButtons={this.props.themeList.filter(t=>t.builtIn || t.name==="+ New Theme").map(t=>t.name)}
 							editItem={this.props.toggleThemeEditor}
 							deleteItem={this.props.deleteTheme} />
 			</span>
