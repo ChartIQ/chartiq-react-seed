@@ -16,7 +16,63 @@ resume: React Components
 /*  */
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700,500,100,300,400italic|Roboto+Condensed:400,700,300");
 /*
-* Global theme
+* Day theme
+*/
+.ciq-day {
+  color: #000; }
+  .ciq-day #symbolInput:hover, .ciq-day #symbolCompareInput:hover,
+  .ciq-day #symbolInput:focus, .ciq-day #symbolCompareInput:focus {
+    transition: background .60s 0s;
+    background-color: #f8f8f8; }
+  .ciq-day .ciq-nav input:placeholder {
+    color: #fafafa; }
+  .ciq-day .ciq-nav input {
+    color: #555;
+    background-color: #fcfcfc; }
+  .ciq-day #symbolCompareInput, .ciq-day #symbolInput {
+    border-radius: 1px;
+    display: inline;
+    border: #999 1px solid; }
+  .ciq-day div.quick-link:hover {
+    color: #aaa; }
+  .ciq-day .comparisonWrapper:hover {
+    background-color: #ddd; }
+  .ciq-day menu-select span.title {
+    color: #555;
+    transition: color .20s 0s; }
+  .ciq-day menu-select span.title:hover {
+    color: #aaa; }
+  .ciq-day .symbol-btn, .ciq-day .comparison-btn {
+    background-position: -45px -25px; }
+  .ciq-day .comparison-btn {
+    background-position: -443px -25px; }
+  .ciq-day .ciq-nav menu-select#chartTypeSelect::before {
+    background-position: -350px -25px; }
+  .ciq-day .ciq-nav menu-select#studySelect::before {
+    background-position: -300px -25px; }
+  .ciq-day .ciq-nav menu-select#themeSelect::before {
+    background-position: -480px -25px; }
+  .ciq-day .crosshair-btn, .ciq-day .drawing-toolbar-btn {
+    background-position: -443px -25px; }
+  .ciq-day .drawing-toolbar-btn {
+    background-position: -250px -25px; }
+  .ciq-day .timezone-btn {
+    height: 27px;
+    width: 27px;
+    background-image: url(img/ciq-timezone-day.svg); }
+  .ciq-day span.title.ciq-solid-1,
+  .ciq-day span.title.ciq-solid-3,
+  .ciq-day span.title.ciq-solid-5,
+  .ciq-day span.title.ciq-dotted-1,
+  .ciq-day span.title.ciq-dotted-3,
+  .ciq-day span.title.ciq-dotted-5,
+  .ciq-day span.title.ciq-dashed-1,
+  .ciq-day span.title.ciq-dashed-3,
+  .ciq-day span.title.ciq-dashed-5 {
+    border-top-color: #000; }
+
+/*
+* Default theme
 */
 html, body {
   margin: 0;
@@ -605,14 +661,12 @@ div.loader {
   height: 96%; }
 
 .toolbar {
-  border-bottom: 1px solid #131d24;
   height: 40px;
   padding: 5px 10px 0;
   z-index: 2;
   transition: height .20s 0s, padding .20s 0s;
   display: flex;
-  color: white;
-  background: #1c2a35; }
+  color: white; }
 
 .toolbar > span {
   width: 100%;
