@@ -250,8 +250,8 @@ const ThemeUI = (state = initialState, action) => {
 				showEditModal: false,
 			})
 		case Types.RESTORE_THEMES:
-			let restoredThemeList = JSON.parse(CIQ.localStorage.getItem('myChartThemes'));
-			let restoredCurrentThemeName = JSON.parse(CIQ.localStorage.getItem('myChartCurrentThemeName'));
+			let restoredThemeList = JSON.parse(CIQ.localStorage.getItem('myChartThemes')) || state.themeList;
+			let restoredCurrentThemeName = JSON.parse(CIQ.localStorage.getItem('myChartCurrentThemeName')) || restoredThemeList[0].name;
 
 			newState = Object.assign({}, state)
 
