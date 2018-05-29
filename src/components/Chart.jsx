@@ -46,6 +46,7 @@ class Chart extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (this.props.ciq !== nextProps.ciq) {
 			nextProps.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
+			nextProps.ciq.callbacks.drawing = this.props.changeDrawings;
 			nextProps.ciq.callbacks.layout = this.props.layoutChanged;
 			nextProps.ciq.addEventListener('undoStamp', nextProps.undoStamps);
 		}
