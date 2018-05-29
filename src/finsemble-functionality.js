@@ -16,6 +16,7 @@ if(!window.FSBL){
 	FSBL.Clients = {};
 
 	FSBL.Clients.WindowClient = {}
+	FSBL.Clients.WindowClient.options = {}
 	FSBL.Clients.WindowClient.setWindowTitle=()=>{};
 	FSBL.addEventListener=(action, cb)=>{setTimeout(() => {
 		cb()
@@ -34,14 +35,12 @@ if(!window.FSBL){
 
 	FSBL.Clients.WindowClient.getComponentState = function(obj, cb){
 		var state = localStorage.getItem(obj.field);
-		cb(null, state)
+		cb(null, state ? JSON.parse(state) : null)
 	}
 
 	FSBL.Clients.WindowClient.setComponentState = function(obj){
-		localStorage.setItem(obj.field, obj.value);
+		localStorage.setItem(obj.field, JSON.stringify(obj.value));
 	}
-
-
 }
 
 // var Test = require('./test');

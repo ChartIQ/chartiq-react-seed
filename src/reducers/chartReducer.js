@@ -258,7 +258,10 @@ const chart = (state = initialState, action) => {
  * @private
  */
 function restoreDrawings(stx){
-	var memory=CIQ.localStorage.getItem(stx.chart.symbol);
+	if(!stx.chart.symbol) {
+		return;
+	}
+	var memory=CIQ.localStorage.getItem(stx.chart.symbol.toUpperCase());
 	if(memory!==null && !window.FSBL) restoreDrawingsFromMemory(stx, memory);
 }
 

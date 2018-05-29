@@ -531,10 +531,7 @@ export function clear(){
 export function undoStamps(params){
     return (dispatch, getState) => {
 				let state = getState();
-				return Promise.all([
-					dispatch(updateUndoStamps(params)),
-					dispatch(changeDrawings(params))
-			]);
+				return dispatch({ type: 'UPDATE_UNDO_STAMPS', params: params });
 
     }
 }

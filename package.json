@@ -53,7 +53,7 @@
   },
   "scripts": {
     "dev": "webpack --mode development",
-    "scss": "node-sass --source-map true css/*.scss -o css",
+    "scss": "node-sass --source-map true css/CIQ_Seed.scss -o css",
     "build": "webpack --mode production",
     "postinstall": "webpack",
     "server": "webpack-dev-server --inline --progress --port 3000 --content-base . --watch=true",

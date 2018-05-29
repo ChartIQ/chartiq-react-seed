@@ -51,8 +51,98 @@ $DEFAULT-border-subtle:		#ddd !default;
 $DEFAULT-border-medium:		#ccc !default;
 $DEFAULT-border-strong:		#999 !default;
 
+
+
+
 /*
-* Global theme
+* Day theme
+*/
+
+$LIGHT-text:				#666 !default;
+$LIGHT-bg:					$DEFAULT-bg;
+
+.ciq-day {
+	color: $DEFAULT-text;
+
+	#symbolInput:hover, #symbolCompareInput:hover,
+	#symbolInput:focus, #symbolCompareInput:focus{
+		transition: background .60s 0s;
+		background-color: $LIGHT-bg;
+	}
+	.ciq-nav input:placeholder {
+		color: #fafafa;
+	}
+	.ciq-nav input {
+		color: #555;
+		background-color: #fcfcfc;
+	}
+	#symbolCompareInput, #symbolInput{
+		border-radius: 1px;
+		display: inline;
+		border: #999 1px solid;
+	}
+	div.quick-link:hover {
+		color: #aaa;
+	}
+	.comparisonWrapper:hover {
+		background-color: #ddd;
+	}
+	menu-select span.title {
+		color: #555;
+		transition: color .20s 0s;
+	}
+	menu-select span.title:hover {
+		color: #aaa;
+	}
+
+	.symbol-btn, .comparison-btn{
+		background-position: -45px -25px;
+	}
+
+	.comparison-btn{
+		background-position: -443px -25px;
+	}
+
+	& .ciq-nav menu-select#chartTypeSelect::before {
+		background-position: -350px -25px;
+	}
+	& .ciq-nav menu-select#studySelect::before {
+		background-position: -300px -25px;
+	}
+	& .ciq-nav menu-select#themeSelect::before {
+		background-position: -480px -25px;
+	}
+
+	.crosshair-btn, .drawing-toolbar-btn {
+		background-position: -443px -25px;
+	}
+	
+	.drawing-toolbar-btn{
+		background-position: -250px -25px;
+	}
+
+	.timezone-btn {
+		height: 27px;
+		width: 27px;
+		background-image: url(img/ciq-timezone-day.svg);
+	}
+
+	span.title.ciq-solid-1,
+	span.title.ciq-solid-3,
+	span.title.ciq-solid-5,
+	span.title.ciq-dotted-1,
+	span.title.ciq-dotted-3,
+	span.title.ciq-dotted-5,
+	span.title.ciq-dashed-1,
+	span.title.ciq-dashed-3,
+	span.title.ciq-dashed-5{
+		border-top-color: #000;
+	}
+
+}
+
+/*
+* Default theme
 */
 
 html, body {
@@ -96,6 +186,8 @@ input[type="text"], input[type="number"] {
 	font-weight: 700;
 	text-transform: uppercase;
 	padding: 20px;
+	z-index: 21;
+	position: absolute;
 }
 
 .chart-title:after { 
@@ -210,8 +302,9 @@ nav {
 
 #symbolCompareInput, #symbolInput{
 	border-radius: 1px;
-	display: inline;
+	display: inline-block;
 	border: #333 1px solid;
+	width: 100%;
 }
 
 #symbolInput:hover, #symbolCompareInput:hover,
@@ -279,15 +372,15 @@ nav {
 // }
 
 .break-lg .symbol-frame {
-	width: 130px;
+	width: 160px;
 }
 
 .break-md .symbol-frame {
-	width: 75px;
+	width: 100px;
 }
 
 .break-sm .symbol-frame {
-	width: 40px;
+	width: 60px;
 }
 
 .symbol-btn, .comparison-btn{
@@ -713,14 +806,12 @@ div.loader{
 }
 
 .toolbar{
-	border-bottom: 1px solid #131d24;
 	height: 40px;
 	padding: 5px 10px 0;
 	z-index: 2;
 	transition: height .20s 0s, padding .20s 0s;
 	display: flex;
 	color: white;
-	background: #1c2a35;
 }
 
 .toolbar > span{
