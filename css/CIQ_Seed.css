@@ -71,6 +71,15 @@ resume: React Components
   .ciq-day span.title.ciq-dashed-5 {
     border-top-color: #000; }
 
+.ciq-night .ciq-nav menu-select#chartTypeSelect::before {
+  background-position: -350px -50px; }
+
+.ciq-night .ciq-nav menu-select#studySelect::before {
+  background-position: -300px -50px; }
+
+.ciq-night .ciq-nav menu-select#themeSelect::before {
+  background-position: -480px -50px; }
+
 /*
 * Default theme
 */
@@ -247,15 +256,6 @@ nav {
 
 .break-sm .ciq-nav menu-select#periodicitySelect span.title, .break-md .ciq-nav menu-select#periodicitySelect span.title {
   display: inline; }
-
-.break-sm .ciq-nav menu-select#chartTypeSelect::before, .break-md .ciq-nav menu-select#chartTypeSelect::before {
-  background-position: -350px -50px; }
-
-.break-sm .ciq-nav menu-select#studySelect::before, .break-md .ciq-nav menu-select#studySelect::before {
-  background-position: -300px -50px; }
-
-.break-sm .ciq-nav menu-select#themeSelect::before, .break-md .ciq-nav menu-select#themeSelect::before {
-  background-position: -480px -50px; }
 
 .break-lg .symbol-frame {
   width: 160px; }
