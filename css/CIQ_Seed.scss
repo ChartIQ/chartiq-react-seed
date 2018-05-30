@@ -141,6 +141,18 @@ $LIGHT-bg:					$DEFAULT-bg;
 
 }
 
+.ciq-night {
+	.ciq-nav menu-select#chartTypeSelect::before {
+		background-position: -350px -50px;
+	}
+	.ciq-nav menu-select#studySelect::before {
+		background-position: -300px -50px;
+	}
+	.ciq-nav menu-select#themeSelect::before {
+		background-position: -480px -50px;
+	}
+}
+
 /*
 * Default theme
 */
@@ -350,18 +362,9 @@ nav {
 		vertical-align: top;
 		// @include rotate(0deg);
 	}
-	
-	& .ciq-nav menu-select#periodicitySelect span.title {
+
+	.ciq-nav menu-select#periodicitySelect span.title {
 		display: inline;
-	}
-	& .ciq-nav menu-select#chartTypeSelect::before {
-		background-position: -350px -50px;
-	}
-	& .ciq-nav menu-select#studySelect::before {
-		background-position: -300px -50px;
-	}
-	& .ciq-nav menu-select#themeSelect::before {
-		background-position: -480px -50px;
 	}
 }
 
