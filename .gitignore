@@ -14,7 +14,11 @@ dist/
 # ChartIQ library files
 chartiq/
 
+# Yarn lock file
+yarn.lock
+
 # Editor files
+.code-workspace
 .idea
 .vscode/
 
