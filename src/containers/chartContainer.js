@@ -40,7 +40,8 @@ const mapStateToProps = (state, ownProps) => {
         undoStack: state.chart.undoStack,
         canUndo: state.chart.canUndo,
         canRedo: state.chart.canRedo,
-        canClear: state.chart.canClear
+        canClear: state.chart.canClear,
+        showDrawingToolbar: state.showDrawingToolbar
     }
 }
 

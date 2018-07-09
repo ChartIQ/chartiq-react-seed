@@ -40,17 +40,8 @@ const initialState = {
 const draw = (state = initialState, action) => {
     switch(action.type){
         case Types.TOGGLE_DRAWING:
-            let elem = document.getElementById('chartContainer'),
-            flipToolbar = !state.showDrawingToolbar
-
-            if(flipToolbar){
-                elem.classList.add('toolbarOn')
-            }else{
-                elem.classList.remove('toolbarOn')
-            }
-
             return Object.assign({}, state, {
-                showDrawingToolbar: flipToolbar
+                showDrawingToolbar: !state.showDrawingToolbar
             })
         case Types.SET_FONT_FAMILY:
             return Object.assign({}, state, {

@@ -130,7 +130,7 @@ const chart = (state = initialState, action) => {
         state.ciq.currentVectorParameters.annotation.font.style = style.style
         state.ciq.currentVectorParameters.annotation.font.weight = style.weight
       }
-      let toolbarStatus=document.getElementById('chartContainer').classList.contains('toolbarOn')
+      let toolbarStatus=state.showDrawingToolbar;
 	    if(!state.initialTool) state.initialTool=action.tool;
       if(action.tool&&state.initialTool!==action.tool) state.initialTool=action.tool;
 	    let tool=(!action.tool&&toolbarStatus&&state.initialTool)?state.initialTool:action.tool

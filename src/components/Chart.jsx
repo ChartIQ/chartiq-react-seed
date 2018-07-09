@@ -68,12 +68,18 @@ class Chart extends React.Component {
 		}
   }
 	render() {
+		let chartContainerClasses = 'chartContainer chartContainerMain';
+
+		if (this.props.showDrawingToolbar) {
+			chartContainerClasses += ' toolbarOn'
+		}
+
 		return (
 			<div className={this.props.responsiveSize}>
 				<UI {...this.props} />
 				<div className="ciq-chart-area">
 					<DrawingContainer {...this.props} />
-					<div id='chartContainer' className='chartContainer chartContainerMain' ref={this.chartContainer}>
+					<div className={chartContainerClasses} ref={this.chartContainer}>
 						<div className={this.props.isLoadingPeriodicity ? 'loader' : ''}></div>
 						<Legend {...this.props} />
 					</div>
