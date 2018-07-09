@@ -33,9 +33,11 @@ export var calculateResponsiveSize = function() {
 class Chart extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.chartContainer = React.createRef();
 	}
 	componentDidMount() {
-		this.props.setChartContainer($$$('#chartContainer'), {
+		this.props.setChartContainer(this.chartContainer.current, {
 			studyOverlayEdit: this.props.toggleStudyOverlay,
 			studyPanelEdit: this.props.openStudyModal
 		})
@@ -71,7 +73,7 @@ class Chart extends React.Component {
 				<UI {...this.props} />
 				<div className="ciq-chart-area">
 					<DrawingContainer {...this.props} />
-					<div id='chartContainer' className='chartContainer chartContainerMain'>
+					<div id='chartContainer' className='chartContainer chartContainerMain' ref={this.chartContainer}>
 						<div className={this.props.isLoadingPeriodicity ? 'loader' : ''}></div>
 						<Legend {...this.props} />
 					</div>
