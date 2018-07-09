@@ -226,10 +226,10 @@ const chart = (state = initialState, action) => {
           canClear: state.ciq.drawingObjects.length > 0
         });
     case Types.IMPORT_DRAWINGS:
-        drawings = state.ciq.drawingObjects.slice();
+        let importedDrawings = state.ciq.drawingObjects.slice();
         return Object.assign({}, state, {
-          drawings: drawings,
-          canClear: drawings.length > 0
+          drawings: importedDrawings,
+          canClear: importedDrawings.length > 0
         });
     default:
       return state
