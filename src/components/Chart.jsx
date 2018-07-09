@@ -85,7 +85,7 @@ class Chart extends React.Component {
 					</div>
 				</div>
 				<div className="ciq-footer">
-					<div className="ciq-share-button" onClick={()=>props.setShareStatus("SHOW")}>Share</div>
+					<div className="ciq-share-button" onClick={()=>this.props.setShareStatus("SHOW")}>Share</div>
 					<RangeSelector {...this.props} />
 				</div>
 			</div>
