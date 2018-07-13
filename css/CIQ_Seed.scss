@@ -51,8 +51,110 @@ $DEFAULT-border-subtle:		#ddd !default;
 $DEFAULT-border-medium:		#ccc !default;
 $DEFAULT-border-strong:		#999 !default;
 
+
+
+
 /*
-* Global theme
+* Day theme
+*/
+
+$LIGHT-text:				#666 !default;
+$LIGHT-bg:					$DEFAULT-bg;
+
+.ciq-day {
+	color: $DEFAULT-text;
+
+	#symbolInput:hover, #symbolCompareInput:hover,
+	#symbolInput:focus, #symbolCompareInput:focus{
+		transition: background .60s 0s;
+		background-color: $LIGHT-bg;
+	}
+	.ciq-nav input:placeholder {
+		color: #fafafa;
+	}
+	.ciq-nav input {
+		color: #555;
+		background-color: #fcfcfc;
+	}
+	#symbolCompareInput, #symbolInput{
+		border-radius: 1px;
+		display: inline;
+		border: #999 1px solid;
+	}
+	div.quick-link:hover {
+		color: #aaa;
+	}
+	.comparisonWrapper:hover {
+		background-color: #ddd;
+	}
+	menu-select span.title {
+		color: #555;
+		transition: color .20s 0s;
+	}
+	menu-select span.title:hover {
+		color: #aaa;
+	}
+
+	.symbol-btn, .comparison-btn{
+		background-position: -45px -25px;
+	}
+
+	.comparison-btn{
+		background-position: -443px -25px;
+	}
+
+	& .ciq-nav menu-select#chartTypeSelect::before {
+		background-position: -350px -25px;
+	}
+	& .ciq-nav menu-select#studySelect::before {
+		background-position: -300px -25px;
+	}
+	& .ciq-nav menu-select#themeSelect::before {
+		background-position: -480px -25px;
+	}
+
+	.crosshair-btn, .drawing-toolbar-btn {
+		background-position: -443px -25px;
+	}
+	
+	.drawing-toolbar-btn{
+		background-position: -250px -25px;
+	}
+
+	.timezone-btn {
+		height: 27px;
+		width: 27px;
+		background-image: url(img/ciq-timezone-day.svg);
+	}
+
+	span.title.ciq-solid-1,
+	span.title.ciq-solid-3,
+	span.title.ciq-solid-5,
+	span.title.ciq-dotted-1,
+	span.title.ciq-dotted-3,
+	span.title.ciq-dotted-5,
+	span.title.ciq-dashed-1,
+	span.title.ciq-dashed-3,
+	span.title.ciq-dashed-5{
+		border-top-color: #000;
+	}
+
+}
+
+.ciq-night {
+	.ciq-nav menu-select#chartTypeSelect::before {
+		background-position: -350px -50px;
+	}
+	.ciq-nav menu-select#studySelect::before {
+		background-position: -300px -50px;
+	}
+	.ciq-nav menu-select#themeSelect::before {
+		background-position: -480px -50px;
+	}
+}
+
+/*
+* Default theme
 */
 
 html, body {
@@ -85,16 +187,34 @@ input[type="text"], input[type="number"] {
 	padding: 0 5px 0 10px;
 }
 
-.stx-chart-panel.stx-show {
-	display: inline-block !important;
+.stx-panel-title {
+	display:none;
 }
 
-.stx-panel-title.chart-title{
+.chart-title{
+	float:left;
 	font-size: 28px;
 	font-family: $heading-font;
 	font-weight: 700;
-	margin:10px;
+	text-transform: uppercase;
+	padding: 20px;
+	z-index: 21;
+	position: absolute;
 }
+
+.chart-title:after { 
+	content: "."; 
+	visibility: hidden; 
+	display: block; 
+	height: 0; 
+	clear: both;
+ }
+
+ .clearfloat {
+	display: block; 
+	height: 0; 
+	clear:both;
+ }
 
 h3 {
 	font-family: $base-font;
@@ -132,7 +252,8 @@ nav {
 .left span{
 	margin-right:10px;
 }
-.stx-chart-panel .stx-ico-focus, .stx-chart-panel .stx-ico-down, .stx-chart-panel .stx-ico-up{
+
+.stx-chart-panel .stx-ico-focus, .stx-chart-panel .stx-ico-down, .stx-chart-panel .stx-ico-up, .stx-btn-panel{
 	display: none;
 }
 
@@ -193,8 +314,9 @@ nav {
 
 #symbolCompareInput, #symbolInput{
 	border-radius: 1px;
-	display: inline;
+	display: inline-block;
 	border: #333 1px solid;
+	width: 100%;
 }
 
 #symbolInput:hover, #symbolCompareInput:hover,
@@ -240,18 +362,9 @@ nav {
 		vertical-align: top;
 		// @include rotate(0deg);
 	}
-	
-	& .ciq-nav menu-select#periodicitySelect span.title {
+
+	.ciq-nav menu-select#periodicitySelect span.title {
 		display: inline;
-	}
-	& .ciq-nav menu-select#chartTypeSelect::before {
-		background-position: -350px -50px;
-	}
-	& .ciq-nav menu-select#studySelect::before {
-		background-position: -300px -50px;
-	}
-	& .ciq-nav menu-select#themeSelect::before {
-		background-position: -480px -50px;
 	}
 }
 
@@ -262,15 +375,15 @@ nav {
 // }
 
 .break-lg .symbol-frame {
-	width: 130px;
+	width: 160px;
 }
 
 .break-md .symbol-frame {
-	width: 75px;
+	width: 100px;
 }
 
 .break-sm .symbol-frame {
-	width: 40px;
+	width: 60px;
 }
 
 .symbol-btn, .comparison-btn{
@@ -696,14 +809,12 @@ div.loader{
 }
 
 .toolbar{
-	border-bottom: 1px solid #131d24;
 	height: 40px;
 	padding: 5px 10px 0;
 	z-index: 2;
 	transition: height .20s 0s, padding .20s 0s;
 	display: flex;
 	color: white;
-	background: #1c2a35;
 }
 
 .toolbar > span{

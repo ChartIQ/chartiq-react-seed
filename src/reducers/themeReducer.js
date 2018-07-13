@@ -7,11 +7,16 @@ import Types from '../actions/themeActions'
 import themeActions from '../actions/themeActions';
 
 // create the default theme
-let night = {
+let builtinThemes = [{
 	"name": "Night",
 	"className": "ciq-night",
 	"builtIn": true
-}
+},
+{
+	"name": "Day",
+	"className": "ciq-day",
+	"builtIn": true
+}]
 
 // default settings and options to display in UI
 let defaultSettings = [{
@@ -124,7 +129,7 @@ let defaultSettings = [{
 
 // initial state and schema
 const initialState = {
-    themeList: [night, { "name": "+ New Theme" }],
+    themeList: builtinThemes.concat([{ "name": "+ New Theme" }]),
     currentThemeSettings: defaultSettings,
     currentThemeName: 'Default',
     showEditModal: false,
@@ -142,7 +147,7 @@ let newThemeSettings=undefined
  * @param {any} action
  */
 const ThemeUI = (state = initialState, action) => {
-    switch(action.type){
+	switch(action.type){
 			case Types.SET_HELPER:
             if(!action.ciq) return state
             let themeHelper = new CIQ.ThemeHelper({
@@ -183,28 +188,28 @@ const ThemeUI = (state = initialState, action) => {
                 currentThemeSettings: newThemeSettings
             })
 	    case Types.SAVE_THEME:
-            let item = {
-                name: action.name,
-                settings: action.theme
-            },
-            endIndex = state.themeList.length-1,
-						newThemeList = state.themeList.slice(),
-						existsIndex = -1;
-						newThemeList.map((theme, i) => {
-							if (theme.name === action.name){
-								existsIndex = i;
-							}
-						});
+						let item = {
+							    name: action.name,
+							    settings: action.theme
+						}
+						item.className = $$$('body').className
 
-				    if(action.name==="Night" || action.name==="+ New Theme") {
+						let newThemeList = state.themeList.slice()
+						let existsIndex = newThemeList.findIndex(t=>t.name.toUpperCase()==action.name.toUpperCase())
+
+				    if((existsIndex > -1 && newThemeList[existsIndex].builtIn == true) || action.name==="+ New Theme") {
 					    alert('Cannot override a built in theme');
 					    return state;
 				    }
 
-						if (existsIndex > -1) { newThemeList.splice(existsIndex, 1, item); }
-						else { newThemeList.splice(endIndex, 0, item); }
+						if (existsIndex > -1) {
+							newThemeList.splice(existsIndex, 1, item);
+						}
+						else {
+							newThemeList.splice(newThemeList.length-1, 0, item);
+						}
 
-						setTheme(state.themeHelper, {settings: action.theme})
+						setTheme(state.themeHelper, {settings: item.settings})
 
 						CIQ.localStorageSetItem('myChartThemes', JSON.stringify(newThemeList));
 						CIQ.localStorageSetItem('myChartCurrentThemeName', JSON.stringify(action.name));
@@ -247,8 +252,8 @@ const ThemeUI = (state = initialState, action) => {
 				showEditModal: false,
 			})
 		case Types.RESTORE_THEMES:
-			let restoredThemeList = JSON.parse(CIQ.localStorage.getItem('myChartThemes'));
-			let restoredCurrentThemeName = JSON.parse(CIQ.localStorage.getItem('myChartCurrentThemeName'));
+			let restoredThemeList = JSON.parse(CIQ.localStorage.getItem('myChartThemes')) || state.themeList;
+			let restoredCurrentThemeName = JSON.parse(CIQ.localStorage.getItem('myChartCurrentThemeName')) || restoredThemeList[0].name;
 
 			newState = Object.assign({}, state)
 
@@ -339,6 +344,7 @@ function setTheme(themeHelper, theme) {
 	if (theme.settings) {
 		themeHelper.settings = CIQ.clone(theme.settings);
 		themeHelper.update();
+		$$$('body').className = theme.settings.className
 	} else if (theme.builtIn === true) {
 		$$$('body').className = theme.className
 		var stx = themeHelper.params.stx;
