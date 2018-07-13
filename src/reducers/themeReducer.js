@@ -192,6 +192,8 @@ const ThemeUI = (state = initialState, action) => {
 							    name: action.name,
 							    settings: action.theme
 						}
+						item.className = $$$('body').className
+
 						let newThemeList = state.themeList.slice()
 						let existsIndex = newThemeList.findIndex(t=>t.name.toUpperCase()==action.name.toUpperCase())
 
@@ -342,6 +344,7 @@ function setTheme(themeHelper, theme) {
 	if (theme.settings) {
 		themeHelper.settings = CIQ.clone(theme.settings);
 		themeHelper.update();
+		$$$('body').className = theme.settings.className
 	} else if (theme.builtIn === true) {
 		$$$('body').className = theme.className
 		var stx = themeHelper.params.stx;
