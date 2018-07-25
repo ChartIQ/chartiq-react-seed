@@ -1,3 +1,16 @@
+/**
+ * LineStyle drawing component
+ * @module components/Drawing/LineStyle
+ */
+
+import React from 'react'
+
+/**
+ * LineStyle drawing component
+ *
+ * @param {Object} props
+ * @returns
+ */
 class LineStyle extends React.Component{
 	constructor(props){
 		super(props);
@@ -18,7 +31,10 @@ class LineStyle extends React.Component{
 		});
 	}
 	render(){
-		let cName = this.props.linePattern && this.props.lineWidth ? 'ciq-' + this.props.linePattern + '-' + this.props.lineWidth : null;
+		let cName
+		if(this.props.linePattern && this.props.lineWidth) {
+			cName = 'ciq-' + this.props.linePattern + '-' + this.props.lineWidth;
+		}
 
 		let menuDisplay = {
 			display: this.state.menuOpen ? 'block' : 'none'

@@ -1,17 +1,32 @@
-//components
+/**
+ * Drawing toolbar for adding drawings to the chart
+ * @module components/DrawingToolbar
+ */
+
+import React from 'react'
 import ColorSwatch from './Drawing/ColorSwatch'
 import LineStyle from "./Drawing/LineStyle"
 import FontStyle from "./Text/FontStyle"
 import Font from './Text/Font'
 import Measure from './Drawing/Measure'
 import MenuSelect from './shared/MenuSelect'
+import AxisLabel from './Drawing/AxisLabel'
+import Undo from './Drawing/Undo'
+import Redo from './Drawing/Redo'
+import Clear from './Drawing/Clear'
 
+/**
+ * Drawing toolbar for adding drawings to the chart
+ *
+ * @class DrawingToolbar
+ * @extends {React.Component}
+ */
 class DrawingToolbar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isPickingDrawColor: false,
-			menuOpen: false
+			currentToolHasLabels: false,
+			toolTitle: 'Select Tool'
 		};
 	}
 	componentDidMount(){
@@ -36,20 +51,25 @@ class DrawingToolbar extends React.Component {
 		return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 	}
 	setTool(ciq, tool){
-		if (ciq === null) return
-		else {
-			if(tool=='callout' || tool=='annotation') { // no need to do this every time
-				// Sync the defaults for font tool
-				var style=ciq.canvasStyle("stx_annotation");
-				ciq.currentVectorParameters.annotation.font.size=style.fontSize
-				ciq.currentVectorParameters.annotation.font.family=style.fontFamily
-				ciq.currentVectorParameters.annotation.font.style=style.fontStyle
-				ciq.currentVectorParameters.annotation.font.weight=style.fontWeight
-			}
-			let toolParams = CIQ.Drawing.getDrawingParameters(ciq, tool)
-			this.props.changeTool(tool, toolParams)
-			this.props.changeVectorParams(tool)
+		if (ciq === null) {
+			return
 		}
+		if(tool=='callout' || tool=='annotation') { // no need to do this every time
+			// Sync the defaults for font tool
+			var style=ciq.canvasStyle("stx_annotation");
+			ciq.currentVectorParameters.annotation.font.size=style.fontSize
+			ciq.currentVectorParameters.annotation.font.family=style.fontFamily
+			ciq.currentVectorParameters.annotation.font.style=style.fontStyle
+			ciq.currentVectorParameters.annotation.font.weight=style.fontWeight
+		}
+		let toolParams = CIQ.Drawing.getDrawingParameters(ciq, tool)
+		this.props.changeTool(tool, toolParams)
+		this.props.changeVectorParams(tool)
+		this.setState({
+			currentToolHasLabels: toolParams.hasOwnProperty('axisLabel'),
+			toolTitle: this.toTitleCase(tool)
+		});
+
 	}
 	changeFontStyle(type){
 		this.props.setFontStyle(type)
@@ -108,11 +128,12 @@ class DrawingToolbar extends React.Component {
 								keyName='tool'
 								handleOptionSelect={this.setTool.bind(this)}
 								menuId='toolSelect'
-								title='Select Tool'
+								title={this.state.toolTitle}
 								needsCiq={true}
 								ciq={this.props.ciq}
 								labelNeedsTransform={true}
-								labelTransform={this.toTitleCase} />
+								labelTransform={this.toTitleCase}
+								handlesOwnContent={true} />
 					<span>
 						<div className="drawingParameters">
 							<ColorSwatch name="Line" type="line" setColor={this.setColor} color={this.props.line} isPickingColor={this.state.isPickingDrawColor} changeState={this.changePickerState} />
@@ -121,6 +142,12 @@ class DrawingToolbar extends React.Component {
 							<FontStyle {...this.props} onClick={this.changeFontStyle} />
 							<Font {...this.props} onFamilyClick={this.changeFontFamily} onSizeClick={this.changeFontSize} />
 							<Measure {...this.props} />
+							<AxisLabel {...this.props} hasLabels={this.state.currentToolHasLabels} />
+						</div>
+						<div className="undoSection">
+							<Undo {...this.props} />
+							<Redo {...this.props} />
+							<Clear {...this.props} />
 						</div>
 					</span>
 				</div>

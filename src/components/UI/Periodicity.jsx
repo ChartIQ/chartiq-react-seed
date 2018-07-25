@@ -1,18 +1,25 @@
-import configs from "../../../configs/ui.js"
+/**
+ * Periodicity selection for changing chart span / range
+ * @module components/UI/Periodicity
+ */
 
+import React from 'react'
+import configs from "../../../configs/ui.js"
 import MenuSelect from '../shared/MenuSelect'
 
+/**
+ * Periodicity selection for changing chart span / range
+ *
+ * @param {Object} props
+ */
 const Periodicity = (props) => {
 	let label = getOptionLabel(props.ciq.layout);
-
 	return (
 		<MenuSelect options={configs.periodicity.options} keyName='period' name='label' handleOptionSelect={props.setPeriodicityWithLoader} menuId='periodicitySelect' title={label} />
 	);
 }
 
-//private
 function getOptionLabel(layout) {
-
 	var text = "";
 	var periodicity = layout.periodicity, interval = layout.interval, timeUnit = layout.timeUnit;
 	if (isNaN(interval)) {

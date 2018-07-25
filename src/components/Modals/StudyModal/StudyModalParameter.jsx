@@ -1,5 +1,16 @@
+/**
+ * Study modal parameter
+ * @module components/Modals/StudyModal/StudyModalParameter
+ */
+
+import React from 'react'
 import ColorSwatch from '../../Drawing/ColorSwatch'
 
+/**
+ * Study modal parameter
+ *
+ * @param {Object} props
+ */
 const StudyModalParameter = (props) => {
     return (
         <div>

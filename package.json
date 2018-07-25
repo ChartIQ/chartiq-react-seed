@@ -1,68 +1,73 @@
 {
-  "name": "reactchartiq",
-  "version": "1.0.0",
-  "description": "",
-  "main": "helloworld.js",
-  "dependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-loader": "^6.2.7",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "flux": "^3.1.2",
-    "lodash": "^4.17.5",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-create-action-types": "^2.1.0",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
-    "requirejs-babel": "^0.0.9",
-    "webpack": "2.2.1"
-  },
-  "devDependencies": {
-    "esformatter-jsx": "^7.2.0",
-    "eslint": "^3.10.2",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-promise": "^3.4.0-0",
-    "eslint-plugin-standard": "^2.0.1",
-    "redux-devtools": "^3.4.1",
-    "webpack-dev-server": "^2.4.2"
-  },
-  "esformatter": {
-    "plugins": [
-      "esformatter-jsx"
-    ],
-    "jsx": {
-      "formatJSX": true,
-      "attrsOnSameLineAsTag": false,
-      "maxAttrsOnTag": 3,
-      "firstAttributeOnSameLine": true,
-      "formatJSXExpressions": true,
-      "JSXExpressionsSingleLine": true,
-      "alignWithFirstAttribute": false,
-      "spaceInJSXExpressionContainers": " ",
-      "removeSpaceBeforeClosingJSX": false,
-      "closingTagOnNewLine": false,
-      "htmlOptions": {}
-    }
-  },
-  "scripts": {
-    "build": "webpack --config=webpack.config.js",
-    "postinstall": "webpack",
-    "server": "webpack-dev-server --inline --progress --port 3000 --content-base . --watch=true",
-    "start": "NODE_ENV=development webpack-dev-server  --config=webpack.build.config.js --open"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ChartIQ/Charting-Library---React-Seed-Project.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ChartIQ/Charting-Library---React-Seed-Project/issues"
-  },
-  "homepage": "https://github.com/ChartIQ/Charting-Library---React-Seed-Project#readme"
+	"name": "reactchartiq",
+	"version": "1.0.0",
+	"description": "ChartIQ Charting Library react seed project",
+	"dependencies": {
+		"npm": "^6.0.0",
+		"react": "^16.3.2",
+		"react-dom": "^16.3.2",
+		"react-redux": "^5.0.7",
+		"redux": "^4.0.0",
+		"redux-create-action-types": "^2.1.0",
+		"redux-logger": "^3.0.6",
+		"redux-thunk": "^2.2.0"
+	},
+	"devDependencies": {
+		"babel-core": "^6.26.3",
+		"babel-loader": "^7.1.4",
+		"babel-polyfill": "^6.26.0",
+		"babel-preset-env": "^1.7.0",
+		"babel-preset-react": "^6.24.1",
+		"esformatter-jsx": "^8.0.1",
+		"eslint": "^4.19.1",
+		"eslint-config-standard": "^11.0.0",
+		"eslint-plugin-import": "^2.11.0",
+		"eslint-plugin-node": "^6.0.1",
+		"eslint-plugin-promise": "^3.7.0",
+		"eslint-plugin-standard": "^3.1.0",
+		"node-sass": "^4.9.0",
+		"lodash": "^4.17.5",
+		"prop-types": "^15.6.1",
+		"redux-devtools": "^3.4.1",
+		"webpack": "^4.8.3",
+		"webpack-cli": "^2.1.3",
+		"webpack-dev-server": "^3.1.4"
+	},
+	"esformatter": {
+		"plugins": [
+			"esformatter-jsx"
+		],
+		"jsx": {
+			"formatJSX": true,
+			"attrsOnSameLineAsTag": false,
+			"maxAttrsOnTag": 3,
+			"firstAttributeOnSameLine": true,
+			"formatJSXExpressions": true,
+			"JSXExpressionsSingleLine": true,
+			"alignWithFirstAttribute": false,
+			"spaceInJSXExpressionContainers": " ",
+			"removeSpaceBeforeClosingJSX": false,
+			"closingTagOnNewLine": false,
+			"htmlOptions": {}
+		}
+	},
+	"scripts": {
+		"dev": "webpack --mode development",
+		"scss": "node-sass --source-map true css/CIQ_Seed.scss -o css",
+		"build": "webpack --mode production",
+		"postinstall": "npm run dev",
+		"server": "webpack-dev-server --inline --progress --port 3000 --content-base . --watch=true",
+		"start": "webpack-dev-server --mode development --config=webpack.config.js --open",
+		"start0": "webpack-dev-server --mode development --config=webpack.config.js --open --host 0.0.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ChartIQ/Charting-Library---React-Seed-Project.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ChartIQ/Charting-Library---React-Seed-Project/issues"
+	},
+	"homepage": "https://github.com/ChartIQ/Charting-Library---React-Seed-Project#readme"
 }

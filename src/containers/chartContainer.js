@@ -1,125 +1,150 @@
-//modules
-import { connect } from 'react-redux'
+/**
+ * Chart container for redux container-component pattern, which connects a store
+ * to a parent component through the react-redux.connect() method
+ * @module containers/chartContainer
+ */
 
-//actions
-import { setChartContainer,
-        addComparison,
-        removeComparison,
-        toggleCrosshairs,
-        setSpanWithLoader,
-        shareChart,
-        setShareStatus,
-        changeContainerSize,
-        changeVectorParams,
-        changeVectorLineParams,
-        changeVectorStyle,
-        setPeriodicity,
-        setChartType,
-        toggleLoader,
-        setRefreshInterval,
-        setSymbol,
-        changingChartData,
-        setPeriodicityWithLoader,
-        toggleTimezoneModal,
-        setTimeZone,
-        draw } from '../actions/chartActions'
-
-import { toggleDrawing } from '../actions/drawActions'
-
-//components
+import * as reactRedux from 'react-redux'
+import * as chartActions from '../actions/chartActions'
+import * as drawActions from '../actions/drawActions'
+import * as studyActions from '../actions/studyActions'
 import Chart from '../components/Chart'
 
-const mapStateToProps = (state, props) => {
-    return {
-        ciq: state.chart.ciq,
-        chartType: state.chart.chartType,
-        periodicity: state.chart.periodicity,
-        isLoadingPeriodicity: state.chart.isLoadingPeriodicity,
-        comparisons: state.chart.comparisons,
-        service: state.chart.service,
-        symbol: state.chart.symbol,
-        refreshInterval: state.chart.refreshInterval,
-        showCrosshairs: state.chart.showCrosshairs,
-        showTimezoneModal: state.chart.showTimezoneModal,
-        setTimeZone: state.chart.setTimeZone,
-        chartSeries: state.chart.chartSeries,
-        shareStatus: state.chart.shareStatus,
-        shareStatusMsg : state.chart.shareStatusMsg
-    }
+/**
+ * Maps store state to component properties per react-redux
+ *
+ * @param {Object} state
+ * @param {Object} ownProps
+ */
+const mapStateToProps = (state, ownProps) => {
+	return {
+		ciq: state.chart.ciq,
+				chartType: state.chart.chartType,
+				chartTop: state.chart.chartTop,
+		periodicity: state.chart.periodicity,
+		isLoadingPeriodicity: state.chart.isLoadingPeriodicity,
+		comparisons: state.chart.comparisons,
+		service: state.chart.service,
+		symbol: state.chart.symbol,
+		refreshInterval: state.chart.refreshInterval,
+		showCrosshairs: state.chart.showCrosshairs,
+		showTimezoneModal: state.chart.showTimezoneModal,
+		showAxisLabels: state.chart.showAxisLabels,
+		setTimeZone: state.chart.setTimeZone,
+				chartSeries: state.chart.chartSeries,
+				responsiveSize: state.chart.responsiveSize,
+		shareStatus: state.chart.shareStatus,
+		shareStatusMsg : state.chart.shareStatusMsg,
+		drawings: state.chart.drawings,
+		redoStack: state.chart.redoStack,
+		undoStack: state.chart.undoStack,
+		canUndo: state.chart.canUndo,
+		canRedo: state.chart.canRedo,
+		canClear: state.chart.canClear
+	}
 }
 
+/**
+ * Maps dispatches to properties to expose actions to components
+ *
+ * @param {Function} dispatch
+ * @param {*} ownProps
+ */
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setChartContainer: (container) => {
-      dispatch(setChartContainer(container))
-    },
-    changeVectorParams: (tool) => {
-      dispatch(changeVectorParams(tool))
-    },
-    changeVectorLineParams: (weight, pattern) => {
-      dispatch(changeVectorLineParams(weight, pattern))
-    },
-    changeVectorStyle: (styleType, style) => {
-      dispatch(changeVectorStyle(styleType, style))
-    },
-    addComparison: (comparison, color) => {
-      dispatch(addComparison(comparison, color))
-    },
-    addStudy: (study) => {
-      dispatch(addStudy(study))
-    },
-    removeComparison: (comparison) => {
-      dispatch(removeComparison(comparison))
-    },
-    removeStudy: (params) => {
-      dispatch(removeStudy(params))
-    },
-    toggleCrosshairs: () => {
-      dispatch(toggleCrosshairs())
-    },
-    toggleTimezoneModal: () => {
-      dispatch(toggleTimezoneModal())
-    },
-        setTimeZone: (zone) => {
-          dispatch(setTimeZone(zone))
-        },
-    setSymbol: (symbol) => {
-      dispatch(setSymbol(symbol))
-    },
-    toggleDrawingToolbar: () => {
-					Promise.all([
-						dispatch(toggleDrawing()),
-						dispatch(changeVectorParams())
-					])
-    },
-    setPeriodicity: (period, interval) => {
-      dispatch(setPeriodicity(period, interval))
-    },
-    setPeriodicityWithLoader: (periodicity) => {
-      dispatch(setPeriodicityWithLoader(periodicity))
-    },
-    setChartType: (type) => {
-      dispatch(setChartType(type))
-    },
-        setSpanWithLoader: (multiplier, base, interval, period, timeUnit) => {
-            dispatch(setSpanWithLoader(multiplier, base, interval, period, timeUnit))
-        },
-        draw: () => {
-            dispatch(draw())
-    },
-    shareChart: () => {
-      dispatch(shareChart())
-    },
-    setShareStatus: (status, msg) => {
-      dispatch(setShareStatus(status, msg))
-    }
+	setChartContainer: (container, callbacks) => {
+	  dispatch(chartActions.setChartContainer(container, callbacks))
+	},
+	importDrawings: () => {
+	  dispatch(chartActions.importDrawings())
+		},
+		changeDrawings: (params) => {
+			dispatch(chartActions.changeDrawings(params))
+		},
+	changeVectorParams: (tool) => {
+	  dispatch(chartActions.changeVectorParams(tool))
+	},
+	changeVectorLineParams: (weight, pattern) => {
+	  dispatch(chartActions.changeVectorLineParams(weight, pattern))
+	},
+	changeVectorStyle: (styleType, style) => {
+	  dispatch(chartActions.changeVectorStyle(styleType, style))
+	},
+	addComparisonAndSave: (symbol, params) => {
+	  dispatch(chartActions.addComparisonAndSave(symbol, params))
+	},
+	removeComparisonAndSave: (comparison) => {
+	  dispatch(chartActions.removeComparisonAndSave(comparison))
+	},
+	toggleCrosshairsAndSave: () => {
+	  dispatch(chartActions.toggleCrosshairsAndSave())
+	},
+	toggleTimezoneModal: () => {
+	  dispatch(chartActions.toggleTimezoneModal())
+		},
+		setShareStatus: (status, msg) => {
+			dispatch(chartActions.setShareStatus(status, msg))
+	},
+	setTimeZone: (zone) => {
+	  dispatch(chartActions.setTimeZone(zone))
+	},
+	setSymbolAndSave: (symbol) => {
+	  dispatch(chartActions.setSymbolAndSave(symbol))
+	},
+	toggleDrawingToolbar: () => {
+		Promise.all([
+			dispatch(drawActions.toggleDrawing()),
+			dispatch(chartActions.changeVectorParams())
+		])
+	},
+	setPeriodicityWithLoader: (periodicity) => {
+		dispatch(chartActions.setPeriodicityWithLoader(periodicity))
+	},
+	setChartType: (type) => {
+		dispatch(chartActions.setChartType(type))
+		},
+		setResponsiveSize: (size) => {
+			dispatch(chartActions.setResponsiveSize(size))
+		},
+	setSpanWithLoader: (multiplier, base, interval, period, timeUnit) => {
+		dispatch(chartActions.setSpanWithLoader(multiplier, base, interval, period, timeUnit))
+	},
+	draw: () => {
+		dispatch(chartActions.draw())
+	},
+	undo: (undid) => {
+		dispatch(chartActions.undo(undid))
+	},
+	redo: () => {
+		dispatch(chartActions.redo())
+	},
+	clear: () => {
+	  dispatch(chartActions.clear())
+	},
+	toggleAxisLabels: () => {
+		dispatch(chartActions.toggleAxisLabels())
+	},
+	layoutChanged: () => {
+	  dispatch(chartActions.layoutChanged())
+	},
+	undoStamps: (params) => {
+	  dispatch(chartActions.undoStamps(params))
+	},
+	toggleStudyOverlay: (params) => {
+	  dispatch(studyActions.toggleOverlay(params))
+	},
+	openStudyModal: (params) => {
+	  dispatch(studyActions.openStudyModal(params))
+	}
   }
 }
 
-
-const ChartContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+/**
+ * Redux connection object linking the store to the Chart component
+ */
+const ChartContainer = reactRedux.connect(
+	mapStateToProps,
+	mapDispatchToProps
 )(Chart)
 
 export default ChartContainer
