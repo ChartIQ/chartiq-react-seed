@@ -18,20 +18,30 @@ class StudyUI extends React.Component{
 	constructor(props){
 		super(props);
 	}
+
+	componentDidMount(){
+		this.props.syncStudies.bind(this, this.props)
+		this.props.syncStudies(this.props)
+	}
+
 	render(){
-		let tempStudies = [];
+		let alphabetized = [];
 		let props = this.props
 
-		Object.keys(this.props.studyList).map((key) => {
-			if (this.props.studyList.hasOwnProperty(key)){
-				tempStudies.push(this.props.studyList[key]);
+		Object.keys(this.props.studyLibrary).map((key) => {
+			if (this.props.studyLibrary.hasOwnProperty(key)){
+				alphabetized.push(this.props.studyLibrary[key]);
 			}
 		});
 
+		alphabetized.sort((a, b) => {
+		 	if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+		 	else if (b.name.toLowerCase() > a.name.toLowerCase()) { return -1; }
+		 	else { return 0; }
+		 });
+
 		props.ciq.callbacks.studyOverlayEdit = props.toggleOverlay;
 		props.ciq.callbacks.studyPanelEdit = props.openStudyModal;
-
-		props.ciq.append('panelClose', props.syncStudies);
 
 		return (
 			<span>
@@ -39,7 +49,7 @@ class StudyUI extends React.Component{
 				<StudyModal {...props} />
 
 				<MenuSelect hasButtons={false}
-							options={tempStudies}
+							options={alphabetized}
 							keyName='study'
 							name='name'
 							handleOptionSelect={props.addStudy}

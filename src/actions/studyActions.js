@@ -77,8 +77,8 @@ export function addStudy(ciq, study){
 	return (dispatch, getState) => {
 		let state = getState();
 		let studyLookup = {};
-		for(let libraryEntry in state.study.studyList){
-				studyLookup[state.study.studyList[libraryEntry].name] = libraryEntry
+		for(let libraryEntry in state.study.studyLibrary){
+				studyLookup[state.study.studyLibrary[libraryEntry].name] = libraryEntry
 		}
 		CIQ.Studies.addStudy(ciq, studyLookup[study.name])
 		return dispatch({ type: 'ADD_STUDY', ciq: ciq, study: study })
@@ -112,13 +112,7 @@ export function updateStudy(inputs, outputs, parameters){
  * @returns
  */
 export function removeStudy(study){
-	let hasStx = false;
-            if (study.hasOwnProperty('stx')) { hasStx = true; }
-            if (hasStx){
-                CIQ.Studies.removeStudy(action.study.stx, action.study.sd);
-            } else {
-                if(state.studyHelper !== null) { CIQ.Studies.removeStudy(state.studyHelper.stx, state.studyHelper.sd); }
-            }
+	CIQ.Studies.removeStudy(study.stx, study.sd);
 	return { type: 'REMOVE_STUDY', study: study }
 }
 
@@ -138,12 +132,9 @@ export function clearStudies(){
 	return { type: 'CLEAR_STUDIES' }
 }
 
-export function syncStudies(){
-	return (dispatch, getState) => {
-		let state = getState();
-		let newStudies = CIQ.clone(state.chart.ciq.layout.studies);
-		return dispatch({ type: 'SYNC_STUDIES', studies: newStudies});
-	}
+export function syncStudies(prps){
+	var newStudies = Object.assign({},prps.ciq.layout.studies);
+	return { type: 'SYNC_STUDIES', studies: newStudies};
 }
 
 
