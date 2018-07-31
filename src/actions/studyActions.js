@@ -74,15 +74,9 @@ export function closeStudyModal(){
  * @returns
  */
 export function addStudy(ciq, study){
-	return (dispatch, getState) => {
-		let state = getState();
-		let studyLookup = {};
-		for(let libraryEntry in state.study.studyLibrary){
-				studyLookup[state.study.studyLibrary[libraryEntry].name] = libraryEntry
-		}
-		CIQ.Studies.addStudy(ciq, studyLookup[study.name])
-		return dispatch({ type: 'ADD_STUDY', ciq: ciq, study: study })
-	}
+	var sd = CIQ.Studies.addStudy(ciq, study.name)
+	var helper = new CIQ.Studies.DialogHelper({stx: ciq, sd:sd})
+	return { type: 'ADD_STUDY', ciq: ciq, study: study, studyHelper: helper, sd: sd}
 }
 
 /**

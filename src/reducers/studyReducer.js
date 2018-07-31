@@ -83,7 +83,7 @@ const study = (state = initialState, action) => {
 					left: 0
 				},
 				// studies: hasStx ? CIQ.clone(action.study.stx.layout.studies,{}) : CIQ.clone(state.studyHelper.stx.layout.studies,{})
-				studies: Object.assign({},state.studyHelper.stx.layout.studies)
+				studies: Object.assign({},action.study.stx.layout.studies)
 			})
 		case Types.CLEAR_STUDIES:
 			return Object.assign({}, state, {

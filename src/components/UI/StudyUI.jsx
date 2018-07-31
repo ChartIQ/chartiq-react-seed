@@ -44,7 +44,7 @@ class StudyUI extends React.Component{
 		props.ciq.callbacks.studyPanelEdit = props.openStudyModal;
 
 		return (
-			<span>
+			<React.Fragment>
 				<OverlayMenu {...props} />
 				<StudyModal {...props} />
 
@@ -62,7 +62,7 @@ class StudyUI extends React.Component{
 							legendButtonAction={props.removeAllStudies}
 							removeLegendItem={props.removeStudy}
 							editLegendItem={props.openStudyModal} />
-			</span>
+			</React.Fragment>
 		);
 	}
 };
