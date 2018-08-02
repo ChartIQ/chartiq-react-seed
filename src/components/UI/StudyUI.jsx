@@ -24,19 +24,24 @@ class StudyUI extends React.Component{
 		this.props.syncStudies(this.props)
 	}
 
-	render(){
-		let alphabetized = [];
-		let props = this.props
+	checkStudyLibrary (studyName) {
+		return CIQ.Studies.studyLibrary[studyName].name || studyName;
+	}
 
-		Object.keys(this.props.studyLibrary).map((key) => {
-			if (this.props.studyLibrary.hasOwnProperty(key)){
-				alphabetized.push(this.props.studyLibrary[key]);
-			}
-		});
+	render(){
+		let props = this.props
+		let alphabetized = Object.keys(props.studyLibrary)
+
+		// var entries = Object.values(props.studyLibrary)
+		// Object.keys(props.studyLibrary).map((key, val) => {
+		// 	var entry = {}
+
+		// 	alphabetized.push(entry[props.studyLibrary[key]] = entries[val]);
+		// });
 
 		alphabetized.sort((a, b) => {
-		 	if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
-		 	else if (b.name.toLowerCase() > a.name.toLowerCase()) { return -1; }
+		 	if (a.toLowerCase() > b.toLowerCase()) { return 1; }
+		 	else if (b.toLowerCase() > a.toLowerCase()) { return -1; }
 		 	else { return 0; }
 		 });
 
@@ -51,13 +56,14 @@ class StudyUI extends React.Component{
 				<MenuSelect hasButtons={false}
 							options={alphabetized}
 							keyName='study'
-							name='name'
 							handleOptionSelect={props.addStudy}
 							needsCiq={true}
 							ciq={props.ciq}
 							menuId='studySelect'
 							title='Studies'
 							hasLegend={Object.keys(props.studies).length !== 0 ? true : false}
+							labelNeedsTransform={true}
+							labelTransform={this.checkStudyLibrary}
 							legendItems={props.studies}
 							legendButtonAction={props.removeAllStudies}
 							removeLegendItem={props.removeStudy}

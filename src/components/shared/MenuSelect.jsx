@@ -94,7 +94,7 @@ class MenuSelect extends React.Component{
 			<menu-select id={this.props.menuId} /*{onMouseLeave={this.toggleMenu.bind(this, false)}}*/ onClick={this.toggleMenu.bind(this, !this.state.menuOpen)}>
 				<span className='title'>{this.props.title}</span>
 				<menu-select-options className='ps-container' style={menuDisplay}>
-					{this.props.hasLegend ? <StudyLegend {...this.props} legendItems={this.props.legendItems} /> : null}
+					{this.props.hasLegend && Object.keys(this.props.legendItems).length? <StudyLegend {...this.props} legendItems={this.props.legendItems} /> : null}
 					<div className='cq-scroll'>
 						{options}
 					</div>

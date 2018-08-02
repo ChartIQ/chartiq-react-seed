@@ -74,7 +74,7 @@ export function closeStudyModal(){
  * @returns
  */
 export function addStudy(ciq, study){
-	var sd = CIQ.Studies.addStudy(ciq, study.name)
+	var sd = CIQ.Studies.addStudy(ciq, study)
 	var helper = new CIQ.Studies.DialogHelper({stx: ciq, sd:sd})
 	return { type: 'ADD_STUDY', ciq: ciq, study: study, studyHelper: helper, sd: sd}
 }
