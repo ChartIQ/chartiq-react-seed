@@ -32,13 +32,6 @@ class StudyUI extends React.Component{
 		let props = this.props
 		let alphabetized = Object.keys(props.studyLibrary)
 
-		// var entries = Object.values(props.studyLibrary)
-		// Object.keys(props.studyLibrary).map((key, val) => {
-		// 	var entry = {}
-
-		// 	alphabetized.push(entry[props.studyLibrary[key]] = entries[val]);
-		// });
-
 		alphabetized.sort((a, b) => {
 		 	if (a.toLowerCase() > b.toLowerCase()) { return 1; }
 		 	else if (b.toLowerCase() > a.toLowerCase()) { return -1; }
