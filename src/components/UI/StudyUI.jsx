@@ -20,7 +20,6 @@ class StudyUI extends React.Component{
 	}
 
 	componentDidMount(){
-		this.props.syncStudies.bind(this, this.props)
 		this.props.syncStudies(this.props)
 	}
 
@@ -66,4 +65,4 @@ class StudyUI extends React.Component{
 	}
 };
 
-export default StudyUI
+export default StudyUI;
