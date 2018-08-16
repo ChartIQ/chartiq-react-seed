@@ -26,7 +26,7 @@ npm install
 
 Once the node_modules have downloaded, run ```npm start``` and open your browser window to localhost port 3000 to view the fully working example.
 
-If port 3000 is already in use change the port in package.json and webpack.config.js.
+If port 3000 is already in use, change the port in package.json and webpack.config.js.
 You can see which ports are currently being used by using ```netstat -a``` on any command line. 
 
 ## Project Structure and Customization
