@@ -14,7 +14,7 @@ This is a basic build of the ChartIQ library within the React framework. This pr
 
 ## Getting started
 
-To view the example, you will need to copy and paste the ChartIQ `js` and `css` directories inside of the `chartiq` directory.
+To view the example, you will need to create a 'chartiq' directory under the project root and copy/paste the ChartIQ library `js` and `css` directories within.
 
 ### Running Locally
 
@@ -24,7 +24,10 @@ You will need to install the project's dependencies and build the distribution f
 npm install
 ```
 
-Once you have that, run ```npm start``` and open your browser window to localhost port 3000 to view the fully working example.
+Once the node_modules have downloaded, run ```npm start``` and open your browser window to localhost port 3000 to view the fully working example.
+
+If port 3000 is already in use change the port in package.json and webpack.config.js.
+You can see which ports are currently being used by using ```netstat -a``` on any command line. 
 
 ## Project Structure and Customization
 
