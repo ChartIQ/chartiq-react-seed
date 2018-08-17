@@ -14,7 +14,7 @@ This is a basic build of the ChartIQ library within the React framework. This pr
 
 ## Getting started
 
-To view the example, you will need to create a 'chartiq' directory under the project root and at a minimum copy/paste the ChartIQ library `js` and `css` directories within. If you have 'plugins' enabled for your license copy that folder. Optionally if you have 'plugins' enabled for your license or need to use our 'example-data'/'example-feeds' copy those folders over as well. 
+To view the example, you will need to create a 'chartiq' directory under the project root and at a minimum copy/paste the ChartIQ library `js` and `css` directories within. If you have 'plugins' enabled for your license copy that folder. Optionally if you have 'plugins' enabled for your license or need to use our 'example-data'/'example-feeds' copy those folders over as well.
 
 ### Running Locally
 
@@ -27,7 +27,7 @@ npm install
 Once the node_modules have downloaded, run ```npm start``` and open your browser window to localhost port 3000 to view the fully working example.
 
 If port 3000 is already in use, change the port in package.json and webpack.config.js.
-You can see which ports are currently being used by using ```netstat -a``` on any command line. 
+You can see which ports are currently being used by using ```netstat -a``` on any command line.
 
 ## Project Structure and Customization
 
@@ -69,7 +69,8 @@ This project is using Webpack to transform JSX and ES6 to ES5. The configs for t
 Running `npm run build` from the command line will re-create the distribution file `dist/main.js`.
 This is a transformed and bundled version of everything in the src directory. `src/index.js` will automatically load this file.
 
-## Contributing to this project
+## Contributing
 
-If you wish to contribute to this project, fork it and send us a pull request.
-We'd love to see what it is you want to do with our charting tools!
+If you see something that you think this project needs, feel free to submit a pull request. We'd love to see what it is you want to do with our charting tools! This project follows the GitFlow branching strategy, if you're not familiar with it you can read about it [here](https://nvie.com/posts/a-successful-git-branching-model/) and [here](https://danielkummer.github.io/git-flow-cheatsheet/).
+
+First fork the project, checkout branch `develop` and work from there. Once you have tested that your projects works submit a Pull Request and we will review your work, asking for changes if necessary. Once the work has been approved we'll merge it into a release branch where it will be merged into master.
