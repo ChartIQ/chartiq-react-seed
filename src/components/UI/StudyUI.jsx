@@ -32,10 +32,8 @@ class StudyUI extends React.Component{
 		let alphabetized = Object.keys(props.studyLibrary)
 
 		alphabetized.sort((a, b) => {
-		 	if (a.toLowerCase() > b.toLowerCase()) { return 1; }
-		 	else if (b.toLowerCase() > a.toLowerCase()) { return -1; }
-		 	else { return 0; }
-		 });
+			return a.toLowerCase().localeCompare(b.toLowerCase());
+		});
 
 		props.ciq.callbacks.studyOverlayEdit = props.toggleOverlay;
 		props.ciq.callbacks.studyPanelEdit = props.openStudyModal;
