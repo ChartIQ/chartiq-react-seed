@@ -110,16 +110,12 @@ export function removeStudy(study){
 	return { type: 'REMOVE_STUDY', study: study }
 }
 
-export function removeAllStudies(){
-	return (dispatch, getState) => {
-		let state = getState();
-		for (var id in state.chart.ciq.layout.studies){
-			let sd = state.chart.ciq.layout.studies[id];
-			if (!sd.customLegend) { CIQ.Studies.removeStudy(state.chart.ciq, sd); }
-		}
-		state.chart.ciq.draw();
-		return dispatch(clearStudies())
+export function removeAllStudies(ciq){
+	for (var id in ciq.layout.studies){
+		let sd = ciq.layout.studies[id];
+		if (!sd.customLegend) { CIQ.Studies.removeStudy(ciq, sd); }
 	}
+	return {type: 'CLEAR_STUDIES', ciq: ciq}
 }
 
 export function clearStudies(){

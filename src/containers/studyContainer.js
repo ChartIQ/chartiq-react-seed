@@ -62,8 +62,8 @@ const mapDispatchToProps = (dispatch) => {
 		removeStudy: (params) => {
 			dispatch(removeStudy(params))
 		},
-		removeAllStudies: () => {
-			dispatch(removeAllStudies())
+		removeAllStudies: (ciq) => {
+			dispatch(removeAllStudies(ciq))
 		},
 		syncStudies: (params) => {
 			dispatch(syncStudies(params))
