@@ -17,6 +17,7 @@ chartiq/
 # Editor files
 .idea
 .vscode/
+.project
 
 # OS generated files
 .DS_Store
