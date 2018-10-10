@@ -43,6 +43,24 @@ class Chart extends React.Component {
 		window.addEventListener("resize", this.resizeScreenFn);
 		this.resizeScreenFn();
 	}
+	componentDidUpdate(prevProps) {
+		if (prevProps.ciq === null && this.props.ciq !== null) {
+			// Add actions to window so these methods can be called by extensions
+			window.actions = {
+				importLayout: this.props.importLayout,
+				setSymbolAndSave: this.props.setSymbolAndSave,
+				importDrawings: this.props.importDrawings
+			};
+
+			// Add the chart engine instance to the window for use by extensions
+			window.stxx = this.props.ciq;
+
+			this.props.ciq.callbacks.drawing = this.props.changeDrawings;
+			this.props.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
+			this.props.ciq.callbacks.layout = this.props.layoutChanged;
+			this.props.ciq.addEventListener('undoStamp', this.props.undoStamps);
+		}
+	}
 	componentWillReceiveProps(nextProps) {
 		if (this.props.ciq !== nextProps.ciq) {
 			nextProps.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
@@ -62,10 +80,10 @@ class Chart extends React.Component {
 	}
 	updateComparisonSeries() {
 		if (arguments[0].action == 'remove-series') {
-      let stx = arguments[0]
+			let stx = arguments[0]
 			this.props.removeComparisonAndSave(stx.symbol)
 		}
-  }
+	}
 	render() {
 		return (
 			<div className={this.props.responsiveSize}>
