@@ -577,6 +577,10 @@ function drawingsChanged(){
     return { type: 'DRAWINGS_CHANGED' }
 }
 
+export function importLayout(layout, cb) {
+    return { type: 'IMPORT_LAYOUT', layout: layout, cb: cb }
+}
+
 /**
  * Handle action of the chart.callbacks.laout callback
  *
