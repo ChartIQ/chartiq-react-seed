@@ -243,7 +243,7 @@ const chart = (state = initialState, action) => {
  * @private
  */
 function restoreDrawings(stx){
-	if(!stx.chart.symbol) {
+	if(!stx || !stx.chart || !stx.chart.symbol) {
 		return;
 	}
 	var memory=CIQ.localStorage.getItem(stx.chart.symbol.toUpperCase());
