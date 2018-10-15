@@ -53,11 +53,11 @@ class Chart extends React.Component {
 			};
 
 			// Add the chart engine instance to the window for use by extensions
-			window.stxx = this.props.ciq;
+			window.ciq = this.props.ciq;
 
-			this.props.ciq.callbacks.drawing = this.props.changeDrawings;
-			this.props.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
-			this.props.ciq.callbacks.layout = this.props.layoutChanged;
+			this.props.ciq.addEventListener("drawing", this.props.changeDrawings);
+			this.props.ciq.addEventListener("symbolChange", this.updateComparisonSeries.bind(this));
+			this.props.ciq.addEventListener("layout", this.props.layoutChanged);
 			this.props.ciq.addEventListener('undoStamp', this.props.undoStamps);
 		}
 	}
