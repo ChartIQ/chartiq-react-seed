@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import configs from "../../../configs/ui.js";
+import configs from "../../configs/ui.js";
 import MenuSelect from '../shared/MenuSelect'
 
 /**

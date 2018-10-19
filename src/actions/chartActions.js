@@ -4,7 +4,7 @@
  */
 
 import createTypes from 'redux-create-action-types';
-import configs from "../../configs/ui.js";
+import configs from "../configs/ui.js";
 
 /*
  * action types
