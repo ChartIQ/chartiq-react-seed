@@ -18,38 +18,49 @@ class StudyUI extends React.Component{
 	constructor(props){
 		super(props);
 	}
+
+	componentDidMount(){
+		this.props.syncStudies(this.props)
+	}
+
+	checkStudyLibrary (studyName) {
+		return CIQ.Studies.studyLibrary[studyName].name || studyName;
+	}
+
 	render(){
-		let tempStudies = [];
+		let props = this.props
+		let alphabetized = Object.keys(props.studyLibrary)
 
-		Object.keys(this.props.studyList).map((key) => {
-			if (this.props.studyList.hasOwnProperty(key)){
-				tempStudies.push(this.props.studyList[key]);
-			}
+		alphabetized.sort((a, b) => {
+			return a.toLowerCase().localeCompare(b.toLowerCase());
 		});
 
-		tempStudies.sort((a, b) => {
-			if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
-			else if (b.name.toLowerCase() > a.name.toLowerCase()) { return -1; }
-			else { return 0; }
-		});
+		props.ciq.callbacks.studyOverlayEdit = props.toggleOverlay;
+		props.ciq.callbacks.studyPanelEdit = props.openStudyModal;
 
 		return (
-			<span>
-				<OverlayMenu {...this.props} />
-				<StudyModal {...this.props} />
+			<React.Fragment>
+				<OverlayMenu {...props} />
+				<StudyModal {...props} />
 
 				<MenuSelect hasButtons={false}
-						options={tempStudies}
-						keyName='study'
-						name='name'
-						handleOptionSelect={this.props.addStudy}
-						needsCiq={true}
-						ciq={this.props.ciq}
-						menuId='studySelect'
-						title='Studies' />
-			</span>
+							options={alphabetized}
+							keyName='study'
+							handleOptionSelect={props.addStudy}
+							needsCiq={true}
+							ciq={props.ciq}
+							menuId='studySelect'
+							title='Studies'
+							hasLegend={Object.keys(props.studies).length !== 0 ? true : false}
+							labelNeedsTransform={true}
+							labelTransform={this.checkStudyLibrary}
+							legendItems={props.studies}
+							legendButtonAction={props.removeAllStudies}
+							removeLegendItem={props.removeStudy}
+							editLegendItem={props.openStudyModal} />
+			</React.Fragment>
 		);
 	}
-}
+};
 
 export default StudyUI;

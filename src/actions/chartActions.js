@@ -320,6 +320,18 @@ export function changeVectorLineParams(weight, pattern){
 export function changeVectorStyle(type, style){
     return { type: 'CHANGE_VECTOR_STYLE', styleType: type, style: style }
 }
+
+/**
+ * Toggle the axis label state of the next drawing instance
+ *
+ * @export
+ * @returns
+ * @private
+ */
+export function toggleAxisLabels() {
+	return { type: 'TOGGLE_AXIS_LABELS' }
+}
+
 /**
  * Sets the periodicity of the chart
  *
@@ -529,10 +541,7 @@ export function clear(){
 export function undoStamps(params){
     return (dispatch, getState) => {
 				let state = getState();
-				return Promise.all([
-					dispatch(updateUndoStamps(params)),
-					dispatch(changeDrawings(params))
-			]);
+				return dispatch({ type: 'UPDATE_UNDO_STAMPS', params: params });
 
     }
 }

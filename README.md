@@ -4,7 +4,7 @@ If you have questions or get stuck using this project or the ChartIQ library, th
 
 # Charting-Library---React-Seed-Project
 
-This is a basic build of the ChartIQ library within the React framework. This provides an example of how to implement the most common elements in the library. This is not a comprehensive example, more like a good starting point for an React developer.
+This is a basic build of the ChartIQ library within the React framework. This provides an example of how to implement the most common elements in the library. This is not a comprehensive example, more like a good starting point for a React developer.
 
 ## Requirements
 
@@ -14,24 +14,7 @@ This is a basic build of the ChartIQ library within the React framework. This pr
 
 ## Getting started
 
-To view the example, you will need to copy or link the ChartIQ `js` and `css` directories inside of the `chartiq` directory. To do this, execute the following commands in a terminal or command line:
-
-### In OS X:
-
-```
-ln -s <path to extracted ChartIQ library>/js <path to React Seed project>/chartiq
-ln -s <path to extracted ChartIQ library>/css <path to React Seed project>/chartiq
-```
-*NOTE: Use full paths, not relative paths here. (e.g. instead of "~/Documents" use "/Users/<username>/Documents"*
-
-### In Windows:
-
-```
-mklink /d <path to React Seed project>\chartiq\js <path to extracted ChartIQ library>\js
-mklink /d <path to React Seed project>\chartiq\css <path to extracted ChartIQ library>\css
-```
-
-Using symlinks is not required. If preferred the js and css from the charting library can be copied and pasted into these directories (<react_seed_dir>/chartiq/js and css respectively)
+To view the example, you will need to copy and paste the ChartIQ `js` and `css` directories inside of the `chartiq` directory.
 
 ### Running Locally
 

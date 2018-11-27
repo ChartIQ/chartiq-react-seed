@@ -48,6 +48,7 @@ class Chart extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (this.props.ciq !== nextProps.ciq) {
 			nextProps.ciq.callbacks.symbolChange = this.updateComparisonSeries.bind(this);
+			nextProps.ciq.callbacks.drawing = this.props.changeDrawings;
 			nextProps.ciq.callbacks.layout = this.props.layoutChanged;
 			nextProps.ciq.addEventListener('undoStamp', nextProps.undoStamps);
 		}
@@ -81,6 +82,7 @@ class Chart extends React.Component {
 					<DrawingContainer {...this.props} />
 					<div className={chartContainerClasses} ref={this.chartContainer}>
 						<div className={this.props.isLoadingPeriodicity ? 'loader' : ''}></div>
+						<div className="chart-title" style={{top:(this.props.chartTop || 0) + "px"}}>{this.props.symbol}</div>
 						<Legend {...this.props} />
 					</div>
 				</div>
