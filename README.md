@@ -1,7 +1,3 @@
-## Questions and support
-
-If you have questions or get stuck using this project or the ChartIQ library, the dev support team can be reached through [dev@chartiq.com](mailto:dev@chartiq.com).
-
 # Charting-Library---React-Seed-Project
 
 This is a basic build of the ChartIQ library within the React framework. This provides an example of how to implement the most common elements in the library. This is not a comprehensive example, more like a good starting point for an React developer.
@@ -68,6 +64,11 @@ This seed project uses the ChartIQ quote simulator to view randomized data with 
 This project is using Webpack to transform JSX and ES6 to ES5. The configs for this are in the `webpack.config.js`.
 Running `npm run build` from the command line will re-create the distribution file `dist/main.js`.
 This is a transformed and bundled version of everything in the src directory. `src/index.js` will automatically load this file.
+
+## Questions and support
+
+- Our development support team can be reached at [support@chartiq.com](mailto:support@chartiq.com).
+- Our javascript documentation can be found at https://documentation.chartiq.com
 
 ## Contributing
 
