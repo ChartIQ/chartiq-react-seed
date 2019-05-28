@@ -1,6 +1,10 @@
 # Charting-Library---React-Seed-Project
 
-This is a basic build of the ChartIQ library within the React framework. This provides an example of how to implement the most common elements in the library. This is not a comprehensive example, more like a good starting point for an React developer.
+This is a basic example to illustrate how to use the ChartIQ library within the React framework. 
+It is not comprehensive and only intended to provide guidance on how to implement UI that interacts with the most common API calls in the [javaScript library](https://documentation.chartiq.com).
+It may need to be extended to support more elaborate implementations. Feel free to contact us and request sample code and guidance on how to extend the SDK.
+
+A full featured react application can be found at https://github.com/ChartIQ/chartiq-react-app
 
 ## Requirements
 
