@@ -27,7 +27,7 @@ You can see which ports are currently being used by using ```netstat -a``` on an
 
 ## Project Structure and Customization
 
-*Note: We do not recommend using the web components from template-advanced.html within frameworks. Unless you are familiar with integrating web components into React components, you are better off building framework components that interface with the charting library.*
+*Note: Unless you are familiar with integrating web components into React components, we do not recommend using the [ChartIQ web components](https://documentation.chartiq.com/WebComponents.html) (used in template-advanced.html) within this sample. Instead, use the [plug and play react application](https://github.com/ChartIQ/chartiq-react-app), or build React components that interface directly with the charting library.*
 
 
 #### React-Redux
