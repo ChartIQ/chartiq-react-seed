@@ -3,8 +3,7 @@
  * @module components/Modals/ShareChartModal
  */
 
-import React from "react";
-import { Z_BLOCK } from "zlib";
+import React from 'react'
 
 /**
  *  ShareStatus enumeration
@@ -38,33 +37,36 @@ class ShareChartModal extends React.Component {
 
 		this.props.setShareStatus(ShareStatus.GENERATING);
 
-		CIQ.Share.createImage(stx, {}, function(data) {
+		CIQ.Share.createImage(stx, {}, function (data) {
+
 			var id = CIQ.uniqueID();
 			var host = "https://share.chartiq.com";
 			var startOffset = stx.getStartDateOffset();
 
 			var metaData = {
-				layout: stx.exportLayout(),
-				drawings: stx.exportDrawings(),
-				xOffset: startOffset,
-				startDate: stx.chart.dataSegment[startOffset].Date,
-				endDate: stx.chart.dataSegment[stx.chart.dataSegment.length - 1].Date,
-				id: id,
-				symbol: stx.chart.symbol
+				"layout": stx.exportLayout(),
+				"drawings": stx.exportDrawings(),
+				"xOffset": startOffset,
+				"startDate": stx.chart.dataSegment[startOffset].Date,
+				"endDate": stx.chart.dataSegment[stx.chart.dataSegment.length - 1].Date,
+				"id": id,
+				"symbol": stx.chart.symbol
 			};
 
 			var url = host + "/upload/" + id;
-			var payload = { id: id, image: data, config: metaData };
+			var payload = { "id": id, "image": data, "config": metaData };
 
 			props.setShareStatus(ShareStatus.UPLOADING);
-			CIQ.Share.uploadImage(data, url, payload, function(err, response) {
+			CIQ.Share.uploadImage(data, url, payload, function (err, response) {
 				if (err !== null) {
 					props.setShareStatus(ShareStatus.ERROR, err);
-				} else {
+				}
+				else {
 					props.setShareStatus(ShareStatus.COMPLETE, host + response);
 				}
 			});
 		});
+
 	}
 
 	getShareStatus() {
@@ -83,52 +85,32 @@ class ShareChartModal extends React.Component {
 	}
 
 	render() {
-		if (!this.props.shareStatus || this.props.shareStatus == ShareStatus.HIDDEN)
-			return <span></span>;
+		if (!this.props.shareStatus || this.props.shareStatus == ShareStatus.HIDDEN) return (<span></span>)
 		return (
 			<div className="ciq dialog-overlay">
 				<div className="ciq dialog share">
-					<div
-						className="cq-close"
-						onClick={() => {
-							this.props.setShareStatus(ShareStatus.HIDDEN);
-						}}
-					></div>
-					<div className="dialog-heading">Share Your Chart</div>
+					<div className="cq-close" onClick={() => { this.props.setShareStatus(ShareStatus.HIDDEN) }}></div>
+					<div className="dialog-heading">
+						Share Your Chart
+					</div>
 					<hr className="ciq-separator" />
 					<div className="ciq-dialog-cntrls">
-						<div
-							className="ciq-btn"
-							onClick={() => {
-								this.shareChart();
-							}}
-						>
-							Create Image
-						</div>
+						<div className="ciq-btn" onClick={() => { this.shareChart() }}>Create Image</div>
 					</div>
-					<div className="ciq-dialog-cntrls">{this.getShareStatus()}</div>
+					<div className="ciq-dialog-cntrls">
+						{this.getShareStatus()}
+					</div>
 					<div className="ciq-dialog-cntrls share-link-div" style={{ display: 'block', width: 'auto' }}>
-						{[ShareStatus.COMPLETE, ShareStatus.ERROR].indexOf(
-							this.props.shareStatus
-						) >= 0
-							? this.props.shareStatusMsg
-							: null}
+						{([ShareStatus.COMPLETE, ShareStatus.ERROR].indexOf(this.props.shareStatus) >= 0) ? this.props.shareStatusMsg : null}
 					</div>
 					<hr className="ciq-separator" />
 					<div className="ciq-dialog-cntrls">
-						<div
-							className="ciq-btn"
-							onClick={() => {
-								this.props.setShareStatus(ShareStatus.HIDDEN);
-							}}
-						>
-							Done
-						</div>
+						<div className="ciq-btn" onClick={() => { this.props.setShareStatus(ShareStatus.HIDDEN) }}>Done</div>
 					</div>
 					<div className="clearFloat"></div>
 				</div>
 			</div>
-		);
+		)
 	}
 }
 
