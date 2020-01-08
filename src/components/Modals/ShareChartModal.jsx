@@ -100,7 +100,7 @@ class ShareChartModal extends React.Component {
 					<div className="ciq-dialog-cntrls">
 						{this.getShareStatus()}
 					</div>
-					<div className="ciq-dialog-cntrls share-link-div">
+					<div className="ciq-dialog-cntrls share-link-div" style={{ display: 'block', width: 'auto' }}>
 						{([ShareStatus.COMPLETE, ShareStatus.ERROR].indexOf(this.props.shareStatus) >= 0) ? this.props.shareStatusMsg : null}
 					</div>
 					<hr className="ciq-separator" />
