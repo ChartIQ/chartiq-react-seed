@@ -24,13 +24,13 @@ const Types = createTypes(
     'CHANGE_VECTOR_STYLE',
     'CHANGE_VECTOR_LINE_PARAMS',
     'TOGGLE_AXIS_LABELS',
-		'SET_PERIODICITY',
-		'SET_RESPONSIVE_SIZE',
+    'SET_PERIODICITY',
+    'SET_RESPONSIVE_SIZE',
     'TOGGLE_CROSSHAIRS',
     'TOGGLE_TIMEZONE_MODAL',
     'DRAW',
-		'DRAWINGS_CHANGED',
-		'LAYOUT_CHANGED',
+    'DRAWINGS_CHANGED',
+    'LAYOUT_CHANGED',
     'CREATE_UNDO_STAMP',
     'UPDATE_UNDO_STAMPS',
     'UNDO',
@@ -171,6 +171,16 @@ export function toggleCrosshairsAndSave(){
  */
 function toggleCrosshairs(){
     return { type: 'TOGGLE_CROSSHAIRS' }
+}
+
+/**
+ * Dispatch toggle axis labels action
+ *
+ * @returns
+ * @private
+ */
+export function toggleAxisLabels(){
+    return { type: 'TOGGLE_AXIS_LABELS' }
 }
 
 /**
