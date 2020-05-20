@@ -3,7 +3,8 @@
  * @module components/Modals/ShareChartModal
  */
 
-import React from 'react'
+import React from 'react';
+import { CIQ } from '../../../../chartiq/js/chartiq';
 
 /**
  *  ShareStatus enumeration

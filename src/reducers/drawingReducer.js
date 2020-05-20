@@ -2,8 +2,8 @@
  * Drawings redux reducer for actions related to drawings and drawing toolbar
  * @module reducers/drawingReducer
  */
-
-import Types from '../actions/drawActions'
+import { CIQ } from '../../chartiq/js/chartiq';
+import Types from '../actions/drawActions';
 
 // load all drawings, with exclusions
 let tools = CIQ.Drawing.getDrawingToolList({retracement:true});
