@@ -341,12 +341,13 @@ function updateThemeSettings(themeHelper, currentSettings, newParams){
  * @param {any} theme
  */
 function setTheme(themeHelper, theme) {
+	if (theme.className) {
+		document.body.className = theme.className
+	}
 	if (theme.settings) {
 		themeHelper.settings = CIQ.clone(theme.settings);
 		themeHelper.update();
-		document.body.className = theme.settings.className
 	} else if (theme.builtIn === true) {
-		document.body.className = theme.className
 		var stx = themeHelper.params.stx;
 		stx.styles = {};
 		stx.chart.container.style.backgroundColor = "";
