@@ -4,8 +4,7 @@
  */
 
 import React from 'react';
-import { CIQ } from '../../../../chartiq/js/chartiq';
-
+import { CIQ } from '../../../chartiq/js/chartiq';
 /**
  *  ShareStatus enumeration
  */
