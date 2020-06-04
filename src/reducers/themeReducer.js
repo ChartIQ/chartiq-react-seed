@@ -347,7 +347,9 @@ function setTheme(themeHelper, theme) {
 	if (theme.settings) {
 		themeHelper.settings = CIQ.clone(theme.settings);
 		themeHelper.update();
+		document.body.className = theme.settings.className
 	} else if (theme.builtIn === true) {
+		document.body.className = theme.className
 		var stx = themeHelper.params.stx;
 		stx.styles = {};
 		stx.chart.container.style.backgroundColor = "";
