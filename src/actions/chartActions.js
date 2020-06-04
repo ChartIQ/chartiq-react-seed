@@ -2,7 +2,7 @@
  * Chart actions for redux actions involved with the chart object
  * @module actions/chartActions
  */
-import { CIQ } from '../../chartiq/js/chartiq';
+import { CIQ } from '../../chartiq/js/advanced.js';
 import createTypes from 'redux-create-action-types';
 
 /*

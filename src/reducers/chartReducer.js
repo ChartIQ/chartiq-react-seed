@@ -5,7 +5,7 @@
 
 import Types from '../actions/chartActions'
 import * as chartComponent from '../components/Chart'
-import { CIQ } from '../../chartiq/js/chartiq'
+import { CIQ } from '../../chartiq/js/advanced.js'
 import '../../chartiq/js/deprecated'
 import quoteFeedSimulator from '../../chartiq/examples/feeds/quoteFeedSimulator'
 

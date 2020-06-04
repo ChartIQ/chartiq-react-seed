@@ -4,7 +4,7 @@
  */
 
 import createTypes from 'redux-create-action-types';
-import { CIQ } from '../../chartiq/js/chartiq';
+import { CIQ } from '../../chartiq/js/advanced.js';
 
 /*
  * action types

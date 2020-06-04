@@ -17,20 +17,11 @@
 	<!-- main chart container -->
 	<div id="chartHere"></div>
 
-	<!-- link to customer-provided licensed ChartIQ charting library -->
-	<script type="module">
-		import { CIQ } from './chartiq/js/standard.js';
-		import './chartiq/js/advanced.js';
+	<!-- chart sharing functionality -->
+	<script src='./chartiq/js/thirdparty/html2canvas.min.js'></script>
 
-		import quoteFeedSimulator from './chartiq/examples/feeds/quoteFeedSimulator.js';
-
-		window['CIQ'] = CIQ;
-		window['quoteFeedSimulator'] = quoteFeedSimulator;
-
-		// setTimeout(() => import('./dist/main.js'), 2200)
-	</script>
 	<!-- webpack generated React seed project bundle -->
-	<script type="module" src='./dist/main.js'></script>
+	<script src='./dist/main.js'></script>
 </body>
 
 </html>

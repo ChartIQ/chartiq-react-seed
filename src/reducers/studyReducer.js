@@ -3,7 +3,7 @@
  * @module reducers/studyReducer
  */
 
-import { CIQ } from '../../chartiq/js/chartiq';
+import { CIQ } from '../../chartiq/js/advanced.js';
 import Types from '../actions/studyActions';
 
 // initial state and schema

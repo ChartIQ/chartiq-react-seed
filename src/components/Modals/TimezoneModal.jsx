@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { CIQ } from '../../../chartiq/js/chartiq';
+import { CIQ } from '../../../chartiq/js/advanced.js';
 
 /**
  * Timezone selection modal dialog window component

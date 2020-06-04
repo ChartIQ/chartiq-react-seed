@@ -3,7 +3,7 @@
  * @module reducers/themeReducer
  */
 
-import { CIQ } from '../../chartiq/js/chartiq';
+import { CIQ } from '../../chartiq/js/advanced.js';
 import Types from '../actions/themeActions';
 
 // create the default theme

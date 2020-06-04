@@ -2,7 +2,7 @@
  * Drawings redux reducer for actions related to drawings and drawing toolbar
  * @module reducers/drawingReducer
  */
-import { CIQ } from '../../chartiq/js/chartiq';
+import { CIQ } from '../../chartiq/js/advanced.js';
 import Types from '../actions/drawActions';
 
 // load all drawings, with exclusions
