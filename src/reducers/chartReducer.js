@@ -5,6 +5,9 @@
 
 import Types from '../actions/chartActions'
 import * as chartComponent from '../components/Chart'
+import { CIQ } from '../../chartiq/js/advanced.js'
+import '../../chartiq/js/deprecated'
+import quoteFeedSimulator from '../../chartiq/examples/feeds/quoteFeedSimulator'
 
 // initial state and schema
 const initialState = {
@@ -56,7 +59,7 @@ const chart = (state = initialState, action) => {
       let ciq = new CIQ.ChartEngine({
         container: action.container
       })
-      ciq.attachQuoteFeed(window.quoteFeedSimulator, { refreshInterval: state.refreshInterval })
+      ciq.attachQuoteFeed(quoteFeedSimulator, { refreshInterval: state.refreshInterval })
       ciq.setMarketFactory(CIQ.Market.Symbology.factory);
       let layout = CIQ.localStorage.getItem('myChartLayout');
       ciq.callbacks.studyOverlayEdit = action.callbacks.studyOverlayEdit;

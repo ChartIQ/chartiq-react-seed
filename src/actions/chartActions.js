@@ -2,9 +2,8 @@
  * Chart actions for redux actions involved with the chart object
  * @module actions/chartActions
  */
-
+import { CIQ } from '../../chartiq/js/advanced.js';
 import createTypes from 'redux-create-action-types';
-import configs from "../../configs/ui.js";
 
 /*
  * action types
@@ -376,20 +375,25 @@ function setPeriodicity(periodicity){
  * @see module:configs/ui
  * @returns
  */
-export function setChartType(type){
+export function setChartType(chartObj){
 	return (dispatch, getState) => {
-		let state = getState()
-		let ciq = state.chart.ciq
-		if (type.aggregationEdit && ciq.layout.aggregationType != type.type) {
-			ciq.setChartType('none');
-			ciq.setAggregationType(type.type);
-		} else {
-			ciq.setAggregationType(type.type)
-			ciq.setChartType(type.type)
+		const ciq = getState().chart.ciq;
+		const aggregations={
+			"heikinashi":true,
+			"kagi":true,
+			"linebreak":true,
+			"pandf":true,
+			"rangebars":true,
+			"renko":true
+		};
+		if(aggregations[chartObj.type]){
+			ciq.setAggregationType(chartObj.type);
+		}else{
+			ciq.setChartType(chartObj.type);
 		}
 		ciq.draw()
 		return Promise.all([
-			dispatch({ type: 'SET_CHART_TYPE', chartType: type })
+			dispatch({ type: 'SET_CHART_TYPE', type: chartObj })
 		])
 	}
 }

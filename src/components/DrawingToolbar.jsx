@@ -15,6 +15,7 @@ import Undo from './Drawing/Undo'
 import Redo from './Drawing/Redo'
 import Clear from './Drawing/Clear'
 
+import { CIQ } from '../../chartiq/js/advanced.js';
 /**
  * Drawing toolbar for adding drawings to the chart
  *

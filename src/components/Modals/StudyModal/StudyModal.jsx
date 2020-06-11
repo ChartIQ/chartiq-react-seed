@@ -9,6 +9,8 @@ import StudyModalOutput from './StudyModalOutput'
 import StudyModalParameter from './StudyModalParameter'
 import ColorSwatch from '../../Drawing/ColorSwatch'
 
+import { CIQ } from '../../../../chartiq/js/advanced.js';
+
 /**
  * Study modal dialog window
  *

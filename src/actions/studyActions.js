@@ -3,7 +3,8 @@
  * @module actions/studyActions
  */
 
-import createTypes from 'redux-create-action-types'
+import createTypes from 'redux-create-action-types';
+import { CIQ } from '../../chartiq/js/advanced.js';
 
 /*
  * action types

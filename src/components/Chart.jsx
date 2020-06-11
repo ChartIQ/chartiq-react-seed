@@ -35,7 +35,7 @@ class Chart extends React.Component {
 		super(props);
 	}
 	componentDidMount() {
-		this.props.setChartContainer($$$('#chartContainer'), {
+		this.props.setChartContainer(document.querySelector('#chartContainer'), {
 			studyOverlayEdit: this.props.toggleStudyOverlay,
 			studyPanelEdit: this.props.openStudyModal
 		})

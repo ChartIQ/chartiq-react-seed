@@ -3,7 +3,8 @@
  * @module reducers/studyReducer
  */
 
-import Types from '../actions/studyActions'
+import { CIQ } from '../../chartiq/js/advanced.js';
+import Types from '../actions/studyActions';
 
 // initial state and schema
 const initialState = {
