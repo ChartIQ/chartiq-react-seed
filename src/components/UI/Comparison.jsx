@@ -89,4 +89,4 @@ class Comparison extends React.Component {
 	}
 }
 
-module.exports = Comparison;
+export default Comparison;

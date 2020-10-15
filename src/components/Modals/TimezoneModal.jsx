@@ -67,4 +67,4 @@ class TimeZone extends React.Component {
   }
 }
 
-module.exports = TimeZone;
+export default TimeZone;

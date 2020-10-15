@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
 		entry: [
-				"babel-polyfill", "./src/index.js"
+				"./src/index.js"
 		],
 		output: {
 				publicPath: '/dist/',
@@ -13,11 +13,16 @@ module.exports = {
 		module: {
 				rules: [
 						{
-								test: /\.(js|jsx)$/,
-								exclude: [
-										/node_modules/, /chartiq/
-								],
-								use: ['babel-loader']
+							test: /\.(js|jsx)$/,
+							exclude: [
+									/node_modules/, /chartiq/
+							],
+							use: {
+								loader: 'babel-loader',
+								options: {
+										presets: ['@babel/preset-env', '@babel/preset-react']
+								}
+							}
 						}
 				]
 		},
@@ -38,6 +43,7 @@ module.exports = {
 				stats: 'minimal'
 		},
 		resolve: {
-				extensions: ['.js', '.jsx']
+				extensions: ['.js', '.jsx'],
+				symlinks: false
 		}
 };

@@ -114,4 +114,4 @@ class ShareChartModal extends React.Component {
 	}
 }
 
-module.exports = ShareChartModal;
+export default ShareChartModal;

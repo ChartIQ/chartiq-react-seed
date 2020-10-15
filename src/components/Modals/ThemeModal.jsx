@@ -71,4 +71,4 @@ class ThemeModal extends React.Component {
 	}
 }
 
-module.exports = ThemeModal;
+export default ThemeModal;

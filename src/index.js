@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { logger } from 'redux-logger'
-import 'babel-polyfill'
+import "@babel/polyfill";
 
 import reducer from './reducers'
 import ChartContainer from './containers/chartContainer'
