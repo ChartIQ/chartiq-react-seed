@@ -20,6 +20,8 @@ For a variety of complete charting solutions that can be easily incorporated int
 
   If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
 
+- Node.js (https://nodejs.org/). We use Node.js and npm to load the React components as well as the different libraries to transform JSX and ES6 to ES5.
+
 ## Getting started
 
 To view the example, create a *chartiq* folder at the project root and, at a minimum, copy the ChartIQ library *js* and *css* directories to the *chartiq* folder. If you have plug-ins enabled for your license, copy the *plugins* folder also. Optionally, if you have plug-ins enabled for your license or need to use our example data or example quote feeds, copy the *examples/data* and *example/feeds* folders as well.
