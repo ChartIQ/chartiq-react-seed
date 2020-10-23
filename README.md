@@ -39,7 +39,7 @@ You can see which ports are currently being used by running `netstat -a` on any 
 
 ## Project structure and customization
 
-*Note: We do not recommend using the web components from template-advanced.html within frameworks. Unless you are familiar with integrating web components into React components, you are better off building framework components that interface with the charting library.*
+**Note:** We do not recommend using the web components from template-advanced.html within frameworks. Unless you are familiar with integrating web components into React components, you are better off building framework components that interface with the charting library.
 
 ### React-Redux
 
