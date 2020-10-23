@@ -22,16 +22,20 @@ For a variety of complete charting solutions that can be easily incorporated int
 
 ## Getting started
 
-To implement this project:
+To view the example, create a *chartiq* folder at the project root and, at a minimum, copy the ChartIQ library *js* and *css* directories to the *chartiq* folder. If you have plug-ins enabled for your license, copy the *plugins* folder also. Optionally, if you have plug-ins enabled for your license or need to use our example data or example quote feeds, copy the *examples/data* and *example/feeds* folders as well.
 
-1. Clone the repository
-2. Extract the contents of your zipped ChartIQ library package
-3. Copy the tarball (.tgz file) from the extracted library package into the root of this project
-4. Run the following commands from the root of the project:
-    - `npm install ./chartiq-x.x.x.tgz` to install the charting library
-    - `npm install` to install the rest of the dependencies
-    - `npm start` to start up the development server
-5. Open your browser to [http://localhost:3000](http://localhost:3000) to load the application
+### Running Locally
+
+You will need to install the project's dependencies and build the distribution file by running the following command from the project's root:
+```
+npm install
+```
+
+Once the node_modules have downloaded, run `npm start` and open your browser to localhost port 3000 to view the fully working example.
+
+If port 3000 is already in use, change the port in *package.json* and *webpack.config.js*.
+
+You can see which ports are currently being used by running `netstat -a` on any command line.
 
 ## Questions and support
 
