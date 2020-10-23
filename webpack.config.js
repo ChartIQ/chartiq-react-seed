@@ -15,7 +15,7 @@ module.exports = {
 						{
 							test: /\.(js|jsx)$/,
 							exclude: [
-									/node_modules/, /chartiq/
+									/node_modules/, path.resolve(__dirname, 'chartiq')
 							],
 							use: {
 								loader: 'babel-loader',
