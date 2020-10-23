@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(drawActions.setLineColor(color))
         },
         setFillStyle: (style) => {
-            dispatch(drawActions.setLineStyle(style))
+            dispatch(drawActions.setFillStyle(style))
         },
         setLineParams: (weight, pattern) => {
             dispatch(drawActions.setLineParams(weight, pattern))

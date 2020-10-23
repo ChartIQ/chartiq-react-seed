@@ -161,4 +161,4 @@ class DrawingToolbar extends React.Component {
 	}
 }
 
-module.exports = DrawingToolbar;
+export default DrawingToolbar;
