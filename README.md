@@ -10,7 +10,7 @@
 
 ## Overview
 
-The ChartIQ React seed project is a basic build of the ChartIQ library within the React framework. The project provides an example of how to implement the most common elements of the library. The project is a good starting point for developers who want to create a UI entirely in React.
+The ChartIQ React seed project is a basic build of the ChartIQ library within the React framework. The project is an example of how to implement the most common user interface elements of the library. The seed project is a good starting point for developers who want to create a UI entirely in React.
 
 For a variety of complete charting solutions that can be easily incorporated into React applications, see the [chartiq-react-app](https://github.com/ChartIQ/chartiq-react-app) project.
 
