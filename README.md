@@ -20,8 +20,6 @@ For a variety of complete charting solutions that can be easily incorporated int
 
   If you do not have a copy of the library, please contact your account manager or send an email to <info@cosaic.io>.
 
-- Node.js (https://nodejs.org/). We use Node.js and npm to load the React components as well as the different libraries to transform JSX and ES6 to ES5.
-
 ## Getting started
 
 To implement this project:
