@@ -5,7 +5,6 @@
 	"dependencies": {
 		"@babel/polyfill": "^7.11.5",
 		"@babel/preset-env": "^7.4.4",
-		"npm": "^6.0.0",
 		"react": "^16.14.0",
 		"react-dom": "^16.14.0",
 		"react-redux": "^5.1.2",
@@ -20,7 +19,6 @@
 		"@babel/plugin-syntax-dynamic-import": "^7.7.4",
 		"@babel/preset-react": "^7.0.0",
 		"babel-loader": "^8.0.4",
-		"esformatter-jsx": "^8.0.1",
 		"eslint": "^4.19.1",
 		"eslint-config-standard": "^11.0.0",
 		"eslint-plugin-import": "^2.22.1",
@@ -63,12 +61,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ChartIQ/Charting-Library---React-Seed-Project.git"
+		"url": "git+https://github.com/ChartIQ/chartiq-react-seed.git"
 	},
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/ChartIQ/Charting-Library---React-Seed-Project/issues"
+		"url": "https://github.com/ChartIQ/chartiq-react-seed/issues"
 	},
-	"homepage": "https://github.com/ChartIQ/Charting-Library---React-Seed-Project#readme"
+	"homepage": "https://github.com/ChartIQ/chartiq-react-seed#readme"
 }
